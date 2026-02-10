@@ -1,0 +1,203 @@
+Build a fully functional full-stack application (not just UI) for connecting students with private tutors for offline classes. The app must be usable end-to-end.
+
+1. Core App Architecture
+
+Use client–server architecture
+
+Frontend communicates with backend via REST APIs
+
+Backend handles:
+
+Authentication
+
+Business logic
+
+Database operations
+
+Enforce role-based access control (RBAC)
+
+2. Database Design (Mandatory)
+Users Table
+
+id
+
+name
+
+email (unique)
+
+password_hash
+
+role (student | tutor)
+
+phone
+
+created_at
+
+Tutor Profiles Table
+
+tutor_id (FK → users.id)
+
+subjects (array/string)
+
+experience_years
+
+teaching_locations
+
+fee_per_class
+
+availability_schedule
+
+is_active
+
+Student Profiles Table
+
+student_id (FK → users.id)
+
+class_level
+
+preferred_subjects
+
+city
+
+Contact / Inquiry Table
+
+id
+
+student_id
+
+tutor_id
+
+message
+
+status (pending, replied, closed)
+
+created_at
+
+3. Authentication & Authorization
+
+Signup & login endpoints for both roles
+
+Password hashing using bcrypt
+
+JWT-based authentication
+
+Middleware to:
+
+Validate token
+
+Restrict routes by role
+
+Prevent students from accessing tutor-only routes and vice versa
+
+4. Backend API Endpoints
+Auth
+
+POST /api/auth/signup
+
+POST /api/auth/login
+
+GET /api/auth/me
+
+Tutor APIs
+
+POST /api/tutor/profile
+
+PUT /api/tutor/profile
+
+GET /api/tutor/profile/:id
+
+GET /api/tutors (search + filters)
+
+PATCH /api/tutor/visibility
+
+Student APIs
+
+GET /api/tutors
+
+POST /api/contact
+
+GET /api/student/contacts
+
+Messaging / Contact
+
+POST /api/messages
+
+GET /api/messages/:conversationId
+
+5. Search & Discovery Logic
+
+Allow students to search tutors by:
+
+Subject (partial match)
+
+Location
+
+Fee range
+
+Availability
+
+Implement pagination
+
+Return only active tutor profiles
+
+6. Frontend App Logic
+
+Maintain global auth state (logged in user + role)
+
+Protect routes:
+
+/student/* → students only
+
+/tutor/* → tutors only
+
+Conditional UI rendering based on role
+
+Form validation + loading states
+
+Error handling for API failures
+
+7. Contact Flow (Critical)
+
+Student selects a tutor
+
+Student sends inquiry message
+
+Record saved in database
+
+Tutor sees inquiry in dashboard
+
+Tutor replies
+
+Conversation status updates
+
+8. Security & Stability
+
+Input validation on backend
+
+Prevent duplicate contact requests
+
+Rate-limit auth endpoints
+
+Sanitize user input
+
+9. Seed & Test Data
+
+Create seed script with:
+
+5 students
+
+5 tutors
+
+Multiple subjects & locations
+
+Provide example API calls (Postman-style)
+
+10. Deployment / Run Instructions
+
+.env setup
+
+Database migration / initialization
+
+Single command to start app
+
+Works fully inside Replit
