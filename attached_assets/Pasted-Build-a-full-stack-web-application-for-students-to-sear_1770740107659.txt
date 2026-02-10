@@ -1,0 +1,192 @@
+Build a full-stack web application for students to search, discover, and contact private tutors for offline (in-person) classes.
+
+1. App Purpose
+
+The platform connects students with private tutors who offer offline classes. Students can search tutors by subject, location, price, and availability, then contact them securely through the app.
+
+2. User Roles
+
+The app must support two separate user roles:
+
+Student
+
+Tutor
+
+Each role must have separate authentication, dashboards, and permissions.
+
+3. Authentication & Login System
+
+Implement secure login and signup for both students and tutors
+
+Fields:
+
+Email
+
+Password (hashed)
+
+Role selection (Student / Tutor)
+
+Optional:
+
+Phone number
+
+OTP / email verification
+
+Maintain session-based or token-based authentication
+
+Role-based route protection
+
+4. Student Features
+
+Student dashboard with:
+
+Search bar for tutors
+
+Filters:
+
+Subject
+
+City / Area
+
+Class level (school, college, competitive exams)
+
+Price range
+
+Availability (days/timings)
+
+Tutor profile view:
+
+Name
+
+Subjects taught
+
+Experience
+
+Location
+
+Fees
+
+Offline availability
+
+Contact tutor:
+
+In-app messaging OR contact request form
+
+Save / bookmark tutors
+
+Profile management
+
+5. Tutor Features
+
+Tutor dashboard with:
+
+Profile creation and editing
+
+Subjects offered
+
+Teaching experience
+
+Offline teaching locations
+
+Fees per session
+
+Available days and time slots
+
+View student inquiries
+
+Respond to student messages
+
+Enable / disable profile visibility
+
+6. App Layout (UI Requirement)
+Header (Solid & Persistent)
+
+App logo / name
+
+Navigation links:
+
+Home
+
+Find Tutors
+
+Dashboard
+
+Login / Signup
+
+Logout (when logged in)
+
+Responsive design
+
+Footer (Solid & Persistent)
+
+About Us
+
+Contact
+
+Privacy Policy
+
+Terms & Conditions
+
+Social media links
+
+Copyright text
+
+7. Pages Required
+
+Landing page
+
+Student signup/login
+
+Tutor signup/login
+
+Student dashboard
+
+Tutor dashboard
+
+Tutor profile page
+
+Messaging / contact page
+
+Error / 404 page
+
+8. Tech Stack (Recommended)
+
+Frontend: React (with modern UI styling)
+
+Backend: Node.js + Express
+
+Database: PostgreSQL or MongoDB
+
+Authentication: JWT or session-based auth
+
+Styling: Tailwind CSS or equivalent
+
+Clean folder structure and readable code
+
+9. Additional Requirements
+
+Mobile-responsive UI
+
+Form validation
+
+Proper error handling
+
+Sample seed data for tutors and students
+
+Clear comments explaining core logic
+
+10. Output Expectation
+
+Generate:
+
+Complete runnable code
+
+Database schema/models
+
+API routes
+
+Authentication logic
+
+Frontend components
+
+Instructions to run the app in Replit
