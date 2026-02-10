@@ -1,0 +1,167 @@
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { Search, ShieldCheck, MapPin, Star, BookOpen } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+export default function Home() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 overflow-hidden bg-background">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+            <div className="flex-1 space-y-8 text-center lg:text-left">
+              <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold text-primary bg-primary/5">
+                <span className="flex h-2 w-2 rounded-full bg-secondary mr-2 animate-pulse"></span>
+                Now available in New York City
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-heading font-bold tracking-tight text-foreground leading-[1.1]">
+                Master any subject with <span className="text-primary">expert private tutors</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+                Connect with qualified tutors for personalized offline classes. Boost your grades, learn a new skill, or prepare for exams with 1-on-1 guidance.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/find-tutors">
+                  <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all">
+                    Find a Tutor
+                  </Button>
+                </Link>
+                <Link href="/auth">
+                  <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2">
+                    Become a Tutor
+                  </Button>
+                </Link>
+              </div>
+              
+              <div className="pt-8 flex items-center justify-center lg:justify-start gap-8 text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-secondary" />
+                  <span className="text-sm font-medium">Verified Tutors</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-secondary" />
+                  <span className="text-sm font-medium">Local & Offline</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex-1 relative w-full max-w-[600px] lg:max-w-none">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 border-4 border-white">
+                <img 
+                  src="/assets/hero-study.jpg" 
+                  alt="Students studying" 
+                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* Floating Card 1 */}
+                <div className="absolute -bottom-6 -left-6 md:bottom-8 md:-left-8 bg-white p-4 rounded-xl shadow-xl border animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-green-100 p-2 rounded-full">
+                      <Star className="h-5 w-5 text-green-600 fill-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold">4.9/5 Rating</p>
+                      <p className="text-xs text-muted-foreground">From 10k+ Students</p>
+                    </div>
+                  </div>
+                </div>
+
+                 {/* Floating Card 2 */}
+                 <div className="absolute top-8 -right-4 md:top-12 md:-right-8 bg-white p-4 rounded-xl shadow-xl border animate-in fade-in slide-in-from-right-4 duration-1000 delay-500 hidden sm:block">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
+                      <AvatarImage src="/assets/avatar-tutor_1.jpg" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-bold">Sarah M.</p>
+                      <p className="text-xs text-primary font-medium">Math Tutor</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative Background Blob */}
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/10 to-secondary/10 rounded-full blur-3xl opacity-70"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-heading font-bold mb-4">Why choose TutorLink?</h2>
+            <p className="text-muted-foreground text-lg">We verify every tutor to ensure you get the best learning experience possible.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Verified Experts",
+                desc: "Every tutor passes a rigorous background check and qualification review.",
+                icon: ShieldCheck,
+                color: "text-blue-500",
+                bg: "bg-blue-50"
+              },
+              {
+                title: "Offline Learning",
+                desc: "Meet in person at a library, cafe, or home for effective hands-on learning.",
+                icon: MapPin,
+                color: "text-orange-500",
+                bg: "bg-orange-50"
+              },
+              {
+                title: "Flexible Scheduling",
+                desc: "Book sessions that fit your schedule. Pay only for the classes you take.",
+                icon: BookOpen,
+                color: "text-green-500",
+                bg: "bg-green-50"
+              }
+            ].map((feature, i) => (
+              <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow bg-background/50 backdrop-blur-sm">
+                <CardContent className="pt-6">
+                  <div className={`w-12 h-12 rounded-xl ${feature.bg} flex items-center justify-center mb-6`}>
+                    <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="bg-primary rounded-3xl p-8 md:p-16 text-center text-primary-foreground relative overflow-hidden">
+            <div className="relative z-10 max-w-2xl mx-auto space-y-8">
+              <h2 className="text-3xl md:text-5xl font-heading font-bold">Ready to start learning?</h2>
+              <p className="text-primary-foreground/90 text-lg md:text-xl">
+                Join thousands of students who have found their perfect tutor on TutorLink today.
+              </p>
+              <Link href="/find-tutors">
+                <Button size="lg" variant="secondary" className="h-14 px-8 text-lg rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-foreground">
+                  Find Your Tutor
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Decorative circles */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
+            <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
