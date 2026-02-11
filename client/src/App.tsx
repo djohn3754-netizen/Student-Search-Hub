@@ -15,6 +15,7 @@ import TutorProfile from "@/pages/tutor-profile";
 import AuthPage from "@/pages/auth";
 import StudentDashboard from "@/pages/student-dashboard";
 import TutorDashboard from "@/pages/tutor-dashboard";
+import MessagingPage from "@/pages/messages";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
           <Route path="/auth" component={AuthPage} />
           <Route path="/student-dashboard" component={StudentDashboard} />
           <Route path="/tutor-dashboard" component={TutorDashboard} />
+          <Route path="/messages" component={MessagingPage} />
           <Route component={NotFound} />
         </Switch>
       </main>

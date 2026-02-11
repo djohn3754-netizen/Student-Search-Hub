@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Menu, X, BookOpen, Search, LayoutDashboard, LogOut, User } from "lucide-react";
+import { Menu, X, BookOpen, Search, LayoutDashboard, LogOut, User, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 export function Navbar() {
@@ -44,13 +44,20 @@ export function Navbar() {
             </a>
           </Link>
           
-          {user && (
-            <Link href={user.role === "student" ? "/student-dashboard" : "/tutor-dashboard"}>
-              <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/student-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
-                Dashboard
-              </a>
-            </Link>
-          )}
+            {user && (
+              <Link href="/messages">
+                <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/messages") ? "text-primary" : "text-muted-foreground"}`}>
+                  Messages
+                </a>
+              </Link>
+            )}
+            {user && (
+              <Link href={user.role === "student" ? "/student-dashboard" : "/tutor-dashboard"}>
+                <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/student-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
+                  Dashboard
+                </a>
+              </Link>
+            )}
         </div>
 
         {/* Auth Buttons / Profile Dropdown */}
@@ -80,6 +87,14 @@ export function Navbar() {
                     <div className="flex w-full items-center cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
                       Dashboard
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/messages">
+                    <div className="flex w-full items-center cursor-pointer">
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Messages
                     </div>
                   </Link>
                 </DropdownMenuItem>
