@@ -96,7 +96,7 @@ export function Navbar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href={user.role === "student" ? "/student-dashboard" : "/tutor-dashboard"}>
+                  <Link href={user.role === "admin" ? "/admin-dashboard" : (user.role === "student" ? "/student-dashboard" : "/tutor-dashboard")}>
                     <div className="flex w-full items-center cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
                       Dashboard

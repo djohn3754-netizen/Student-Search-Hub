@@ -18,8 +18,9 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: "student" | "tutor";
+  role: "student" | "tutor" | "admin";
   avatar?: string;
+  status?: "pending" | "approved" | "rejected";
 }
 
 export const SUBJECTS = [
@@ -145,6 +146,7 @@ export const USERS: User[] = [
     email: "student@example.com",
     role: "student",
     avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+    status: "approved",
   },
   {
     id: "tutor-1",
@@ -152,5 +154,13 @@ export const USERS: User[] = [
     email: "tutor@example.com",
     role: "tutor",
     avatar: "/assets/avatar-tutor_1.jpg",
+    status: "pending",
+  },
+  {
+    id: "admin-1",
+    name: "Admin User",
+    email: "admin@example.com",
+    role: "admin",
+    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
   },
 ];
