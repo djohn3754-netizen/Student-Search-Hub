@@ -18,6 +18,7 @@ import StudentDashboard from "@/pages/student-dashboard";
 import TutorDashboard from "@/pages/tutor-dashboard";
 import MessagingPage from "@/pages/messages";
 import AdminDashboard from "@/pages/admin-dashboard";
+import PrivacyPolicy from "@/pages/privacy";
 
 function Router() {
   return (
@@ -33,6 +34,7 @@ function Router() {
           <Route path="/tutor-dashboard" component={TutorDashboard} />
           <Route path="/admin-dashboard" component={AdminDashboard} />
           <Route path="/messages" component={MessagingPage} />
+          <Route path="/privacy" component={PrivacyPolicy} />
           <Route component={NotFound} />
         </Switch>
       </main>
