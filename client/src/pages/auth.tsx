@@ -4,18 +4,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, GraduationCap, Loader2 } from "lucide-react";
+import { BookOpen, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AuthPage() {
   const { login, isLoading } = useAuth();
+  const { toast } = useToast();
+  const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      login(email);
+      if (isLogin) {
+        login(email);
+      } else {
+        // Simulate registration success
+        toast({
+          title: "Registration Successful",
+          description: "Your tutor account has been created. Please log in.",
+        });
+        setIsLogin(true);
+      }
     }
   };
 
@@ -31,17 +44,31 @@ export default function AuthPage() {
           </div>
           <h2 className="text-3xl font-heading font-bold tracking-tight">Tutor Portal</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to manage your leads and profile
+            {isLogin ? "Sign in to manage your leads" : "Join our network of expert tutors"}
           </p>
         </div>
 
         <Card className="border shadow-lg">
           <CardHeader>
-            <CardTitle>Tutor Login</CardTitle>
-            <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
+            <CardTitle>{isLogin ? "Tutor Login" : "Create Tutor Account"}</CardTitle>
+            <CardDescription>
+              {isLogin ? "Enter your credentials to access your dashboard." : "Fill in your details to get started."}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {!isLogin && (
+                <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input 
+                    id="name" 
+                    placeholder="Dr. Sarah Mitchell" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required 
+                  />
+                </div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input 
@@ -53,6 +80,19 @@ export default function AuthPage() {
                   required 
                 />
               </div>
+              {!isLogin && (
+                <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input 
+                    id="phone" 
+                    type="tel" 
+                    placeholder="+1 (555) 000-0000" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required 
+                  />
+                </div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input 
@@ -66,13 +106,28 @@ export default function AuthPage() {
               
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                {isLoading ? "Signing in..." : "Sign In"}
+                {isLoading ? (isLogin ? "Signing in..." : "Creating account...") : (isLogin ? "Sign In" : "Register as Tutor")}
               </Button>
+
+              <div className="text-center pt-2">
+                <Button 
+                  type="button" 
+                  variant="link" 
+                  className="text-xs"
+                  onClick={() => setIsLogin(!isLogin)}
+                >
+                  {isLogin ? "Don't have an account? Register here" : "Already have an account? Log in"}
+                </Button>
+              </div>
             </form>
           </CardContent>
           <CardFooter className="flex justify-center border-t p-6 bg-muted/10">
             <p className="text-xs text-muted-foreground">
-              Demo Mode: Use <span className="font-mono font-bold">tutor@example.com</span>
+              {isLogin ? (
+                <>Demo Mode: Use <span className="font-mono font-bold">tutor@example.com</span></>
+              ) : (
+                <>Join 500+ tutors already earning with TutorLink</>
+              )}
             </p>
           </CardFooter>
         </Card>
