@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, role: "student" | "tutor") => void;
+  login: (email: string) => void;
   logout: () => void;
   isLoading: boolean;
 }
@@ -16,27 +16,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [, setLocation] = useLocation();
 
-  const login = (email: string, role: "student" | "tutor") => {
+  const login = (email: string) => {
     setIsLoading(true);
-    // Simulate API delay
     setTimeout(() => {
-      // Find mock user or create a temporary session user
-      const mockUser = USERS.find((u) => u.email === email && u.role === role) || {
-        id: "temp-user",
-        name: "Demo User",
+      const mockUser = USERS.find((u) => u.email === email && u.role === "tutor") || {
+        id: "temp-tutor",
+        name: "Demo Tutor",
         email,
-        role,
+        role: "tutor",
         avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+        status: "approved",
       };
       
-      setUser(mockUser);
+      setUser(mockUser as User);
       setIsLoading(false);
-      
-      if (role === "tutor") {
-        setLocation("/tutor-dashboard");
-      } else {
-        setLocation("/student-dashboard");
-      }
+      setLocation("/tutor-dashboard");
     }, 800);
   };
 

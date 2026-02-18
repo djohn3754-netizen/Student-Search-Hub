@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,9 +14,7 @@ import Home from "@/pages/home";
 import FindTutors from "@/pages/find-tutors";
 import TutorProfile from "@/pages/tutor-profile";
 import AuthPage from "@/pages/auth";
-import StudentDashboard from "@/pages/student-dashboard";
 import TutorDashboard from "@/pages/tutor-dashboard";
-import MessagingPage from "@/pages/messages";
 import AdminDashboard from "@/pages/admin-dashboard";
 import PrivacyPolicy from "@/pages/privacy";
 
@@ -30,11 +28,13 @@ function Router() {
           <Route path="/find-tutors" component={FindTutors} />
           <Route path="/tutor/:id" component={TutorProfile} />
           <Route path="/auth" component={AuthPage} />
-          <Route path="/student-dashboard" component={StudentDashboard} />
           <Route path="/tutor-dashboard" component={TutorDashboard} />
           <Route path="/admin-dashboard" component={AdminDashboard} />
-          <Route path="/messages" component={MessagingPage} />
           <Route path="/privacy" component={PrivacyPolicy} />
+          {/* Redirect student dashboard to home as it's no longer used */}
+          <Route path="/student-dashboard">
+            <Redirect to="/" />
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </main>

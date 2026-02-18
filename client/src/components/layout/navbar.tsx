@@ -46,20 +46,13 @@ export function Navbar() {
             </a>
           </Link>
           
-            {user && (
-              <Link href="/messages">
-                <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/messages") ? "text-primary" : "text-muted-foreground"}`}>
-                  Messages
-                </a>
-              </Link>
-            )}
-            {user && (
-              <Link href={user.role === "student" ? "/student-dashboard" : "/tutor-dashboard"}>
-                <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/student-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
-                  Dashboard
-                </a>
-              </Link>
-            )}
+          {user && (
+            <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
+              <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/admin-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
+                Dashboard
+              </a>
+            </Link>
+          )}
         </div>
 
         {/* Auth Buttons / Profile Dropdown */}
@@ -96,18 +89,10 @@ export function Navbar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href={user.role === "admin" ? "/admin-dashboard" : (user.role === "student" ? "/student-dashboard" : "/tutor-dashboard")}>
+                  <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
                     <div className="flex w-full items-center cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
                       Dashboard
-                    </div>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/messages">
-                    <div className="flex w-full items-center cursor-pointer">
-                      <MessageCircle className="mr-2 h-4 w-4" />
-                      Messages
                     </div>
                   </Link>
                 </DropdownMenuItem>
@@ -158,7 +143,7 @@ export function Navbar() {
               <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Find Tutors</a>
             </Link>
             {user && (
-              <Link href={user.role === "student" ? "/student-dashboard" : "/tutor-dashboard"}>
+              <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
                 <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a>
               </Link>
             )}

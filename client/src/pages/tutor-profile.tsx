@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   MapPin, 
   Star, 
@@ -13,13 +15,16 @@ import {
   MessageCircle, 
   Share2, 
   Heart,
-  Calendar
+  Calendar,
+  GraduationCap
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 export default function TutorProfile() {
   const [match, params] = useRoute("/tutor/:id");
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   if (!match || !params) return <div>Error</div>;
   
@@ -32,9 +37,21 @@ export default function TutorProfile() {
     </div>
   );
 
+  const handleEnquiry = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setTimeout(() => {
+      toast({
+        title: "Enquiry Sent!",
+        description: `Your message has been sent to ${tutor.name}. They will contact you shortly.`,
+      });
+      setIsSubmitting(false);
+      (e.target as HTMLFormElement).reset();
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-background pb-20">
-      {/* Header Banner */}
       <div className="h-64 bg-gradient-to-r from-primary/80 to-secondary/80 relative">
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
@@ -73,7 +90,7 @@ export default function TutorProfile() {
                 </div>
                 <div className="flex items-center gap-1">
                   <CheckCircle className="h-4 w-4 text-green-500" />
-                  Background Checked
+                  Verified Profile
                 </div>
               </div>
             </div>
@@ -81,7 +98,6 @@ export default function TutorProfile() {
           
           <div className="p-6 md:p-10 pt-6">
             <div className="flex flex-col lg:flex-row gap-10">
-              {/* Main Info */}
               <div className="flex-1 space-y-8">
                 <section>
                   <h3 className="text-xl font-bold mb-4">About Me</h3>
@@ -98,7 +114,7 @@ export default function TutorProfile() {
                     </div>
                     <div>
                       <p className="font-medium">{tutor.education}</p>
-                      <p className="text-xs text-muted-foreground">Verified</p>
+                      <p className="text-xs text-muted-foreground">Academic Verification Active</p>
                     </div>
                   </div>
                 </section>
@@ -115,49 +131,39 @@ export default function TutorProfile() {
                 </section>
               </div>
               
-              {/* Sidebar Booking */}
-              <div className="lg:w-80 space-y-6">
-                <Card className="bg-muted/30 border-none shadow-inner">
-                  <CardContent className="p-6 space-y-6">
-                    <div>
-                      <h4 className="font-bold mb-4 flex items-center gap-2">
-                        <Calendar className="h-4 w-4" /> Availability
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-                          <div 
-                            key={day}
-                            className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold ${
-                              tutor.availability.includes(day) 
-                                ? "bg-primary text-primary-foreground shadow-md shadow-primary/20" 
-                                : "bg-background text-muted-foreground opacity-50"
-                            }`}
-                          >
-                            {day.charAt(0)}
-                          </div>
-                        ))}
-                      </div>
+              <div className="lg:w-[400px] space-y-6">
+                <Card className="shadow-lg border-primary/10">
+                  <CardContent className="p-8 space-y-6">
+                    <div className="text-center">
+                      <h4 className="text-2xl font-bold mb-2">Book a Trial Class</h4>
+                      <p className="text-sm text-muted-foreground">Send an enquiry to start learning with {tutor.name.split(' ')[0]}.</p>
                     </div>
                     
-                    <div className="space-y-3">
-                      <Button className="w-full h-12 text-lg font-bold shadow-lg shadow-primary/20" onClick={() => {
-                        toast({
-                          title: "Request Sent!",
-                          description: `A message has been sent to ${tutor.name}.`,
-                        });
-                      }}>
-                        <MessageCircle className="mr-2 h-5 w-5" />
-                        Contact Tutor
-                      </Button>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Button variant="outline" className="w-full">
-                          <Heart className="mr-2 h-4 w-4" /> Save
-                        </Button>
-                        <Button variant="outline" className="w-full">
-                          <Share2 className="mr-2 h-4 w-4" /> Share
-                        </Button>
+                    <form onSubmit={handleEnquiry} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Your Name</Label>
+                        <Input id="name" placeholder="Enter your full name" required />
                       </div>
-                    </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="subject">Subject of Interest</Label>
+                        <Input id="subject" defaultValue={tutor.subject} required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea id="message" placeholder="Tell the tutor about your goals..." className="min-h-[100px]" required />
+                      </div>
+                      <Button type="submit" className="w-full h-12 text-lg font-bold shadow-lg" disabled={isSubmitting}>
+                        {isSubmitting ? "Sending..." : "Send Enquiry"}
+                      </Button>
+                    </form>
+                    
+                    <p className="text-[10px] text-center text-muted-foreground uppercase tracking-widest font-bold">
+                      No Login Required for Students
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -166,25 +172,5 @@ export default function TutorProfile() {
         </div>
       </div>
     </div>
-  );
-}
-
-function GraduationCap(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-      <path d="M6 12v5c3 3 9 3 12 0v-5" />
-    </svg>
   );
 }

@@ -8,12 +8,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   BarChart, 
   Users, 
-  DollarSign, 
-  Calendar, 
-  Settings, 
   MessageSquare,
-  MapPin
+  MapPin,
+  CheckCircle2,
+  Clock,
+  User,
+  BookOpen
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 
 export default function TutorDashboard() {
   const { user } = useAuth();
@@ -21,8 +24,9 @@ export default function TutorDashboard() {
   if (!user || user.role !== "tutor") {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <h2 className="text-2xl font-bold">Please log in as a tutor</h2>
-        <Link href="/auth"><Button>Log In</Button></Link>
+        <h2 className="text-2xl font-bold">Access Restricted</h2>
+        <p className="text-muted-foreground">Please log in as a tutor to view this page.</p>
+        <Link href="/auth"><Button>Go to Login</Button></Link>
       </div>
     );
   }
@@ -32,29 +36,28 @@ export default function TutorDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-heading font-bold">Tutor Dashboard</h1>
-          <p className="text-muted-foreground">Manage your profile, requests, and schedule.</p>
+          <p className="text-muted-foreground">Manage your profile and student enquiries.</p>
         </div>
         <div className="flex items-center gap-4 bg-card p-2 rounded-lg border shadow-sm">
-          <span className="text-sm font-medium pl-2">Available for new students</span>
+          <span className="text-sm font-medium pl-2">Profile Visibility</span>
           <Switch defaultChecked />
         </div>
       </div>
 
-      {/* Stats Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Students", value: "12", icon: Users },
-          { label: "This Month", value: "$850", icon: DollarSign },
-          { label: "Profile Views", value: "142", icon: BarChart },
-          { label: "Messages", value: "5", icon: MessageSquare },
+          { label: "New Enquiries", value: "5", icon: MessageSquare, color: "text-blue-500", bg: "bg-blue-500/10" },
+          { label: "Total Leads", value: "42", icon: Users, color: "text-purple-500", bg: "bg-purple-500/10" },
+          { label: "Profile Views", value: "1.2k", icon: BarChart, color: "text-green-500", bg: "bg-green-500/10" },
+          { label: "Response Rate", value: "98%", icon: CheckCircle2, color: "text-orange-500", bg: "bg-orange-500/10" },
         ].map((stat, i) => (
-          <Card key={i}>
+          <Card key={i} className="border-none shadow-sm">
             <CardContent className="p-6 flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
                 <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
               </div>
-              <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+              <div className={`h-10 w-10 ${stat.bg} rounded-full flex items-center justify-center ${stat.color}`}>
                 <stat.icon className="h-5 w-5" />
               </div>
             </CardContent>
@@ -62,35 +65,48 @@ export default function TutorDashboard() {
         ))}
       </div>
 
-      <Tabs defaultValue="requests" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="requests">Requests</TabsTrigger>
-          <TabsTrigger value="schedule">Schedule</TabsTrigger>
+      <Tabs defaultValue="enquiries" className="space-y-4">
+        <TabsList className="bg-muted/50 p-1">
+          <TabsTrigger value="enquiries">Student Enquiries</TabsTrigger>
           <TabsTrigger value="profile">Edit Profile</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="requests" className="space-y-4">
+        <TabsContent value="enquiries" className="space-y-4 animate-in fade-in duration-300">
           <Card>
             <CardHeader>
-              <CardTitle>Student Inquiries</CardTitle>
-              <CardDescription>Recent messages from potential students.</CardDescription>
+              <CardTitle>Recent Leads</CardTitle>
+              <CardDescription>Direct enquiries from interested students.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
+                {[
+                  { name: "John Doe", subject: "Mathematics", location: "Brooklyn, NY", time: "2h ago", status: "new" },
+                  { name: "Jane Smith", subject: "Physics", location: "Manhattan, NY", time: "5h ago", status: "contacted" },
+                  { name: "Mike Ross", subject: "Algebra", location: "Queens, NY", time: "1d ago", status: "contacted" },
+                ].map((enquiry, i) => (
                   <div key={i} className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between p-4 border rounded-xl hover:bg-muted/30 transition-colors">
                     <div className="flex items-center gap-4">
-                      <Avatar>
-                        <AvatarFallback>ST</AvatarFallback>
+                      <Avatar className="h-10 w-10 border">
+                        <AvatarFallback><User className="h-5 w-5" /></AvatarFallback>
                       </Avatar>
                       <div>
-                        <h4 className="font-bold">Student Name</h4>
-                        <p className="text-sm text-muted-foreground">Interested in Algebra II • Brooklyn, NY</p>
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-bold">{enquiry.name}</h4>
+                          {enquiry.status === "new" && <Badge className="bg-blue-500 text-[10px] h-4">NEW</Badge>}
+                        </div>
+                        <p className="text-xs text-muted-foreground flex items-center gap-3">
+                          <span className="flex items-center gap-1"><BookOpen className="h-3 w-3" /> {enquiry.subject}</span>
+                          <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {enquiry.location}</span>
+                          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {enquiry.time}</span>
+                        </p>
                       </div>
                     </div>
                     <div className="flex gap-2 w-full md:w-auto">
-                      <Button variant="outline" className="flex-1 md:flex-none">Decline</Button>
-                      <Button className="flex-1 md:flex-none">Reply</Button>
+                      {enquiry.status === "new" && (
+                        <Button size="sm" className="flex-1 md:flex-none">Mark Contacted</Button>
+                      )}
+                      <Button variant="outline" size="sm" className="flex-1 md:flex-none">View Details</Button>
                     </div>
                   </div>
                 ))}
@@ -99,53 +115,38 @@ export default function TutorDashboard() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="schedule">
+        <TabsContent value="profile" className="animate-in fade-in duration-300">
           <Card>
             <CardHeader>
-              <CardTitle>Weekly Schedule</CardTitle>
-              <CardDescription>Manage your availability for offline classes.</CardDescription>
+              <CardTitle>Profile Configuration</CardTitle>
+              <CardDescription>Update your teaching details and visibility.</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-7 gap-2 text-center mb-4">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(day => (
-                  <div key={day} className="font-bold text-sm text-muted-foreground">{day}</div>
-                ))}
-              </div>
-              <div className="grid grid-cols-7 gap-2 h-64">
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <div key={i} className="bg-muted/30 rounded-lg p-2 border border-dashed relative hover:bg-muted/50 transition-colors cursor-pointer group">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="text-xs font-bold text-primary">+ Add</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="profile">
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Details</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Display Name</label>
-                  <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" defaultValue={user.name} />
+                  <label className="text-sm font-bold">Tutor Name</label>
+                  <Input defaultValue={user.name} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Hourly Rate ($)</label>
-                  <input className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" defaultValue="60" />
+                  <label className="text-sm font-bold">Hourly Rate ($)</label>
+                  <Input type="number" defaultValue="65" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold">Subjects (Comma separated)</label>
+                  <Input defaultValue="Mathematics, Physics, Calculus" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold">Locations</label>
+                  <Input defaultValue="Brooklyn, Manhattan" />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">Bio</label>
-                <textarea className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm" defaultValue="Experienced tutor..." />
+                <label className="text-sm font-bold">Professional Bio</label>
+                <textarea className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" defaultValue="Highly experienced tutor with a focus on..." />
               </div>
-              <div className="flex justify-end">
-                <Button>Save Changes</Button>
+              <div className="flex justify-end gap-3">
+                <Button variant="outline">Discard Changes</Button>
+                <Button>Save Profile</Button>
               </div>
             </CardContent>
           </Card>
