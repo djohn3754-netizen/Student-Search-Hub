@@ -18,6 +18,7 @@ import TutorDashboard from "@/pages/tutor-dashboard";
 import AdminDashboard from "@/pages/admin-dashboard";
 import PrivacyPolicy from "@/pages/privacy";
 import AboutUs from "@/pages/about";
+import HowItWorks from "@/pages/how-it-works";
 
 function Router() {
   return (
@@ -33,6 +34,7 @@ function Router() {
           <Route path="/admin-dashboard" component={AdminDashboard} />
           <Route path="/privacy" component={PrivacyPolicy} />
           <Route path="/about" component={AboutUs} />
+          <Route path="/how-it-works" component={HowItWorks} />
           {/* Redirect student dashboard to home as it's no longer used */}
           <Route path="/student-dashboard">
             <Redirect to="/" />
