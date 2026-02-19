@@ -19,6 +19,7 @@ import AdminDashboard from "@/pages/admin-dashboard";
 import PrivacyPolicy from "@/pages/privacy";
 import AboutUs from "@/pages/about";
 import HowItWorks from "@/pages/how-it-works";
+import TermsOfService from "@/pages/terms";
 
 function Router() {
   return (
@@ -35,6 +36,7 @@ function Router() {
           <Route path="/privacy" component={PrivacyPolicy} />
           <Route path="/about" component={AboutUs} />
           <Route path="/how-it-works" component={HowItWorks} />
+          <Route path="/terms" component={TermsOfService} />
           {/* Redirect student dashboard to home as it's no longer used */}
           <Route path="/student-dashboard">
             <Redirect to="/" />
