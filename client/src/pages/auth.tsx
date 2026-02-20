@@ -62,15 +62,14 @@ export default function AuthPage() {
     setIsLoading(true);
     // Simulate verification
     setTimeout(() => {
-      setIsLoading(false);
       if (values.otp === "123456") {
         toast({
           title: "Login Successful",
           description: "Welcome back to TutorLink!",
         });
-        login("tutor@example.com"); // Use existing login logic with demo email
-        setLocation("/tutor-dashboard");
+        login("tutor@example.com"); // This will handle state and navigation
       } else {
+        setIsLoading(false);
         toast({
           variant: "destructive",
           title: "Invalid OTP",
