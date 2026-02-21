@@ -105,6 +105,41 @@ export default function TutorProfile() {
                     {tutor.bio}
                   </p>
                 </section>
+
+                <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+                  <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                    <MessageCircle className="h-5 w-5 text-primary" />
+                    Short Introduction
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed italic">
+                    "{tutor.shortIntro || 'Professional educator dedicated to student success and academic excellence.'}"
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <GraduationCap className="h-6 w-6 text-primary" />
+                    Teaching Method
+                  </h3>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground leading-relaxed">
+                      {tutor.teachingMethod?.description || 'My teaching philosophy centers on personalized instruction tailored to each student\'s unique learning style.'}
+                    </p>
+                    <ul className="grid sm:grid-cols-2 gap-3">
+                      {(tutor.teachingMethod?.points || [
+                        "Concept-first learning",
+                        "Exam-focused preparation",
+                        "Practical problem solving",
+                        "Use of worksheets / digital tools"
+                      ]).map((point, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm font-medium bg-background border p-3 rounded-xl shadow-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
                 
                 <section>
                   <h3 className="text-xl font-bold mb-4">Education</h3>

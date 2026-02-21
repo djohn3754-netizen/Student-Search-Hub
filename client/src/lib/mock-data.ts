@@ -8,6 +8,11 @@ export interface Tutor {
   reviews: number;
   experience: number; // years
   bio: string;
+  shortIntro?: string;
+  teachingMethod?: {
+    description: string;
+    points: string[];
+  };
   avatar: string;
   availability: string[];
   education: string;
@@ -57,6 +62,11 @@ export const TUTORS: Tutor[] = [
     reviews: 124,
     experience: 12,
     bio: "Ph.D. in Mathematics with over 10 years of teaching experience. I specialize in Calculus, Algebra, and SAT Math prep. My teaching style is patient and concept-focused.",
+    shortIntro: "Highly experienced Mathematics educator dedicated to simplifying complex calculus and algebraic concepts for students of all levels.",
+    teachingMethod: {
+      description: "My approach focuses on building a strong conceptual foundation before moving into advanced problem-solving techniques.",
+      points: ["Concept-first learning", "Exam-focused preparation", "Step-by-step problem breakdown"]
+    },
     avatar: "/assets/avatar-tutor_1.jpg",
     availability: ["Mon", "Wed", "Fri"],
     education: "Ph.D. Mathematics, Columbia University",
