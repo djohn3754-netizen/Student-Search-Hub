@@ -70,13 +70,6 @@ export default function TutorProfile() {
                   <h1 className="text-3xl md:text-4xl font-heading font-bold">{tutor.name}</h1>
                   <p className="text-xl text-primary font-medium">{tutor.subject} Tutor</p>
                 </div>
-                <div className="flex flex-col items-end">
-                  <div className="text-3xl font-bold text-foreground">${tutor.price}<span className="text-sm font-normal text-muted-foreground">/hr</span></div>
-                  <div className="flex items-center gap-1 text-sm font-medium text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full mt-1">
-                    <Star className="h-4 w-4 fill-yellow-500" />
-                    {tutor.rating} ({tutor.reviews} reviews)
-                  </div>
-                </div>
               </div>
               
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground border-b pb-6">
