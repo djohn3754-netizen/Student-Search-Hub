@@ -50,7 +50,9 @@ export const LOCATIONS = [
   "Chennai, Tamil Nadu",
   "Kolkata, West Bengal",
   "Pune, Maharashtra",
-  "Ahmedabad, Gujarat"
+  "Ahmedabad, Gujarat",
+  "Kharagpur, West Bengal",
+  "Midnapore, West Bengal"
 ];
 
 export const TUTORS: Tutor[] = [
