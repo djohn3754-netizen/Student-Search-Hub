@@ -46,7 +46,7 @@ export default function FindTutors() {
       const matchesAvailability = selectedAvailability.length === 0 || 
         selectedAvailability.some(day => tutor.availability.includes(day));
 
-      return matchesSearch && matchesSubject && matchesLocation && matchesPrice && matchesRating && matchesAvailability;
+      return matchesSearch && matchesSubject && matchesLocation && matchesAvailability;
     });
   }, [searchQuery, selectedSubject, selectedLocation, priceRange, minRating, selectedAvailability]);
 
@@ -103,21 +103,6 @@ export default function FindTutors() {
         </Select>
       </div>
 
-      <div className="space-y-4">
-        <div className="flex justify-between">
-          <Label className="text-sm font-bold">Price Range</Label>
-          <span className="text-sm font-medium text-primary">${priceRange[0]} - ${priceRange[1]}</span>
-        </div>
-        <Slider 
-          defaultValue={[0, 150]} 
-          max={150} 
-          step={5} 
-          value={priceRange} 
-          onValueChange={setPriceRange}
-          className="py-4"
-        />
-      </div>
-
       <div className="space-y-3">
         <Label className="text-sm font-bold flex items-center gap-2">
           <Calendar className="h-4 w-4 text-primary" /> Availability
@@ -136,35 +121,12 @@ export default function FindTutors() {
         </div>
       </div>
 
-      <div className="space-y-3">
-        <Label className="text-sm font-bold">Minimum Rating</Label>
-        <div className="flex flex-col gap-2">
-          {[4.5, 4.0, 3.5].map((rating) => (
-            <div key={rating} className="flex items-center space-x-2">
-              <Checkbox 
-                id={`rating-${rating}`} 
-                checked={minRating === rating}
-                onCheckedChange={(checked) => setMinRating(checked ? rating : 0)}
-              />
-              <label 
-                htmlFor={`rating-${rating}`} 
-                className="text-sm font-medium leading-none flex items-center gap-1 cursor-pointer"
-              >
-                {rating}+ Stars
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-      
       <Button 
         variant="ghost" 
         className="w-full text-muted-foreground hover:text-destructive"
         onClick={() => {
           setSelectedSubject("all");
           setSelectedLocation("all");
-          setPriceRange([0, 150]);
-          setMinRating(0);
           setSearchQuery("");
           setSelectedLevel("all");
           setSelectedAvailability([]);
@@ -232,7 +194,7 @@ export default function FindTutors() {
               </Badge>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
-              Sort by: <span className="font-bold text-foreground">Highest Rated</span>
+              Sort by: <span className="font-bold text-foreground">Featured</span>
             </div>
           </div>
 

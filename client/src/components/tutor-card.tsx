@@ -24,13 +24,6 @@ export function TutorCard({ tutor }: TutorCardProps) {
               <AvatarFallback className="text-xl">{tutor.name.charAt(0)}</AvatarFallback>
             </Avatar>
           </div>
-          <div className="mt-4 flex flex-col items-end">
-            <div className="flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-bold">
-              <Star className="h-3 w-3 fill-yellow-600 text-yellow-600" />
-              {tutor.rating} ({tutor.reviews})
-            </div>
-            <p className="font-bold text-lg mt-1 text-primary">${tutor.price}<span className="text-xs font-normal text-muted-foreground">/hr</span></p>
-          </div>
         </div>
 
         <div>
