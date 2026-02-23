@@ -27,9 +27,14 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 font-heading font-bold text-xl text-primary hover:opacity-90 transition-opacity">
-            <BookOpen className="h-6 w-6 text-secondary" />
-            <span>NEXAMID</span>
+          <a className="flex flex-col items-start gap-0 hover:opacity-90 transition-opacity">
+            <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
+              <BookOpen className="h-6 w-6 text-secondary" />
+              <span>Nexamid</span>
+            </div>
+            <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-8 italic">
+              “Your Learning Journey Starts Here.”
+            </span>
           </a>
         </Link>
 

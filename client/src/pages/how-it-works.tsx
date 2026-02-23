@@ -45,7 +45,7 @@ export default function HowItWorks() {
         </Link>
 
         <div className="text-center space-y-4 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold tracking-tight">How TutorLink Works</h1>
+          <h1 className="text-4xl md:text-5xl font-heading font-bold tracking-tight">How Nexamid Works</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Our platform is designed to make finding the right educational support as simple and transparent as possible.
           </p>
@@ -77,7 +77,7 @@ export default function HowItWorks() {
           <div className="space-y-6">
             <h2 className="text-3xl font-heading font-bold">For Tutors</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Are you an expert in your field looking to share your knowledge? Joining TutorLink as an educator is simple and rewarding.
+              Are you an expert in your field looking to share your knowledge? Joining Nexamid as an educator is simple and rewarding.
             </p>
             <ul className="space-y-4">
               {[

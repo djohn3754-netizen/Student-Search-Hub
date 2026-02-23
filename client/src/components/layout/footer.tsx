@@ -7,9 +7,14 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
-              <BookOpen className="h-6 w-6 text-secondary" />
-              <span>NEXAMID</span>
+            <div className="flex flex-col items-start gap-0">
+              <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
+                <BookOpen className="h-6 w-6 text-secondary" />
+                <span>Nexamid</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-8 italic">
+                “Your Learning Journey Starts Here.”
+              </span>
             </div>
             <p className="text-sm text-muted-foreground max-w-xs">
               Connecting ambitious students with expert tutors for personalized offline learning experiences.
@@ -42,7 +47,7 @@ export function Footer() {
               </a>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
-              © 2026 NEXAMID Inc. All rights reserved.
+              © 2026 Nexamid Inc. All rights reserved.
             </p>
           </div>
         </div>

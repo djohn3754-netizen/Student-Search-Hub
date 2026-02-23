@@ -23,7 +23,7 @@ export default function AboutUs() {
               <span className="text-primary">Curiosity and Mastery</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              TutorLink is a dedicated marketplace designed to simplify the discovery of qualified educators. 
+              Nexamid is a dedicated marketplace designed to simplify the discovery of qualified educators. 
               We connect students with local tutors for personalized, offline learning support that fits 
               their specific academic needs and locations.
             </p>
@@ -93,7 +93,7 @@ export default function AboutUs() {
           <section className="space-y-6">
             <h2 className="text-2xl font-bold">Why We Built This Platform</h2>
             <p className="text-muted-foreground leading-relaxed">
-              TutorLink was born from a simple observation: finding a reliable, local tutor is often 
+              Nexamid was born from a simple observation: finding a reliable, local tutor is often 
               unnecessarily difficult. Most parents and students have to rely on generic classified 
               sites or word-of-mouth, which lack the transparency and focus required for a professional 
               educational match.
@@ -135,7 +135,7 @@ export default function AboutUs() {
               <h2 className="text-3xl font-bold">The right guidance changes everything.</h2>
               <p className="text-lg opacity-90 max-w-xl mx-auto">
                 Whether you're looking to master a difficult subject or share your knowledge with others, 
-                TutorLink is here to help you take the next step.
+                Nexamid is here to help you take the next step.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/find-tutors">

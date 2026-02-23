@@ -49,8 +49,8 @@ export default function Home() {
             <div className="flex-1 relative w-full max-w-[600px] lg:max-w-none">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 border-4 border-white">
                 <img 
-                  src="/assets/hero-study.jpg" 
-                  alt="Students studying" 
+                  src="/hero-main.jpg" 
+                  alt="Students with teacher" 
                   className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700"
                 />
                 
@@ -93,7 +93,7 @@ export default function Home() {
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-heading font-bold mb-4">Why choose NEXAMID?</h2>
+            <h2 className="text-3xl font-heading font-bold mb-4">Why choose Nexamid?</h2>
             <p className="text-muted-foreground text-lg">We verify every tutor to ensure you get the best learning experience possible.</p>
           </div>
           
@@ -142,7 +142,7 @@ export default function Home() {
             <div className="relative z-10 max-w-2xl mx-auto space-y-8">
               <h2 className="text-3xl md:text-5xl font-heading font-bold">Ready to start learning?</h2>
               <p className="text-primary-foreground/90 text-lg md:text-xl">
-                Join thousands of students who have found their perfect tutor on NEXAMID today.
+                Join thousands of students who have found their perfect tutor on Nexamid today.
               </p>
               <Link href="/find-tutors">
                 <Button size="lg" variant="secondary" className="h-14 px-8 text-lg rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-foreground">

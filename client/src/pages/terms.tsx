@@ -32,7 +32,7 @@ export default function TermsOfService() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                By accessing or using the TutorLink platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+                By accessing or using the Nexamid platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
               </p>
             </div>
           </section>
@@ -43,7 +43,7 @@ export default function TermsOfService() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                TutorLink is a lead-generation marketplace that connects students with independent tutors. We do not employ tutors, nor are we responsible for the specific educational outcomes or conduct of users during offline sessions. All arrangements made between students and tutors are independent agreements.
+                Nexamid is a lead-generation marketplace that connects students with independent tutors. We do not employ tutors, nor are we responsible for the specific educational outcomes or conduct of users during offline sessions. All arrangements made between students and tutors are independent agreements.
               </p>
             </div>
           </section>
@@ -67,7 +67,7 @@ export default function TermsOfService() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                In no event shall TutorLink or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on TutorLink's website.
+                In no event shall Nexamid or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Nexamid's website.
               </p>
             </div>
           </section>

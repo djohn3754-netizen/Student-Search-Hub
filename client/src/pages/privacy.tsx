@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                At TutorLink, we collect information to provide better services to all our users. The types of information we collect include:
+                At Nexamid, we collect information to provide better services to all our users. The types of information we collect include:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Account Information:</strong> When you sign up for an account, we ask for information like your name, email address, and phone number.</li>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                We use the information we collect to provide, maintain, and improve our services, to develop new ones, and to protect TutorLink and our users. Specifically:
+                We use the information we collect to provide, maintain, and improve our services, to develop new ones, and to protect Nexamid and our users. Specifically:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>To facilitate connections between students and tutors for offline classes.</li>
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
             </h2>
             <div className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
               <p>
-                We do not share your personal information with companies, organizations, or individuals outside of TutorLink except in the following cases:
+                We do not share your personal information with companies, organizations, or individuals outside of Nexamid except in the following cases:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>With your consent:</strong> We will share personal information with tutors or students only when you explicitly choose to connect with them.</li>
