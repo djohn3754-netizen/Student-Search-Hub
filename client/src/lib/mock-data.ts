@@ -3,6 +3,8 @@ export interface Tutor {
   name: string;
   subject: string;
   location: string;
+  localArea?: string;
+  pincode?: string;
   price: number;
   rating: number;
   reviews: number;
@@ -58,6 +60,8 @@ export const TUTORS: Tutor[] = [
     name: "Dr. Sarah Mitchell",
     subject: "Mathematics",
     location: "Mumbai, Maharashtra",
+    localArea: "Andheri West",
+    pincode: "400053",
     price: 85,
     rating: 4.9,
     reviews: 124,
@@ -78,6 +82,8 @@ export const TUTORS: Tutor[] = [
     name: "James Wilson",
     subject: "Physics",
     location: "Delhi, NCR",
+    localArea: "Hauz Khas",
+    pincode: "110016",
     price: 60,
     rating: 4.7,
     reviews: 45,

@@ -75,7 +75,7 @@ export default function TutorProfile() {
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground border-b pb-6">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-4 w-4 text-primary" />
-                  {tutor.location}
+                  {tutor.localArea ? `${tutor.localArea}, ` : ''}{tutor.location} {tutor.pincode ? `- ${tutor.pincode}` : ''}
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4 text-primary" />

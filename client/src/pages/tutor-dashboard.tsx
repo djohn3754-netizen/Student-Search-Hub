@@ -128,16 +128,20 @@ export default function TutorDashboard() {
                   <Input defaultValue={user.name} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold">Hourly Rate ($)</label>
-                  <Input type="number" defaultValue="65" />
+                  <label className="text-sm font-bold">City/State</label>
+                  <Input defaultValue="Mumbai, Maharashtra" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold">Local Area Name</label>
+                  <Input placeholder="e.g. Andheri West" defaultValue="Andheri West" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold">Pincode</label>
+                  <Input placeholder="6-digit Pincode" defaultValue="400053" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold">Subjects (Comma separated)</label>
                   <Input defaultValue="Mathematics, Physics, Calculus" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold">Locations</label>
-                  <Input defaultValue="Brooklyn, Manhattan" />
                 </div>
               </div>
               <div className="space-y-2">

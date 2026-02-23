@@ -36,6 +36,8 @@ export default function FindTutors() {
       const matchesSearch = 
         tutor.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
         tutor.bio.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tutor.localArea?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tutor.pincode?.includes(searchQuery) ||
         tutor.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
         
       const matchesSubject = selectedSubject === "all" || tutor.subject === selectedSubject;
@@ -185,7 +187,7 @@ export default function FindTutors() {
             <div className="relative group">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <Input 
-                placeholder="Search by name, subject, or keyword..." 
+                placeholder="Search by name, area, or pincode..." 
                 className="pl-12 h-14 text-lg shadow-sm rounded-2xl border-2 focus-visible:ring-primary/20"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
