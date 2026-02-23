@@ -36,9 +36,6 @@ export const SUBJECTS = [
   "English Literature",
   "History",
   "Computer Science",
-  "Piano",
-  "Guitar",
-  "Spanish",
   "French",
 ];
 

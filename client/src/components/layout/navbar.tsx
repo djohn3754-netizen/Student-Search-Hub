@@ -29,7 +29,7 @@ export function Navbar() {
         <Link href="/">
           <a className="flex items-center gap-2 font-heading font-bold text-xl text-primary hover:opacity-90 transition-opacity">
             <BookOpen className="h-6 w-6 text-secondary" />
-            <span>TutorLink</span>
+            <span>NEXAMID</span>
           </a>
         </Link>
 

@@ -60,11 +60,13 @@ export default function FindTutors() {
           <SelectTrigger className="bg-background">
             <SelectValue placeholder="All Subjects" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Subjects</SelectItem>
-            {SUBJECTS.map((subject) => (
-              <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-            ))}
+          <SelectContent className="max-h-[300px]">
+            <ScrollArea className="h-[200px]">
+              <SelectItem value="all">All Subjects</SelectItem>
+              {SUBJECTS.map((subject) => (
+                <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+              ))}
+            </ScrollArea>
           </SelectContent>
         </Select>
       </div>
@@ -77,11 +79,13 @@ export default function FindTutors() {
           <SelectTrigger className="bg-background">
             <SelectValue placeholder="All Locations" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Locations</SelectItem>
-            {LOCATIONS.map((location) => (
-              <SelectItem key={location} value={location}>{location}</SelectItem>
-            ))}
+          <SelectContent className="max-h-[300px]">
+            <ScrollArea className="h-[200px]">
+              <SelectItem value="all">All Locations</SelectItem>
+              {LOCATIONS.map((location) => (
+                <SelectItem key={location} value={location}>{location}</SelectItem>
+              ))}
+            </ScrollArea>
           </SelectContent>
         </Select>
       </div>
@@ -94,11 +98,13 @@ export default function FindTutors() {
           <SelectTrigger className="bg-background">
             <SelectValue placeholder="All Levels" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Levels</SelectItem>
-            {levels.map((level) => (
-              <SelectItem key={level} value={level}>{level}</SelectItem>
-            ))}
+          <SelectContent className="max-h-[300px]">
+            <ScrollArea className="h-[200px]">
+              <SelectItem value="all">All Levels</SelectItem>
+              {levels.map((level) => (
+                <SelectItem key={level} value={level}>{level}</SelectItem>
+              ))}
+            </ScrollArea>
           </SelectContent>
         </Select>
       </div>

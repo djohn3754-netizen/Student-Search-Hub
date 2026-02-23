@@ -13,11 +13,6 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
             <div className="flex-1 space-y-8 text-center lg:text-left">
-              <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold text-primary bg-primary/5">
-                <span className="flex h-2 w-2 rounded-full bg-secondary mr-2 animate-pulse"></span>
-                Now available in New York City
-              </div>
-              
               <h1 className="text-4xl md:text-6xl font-heading font-bold tracking-tight text-foreground leading-[1.1]">
                 Master any subject with <span className="text-primary">expert private tutors</span>
               </h1>
@@ -98,7 +93,7 @@ export default function Home() {
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-heading font-bold mb-4">Why choose TutorLink?</h2>
+            <h2 className="text-3xl font-heading font-bold mb-4">Why choose NEXAMID?</h2>
             <p className="text-muted-foreground text-lg">We verify every tutor to ensure you get the best learning experience possible.</p>
           </div>
           
@@ -147,7 +142,7 @@ export default function Home() {
             <div className="relative z-10 max-w-2xl mx-auto space-y-8">
               <h2 className="text-3xl md:text-5xl font-heading font-bold">Ready to start learning?</h2>
               <p className="text-primary-foreground/90 text-lg md:text-xl">
-                Join thousands of students who have found their perfect tutor on TutorLink today.
+                Join thousands of students who have found their perfect tutor on NEXAMID today.
               </p>
               <Link href="/find-tutors">
                 <Button size="lg" variant="secondary" className="h-14 px-8 text-lg rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-foreground">
