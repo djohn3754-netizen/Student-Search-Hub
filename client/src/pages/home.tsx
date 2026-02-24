@@ -53,33 +53,6 @@ export default function Home() {
                   alt="Students with teacher" 
                   className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700"
                 />
-                
-                {/* Floating Card 1 */}
-                <div className="absolute -bottom-6 -left-6 md:bottom-8 md:-left-8 bg-white p-4 rounded-xl shadow-xl border animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-green-100 p-2 rounded-full">
-                      <Star className="h-5 w-5 text-green-600 fill-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold">4.9/5 Rating</p>
-                      <p className="text-xs text-muted-foreground">From 10k+ Students</p>
-                    </div>
-                  </div>
-                </div>
-
-                 {/* Floating Card 2 */}
-                 <div className="absolute top-8 -right-4 md:top-12 md:-right-8 bg-white p-4 rounded-xl shadow-xl border animate-in fade-in slide-in-from-right-4 duration-1000 delay-500 hidden sm:block">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
-                      <AvatarImage src="/assets/avatar-tutor_1.jpg" />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-bold">Sarah M.</p>
-                      <p className="text-xs text-primary font-medium">Math Tutor</p>
-                    </div>
-                  </div>
-                </div>
               </div>
               
               {/* Decorative Background Blob */}

@@ -163,7 +163,7 @@ export default function TutorProfile() {
                 <Card className="shadow-lg border-primary/10">
                   <CardContent className="p-8 space-y-6">
                     <div className="text-center">
-                      <h4 className="text-2xl font-bold mb-2">Book a Trial Class</h4>
+                      <h4 className="text-2xl font-bold mb-2">Send Request Now</h4>
                       <p className="text-sm text-muted-foreground">Send an enquiry to start learning with {tutor.name.split(' ')[0]}.</p>
                     </div>
                     

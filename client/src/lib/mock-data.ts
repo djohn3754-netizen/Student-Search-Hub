@@ -31,6 +31,14 @@ export interface User {
 }
 
 export const SUBJECTS = [
+  "JEE/NEET",
+  "Spoken English",
+  "Coding",
+  "AI",
+  "Digital Skills",
+  "Robotics",
+  "Commerce (Accountancy, Economics)",
+  "Competitive Exam Preparation & Aptitude",
   "Mathematics",
   "Physics",
   "Chemistry",

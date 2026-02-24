@@ -184,14 +184,19 @@ export default function FindTutors() {
           <div className="mb-8">
             <h1 className="text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
             <p className="text-muted-foreground mb-6">Connecting you with the best offline learning experiences.</p>
-            <div className="relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-              <Input 
-                placeholder="Search by name, area, or pincode..." 
-                className="pl-12 h-14 text-lg shadow-sm rounded-2xl border-2 focus-visible:ring-primary/20"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+            <div className="relative group flex gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                <Input 
+                  placeholder="Search by name, area, or pincode..." 
+                  className="pl-12 h-14 text-lg shadow-sm rounded-2xl border-2 focus-visible:ring-primary/20"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg">
+                Search
+              </Button>
             </div>
           </div>
 
