@@ -40,24 +40,6 @@ export default function Contact() {
                     <p className="text-muted-foreground">support@nexamid.com</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-full text-primary">
-                    <Phone className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Call Us</h4>
-                    <p className="text-muted-foreground">+91 (800) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-full text-primary">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Our Office</h4>
-                    <p className="text-muted-foreground">Mumbai, Maharashtra, India</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
