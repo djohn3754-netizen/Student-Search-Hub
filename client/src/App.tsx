@@ -21,6 +21,10 @@ import AboutUs from "@/pages/about";
 import HowItWorks from "@/pages/how-it-works";
 import TermsOfService from "@/pages/terms";
 
+import Contact from "@/pages/contact";
+import Disclaimer from "@/pages/disclaimer";
+import Blog from "@/pages/blog";
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -37,6 +41,9 @@ function Router() {
           <Route path="/about" component={AboutUs} />
           <Route path="/how-it-works" component={HowItWorks} />
           <Route path="/terms" component={TermsOfService} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/disclaimer" component={Disclaimer} />
+          <Route path="/blog" component={Blog} />
           {/* Redirect student dashboard to home as it's no longer used */}
           <Route path="/student-dashboard">
             <Redirect to="/" />

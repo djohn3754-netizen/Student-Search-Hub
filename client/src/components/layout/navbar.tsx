@@ -50,6 +50,11 @@ export function Navbar() {
               Find Tutors
             </a>
           </Link>
+          <Link href="/blog">
+            <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/blog") ? "text-primary" : "text-muted-foreground"}`}>
+              Blog
+            </a>
+          </Link>
           
           {user && (
             <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
@@ -146,6 +151,9 @@ export function Navbar() {
             </Link>
             <Link href="/find-tutors">
               <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Find Tutors</a>
+            </Link>
+            <Link href="/blog">
+              <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Blog</a>
             </Link>
             {user && (
               <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
