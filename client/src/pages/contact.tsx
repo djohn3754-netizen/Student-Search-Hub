@@ -30,17 +30,6 @@ export default function Contact() {
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-full text-primary">
-                    <Mail className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Email Us</h4>
-                    <p className="text-muted-foreground">support@nexamid.com</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 

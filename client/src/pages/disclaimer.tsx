@@ -32,13 +32,6 @@ export default function Disclaimer() {
             While we have made every attempt to ensure that the information contained in this site has been obtained from reliable sources, Nexamid is not responsible for any errors or omissions, or for the results obtained from the use of this information.
           </p>
         </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
-          <p>
-            If you have any questions about this Disclaimer, please contact us at support@nexamid.com.
-          </p>
-        </section>
       </div>
     </div>
   );
