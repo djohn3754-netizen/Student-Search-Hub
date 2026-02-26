@@ -100,21 +100,10 @@ export default function AuthPage() {
                             <div className="absolute left-0 -top-2.5 px-1 ml-3 bg-white text-[12px] text-[#718096] z-10">
                               Mobile number
                             </div>
-                            <div className="flex items-center h-[54px] border border-[#cbd5e0] rounded-lg px-3 focus-within:border-[#3182ce] focus-within:ring-1 focus-within:ring-[#3182ce]/20 transition-all">
-                              <div className="flex items-center gap-1.5 pr-3 border-r border-[#e2e8f0] mr-4">
-                                <div className="w-6 h-4 bg-[#ff9933] relative overflow-hidden flex flex-col">
-                                  <div className="h-1/3 bg-[#ff9933]"></div>
-                                  <div className="h-1/3 bg-white flex items-center justify-center">
-                                    <div className="w-1.5 h-1.5 rounded-full border-[0.5px] border-blue-900"></div>
-                                  </div>
-                                  <div className="h-1/3 bg-[#138808]"></div>
-                                </div>
-                                <ChevronDown className="h-4 w-4 text-[#718096]" />
-                              </div>
-                              <span className="text-[#1a365d] font-medium mr-2">+ 91</span>
+                            <div className="flex items-center h-[54px] border-2 border-black rounded-lg px-3 focus-within:border-[#3182ce] focus-within:ring-1 focus-within:ring-[#3182ce]/20 transition-all">
                               <input 
                                 className="flex-1 bg-transparent border-none outline-none text-[#1a365d] text-[17px] font-medium placeholder:text-[#cbd5e0]"
-                                placeholder=""
+                                placeholder="Enter mobile number"
                                 maxLength={10}
                                 {...field}
                               />
@@ -147,7 +136,7 @@ export default function AuthPage() {
                             <p className="text-sm text-muted-foreground">OTP sent to +91 {phoneNumber}</p>
                             <Input 
                               placeholder="000000" 
-                              className="h-12 text-center text-2xl tracking-[0.5em] font-mono border-[#cbd5e0]" 
+                              className="h-12 text-center text-2xl tracking-[0.5em] font-mono border-2 border-black" 
                               maxLength={6}
                               {...field}
                             />
