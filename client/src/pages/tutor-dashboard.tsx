@@ -105,11 +105,8 @@ export default function TutorDashboard() {
                       </div>
                     </div>
                     <div className="flex gap-2 w-full md:w-auto">
-                      <Button asChild size="sm" className="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white border-none shadow-md ring-0 outline-none">
-                        <a href={`tel:${enquiry.phone}`}>Call Now</a>
-                      </Button>
-                      <Button variant="outline" size="sm" className="flex-1 md:flex-none border-black/20 hover:bg-black hover:text-white transition-colors ring-0 outline-none">
-                        Details
+                      <Button variant="outline" size="sm" className="flex-1 md:flex-none border-black/10 hover:bg-black hover:text-white transition-colors ring-0 outline-none shadow-none px-6">
+                        View Details
                       </Button>
                     </div>
                   </div>
