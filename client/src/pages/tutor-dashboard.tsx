@@ -81,32 +81,36 @@ export default function TutorDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {[
-                  { name: "John Doe", subject: "Mathematics", location: "Brooklyn, NY", time: "2h ago", status: "new" },
-                  { name: "Jane Smith", subject: "Physics", location: "Manhattan, NY", time: "5h ago", status: "contacted" },
-                  { name: "Mike Ross", subject: "Algebra", location: "Queens, NY", time: "1d ago", status: "contacted" },
+                  { name: "Arjun Mehta", subject: "JEE Mathematics", location: "Andheri West, Mumbai", phone: "+91 98765 43210", time: "10 mins ago", status: "new" },
+                  { name: "Priya Sharma", subject: "NEET Biology", location: "Hauz Khas, Delhi", phone: "+91 87654 32109", time: "2h ago", status: "new" },
+                  { name: "Rahul Singh", subject: "Coding (Python)", location: "Salt Lake, Kolkata", phone: "+91 76543 21098", time: "5h ago", status: "contacted" },
+                  { name: "Ananya Iyer", subject: "Commerce", location: "Indiranagar, Bengaluru", phone: "+91 65432 10987", time: "1d ago", status: "contacted" },
                 ].map((enquiry, i) => (
-                  <div key={i} className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between p-4 border rounded-xl hover:bg-muted/30 transition-colors">
+                  <div key={i} className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between p-5 border rounded-2xl hover:bg-muted/30 transition-all shadow-sm">
                     <div className="flex items-center gap-4">
-                      <Avatar className="h-10 w-10 border">
-                        <AvatarFallback><User className="h-5 w-5" /></AvatarFallback>
+                      <Avatar className="h-12 w-12 border-2 border-primary/10">
+                        <AvatarFallback className="bg-primary/5 text-primary font-bold">{enquiry.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <div>
+                      <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-bold">{enquiry.name}</h4>
-                          {enquiry.status === "new" && <Badge className="bg-blue-500 text-[10px] h-4">NEW</Badge>}
+                          <h4 className="font-bold text-lg">{enquiry.name}</h4>
+                          {enquiry.status === "new" && <Badge className="bg-blue-600 text-[10px] h-4 px-1.5">NEW LEAD</Badge>}
                         </div>
-                        <p className="text-xs text-muted-foreground flex items-center gap-3">
-                          <span className="flex items-center gap-1"><BookOpen className="h-3 w-3" /> {enquiry.subject}</span>
-                          <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {enquiry.location}</span>
-                          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {enquiry.time}</span>
-                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1.5"><BookOpen className="h-3.5 w-3.5 text-primary" /> {enquiry.subject}</span>
+                          <span className="flex items-center gap-1.5 font-medium text-black"><Phone className="h-3.5 w-3.5 text-green-600" /> {enquiry.phone}</span>
+                          <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {enquiry.location}</span>
+                          <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {enquiry.time}</span>
+                        </div>
                       </div>
                     </div>
                     <div className="flex gap-2 w-full md:w-auto">
-                      {enquiry.status === "new" && (
-                        <Button size="sm" className="flex-1 md:flex-none">Mark Contacted</Button>
-                      )}
-                      <Button variant="outline" size="sm" className="flex-1 md:flex-none">View Details</Button>
+                      <Button asChild size="sm" className="flex-1 md:flex-none bg-green-600 hover:bg-green-700 text-white border-none shadow-md ring-0 outline-none">
+                        <a href={`tel:${enquiry.phone}`}>Call Now</a>
+                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1 md:flex-none border-black/20 hover:bg-black hover:text-white transition-colors ring-0 outline-none">
+                        Details
+                      </Button>
                     </div>
                   </div>
                 ))}
