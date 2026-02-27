@@ -82,8 +82,7 @@ export default function AuthPage() {
       <div className="w-full max-w-[440px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="space-y-6">
           <div className="space-y-2">
-            <h1 className="text-[28px] font-bold text-[#1a365d]">Sign-in to Nexamid</h1>
-            <p className="text-[#4a5568] text-[15px]">For a more personalised experience, sign in with your registered mobile number</p>
+            <h1 className="text-[32px] font-heading font-bold text-[#1a365d] tracking-tight text-center">Sign-in to Nexamid</h1>
           </div>
 
           <div className="space-y-6">
@@ -100,10 +99,10 @@ export default function AuthPage() {
                             <div className="absolute left-0 -top-2.5 px-1 ml-3 bg-white text-[12px] text-[#718096] z-10">
                               Mobile number
                             </div>
-                            <div className="flex items-center h-[54px] border-2 border-black rounded-lg px-3 focus-within:border-[#3182ce] focus-within:ring-1 focus-within:ring-[#3182ce]/20 transition-all">
+                            <div className="flex items-center h-[54px] border border-black/40 rounded-lg px-4 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all bg-white shadow-sm">
                               <input 
                                 className="flex-1 bg-transparent border-none outline-none text-[#1a365d] text-[17px] font-medium placeholder:text-[#cbd5e0]"
-                                placeholder="Enter mobile number"
+                                placeholder="Enter 10 digit number"
                                 maxLength={10}
                                 {...field}
                               />
@@ -116,10 +115,10 @@ export default function AuthPage() {
                   />
                   <Button 
                     type="submit" 
-                    className="w-full h-[50px] text-[15px] font-bold rounded-lg bg-[#0066ff] hover:bg-[#0052cc] uppercase tracking-wider" 
+                    className="w-full h-[54px] text-[16px] font-bold rounded-lg bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 uppercase tracking-wider transition-all hover:scale-[1.01]" 
                     disabled={isLoading}
                   >
-                    {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "LOGIN WITH OTP"}
+                    {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "GET OTP"}
                   </Button>
                 </form>
               </Form>
@@ -132,11 +131,11 @@ export default function AuthPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="space-y-2 text-center">
-                            <p className="text-sm text-muted-foreground">OTP sent to +91 {phoneNumber}</p>
+                          <div className="space-y-4 text-center">
+                            <p className="text-sm font-medium text-muted-foreground">Verification code sent to {phoneNumber}</p>
                             <Input 
                               placeholder="000000" 
-                              className="h-12 text-center text-2xl tracking-[0.5em] font-mono border-2 border-black" 
+                              className="h-14 text-center text-3xl tracking-[0.6em] font-mono border border-black/40 bg-white rounded-lg focus:border-primary focus:ring-primary/20" 
                               maxLength={6}
                               {...field}
                             />
@@ -148,12 +147,12 @@ export default function AuthPage() {
                   />
                   <Button 
                     type="submit" 
-                    className="w-full h-[50px] text-[15px] font-bold rounded-lg bg-[#0066ff] hover:bg-[#0052cc] uppercase tracking-wider" 
+                    className="w-full h-[54px] text-[16px] font-bold rounded-lg bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 uppercase tracking-wider transition-all hover:scale-[1.01]" 
                     disabled={isLoading}
                   >
-                    {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "VERIFY OTP"}
+                    {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "VERIFY & SIGN IN"}
                   </Button>
-                  <Button variant="ghost" className="w-full" onClick={() => setStep("phone")}>Change Number</Button>
+                  <Button variant="ghost" className="w-full text-primary font-medium" onClick={() => setStep("phone")}>Change mobile number</Button>
                 </form>
               </Form>
             )}

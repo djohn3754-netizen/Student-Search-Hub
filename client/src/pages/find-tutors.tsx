@@ -189,7 +189,7 @@ export default function FindTutors() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                 <Input 
                   placeholder="Search by name, area, or pincode..." 
-                  className="pl-12 h-14 text-lg shadow-sm rounded-2xl border-2 focus-visible:ring-primary/20"
+                  className="pl-12 h-14 text-lg shadow-sm rounded-2xl border border-black/30 focus-visible:ring-primary/20"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />

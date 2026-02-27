@@ -9,10 +9,9 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex flex-col items-start gap-0">
               <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
-                <BookOpen className="h-6 w-6 text-secondary" />
                 <span>Nexamid</span>
               </div>
-              <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-8 italic">
+              <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-0 italic">
                 “Your Learning Journey Starts Here.”
               </span>
             </div>
