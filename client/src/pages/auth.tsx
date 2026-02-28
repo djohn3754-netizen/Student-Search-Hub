@@ -81,8 +81,11 @@ export default function AuthPage() {
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-white">
       <div className="w-full max-w-[440px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-[32px] font-heading font-bold text-[#1a365d] tracking-tight text-center">Sign-in to Nexamid</h1>
+          <div className="text-center space-y-3">
+            <h1 className="text-[32px] font-heading font-bold text-[#1a365d] tracking-tight">Sign-in to Nexamid</h1>
+            <p className="text-[#4a5568] font-medium italic text-lg">
+              "Connecting India's Brightest Minds with the Best Tutors"
+            </p>
           </div>
 
           <div className="space-y-6">
