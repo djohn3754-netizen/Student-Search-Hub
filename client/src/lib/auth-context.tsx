@@ -30,7 +30,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       setUser(mockUser as User);
       setIsLoading(false);
-      setLocation("/tutor-dashboard");
+      
+      // If the user is a new tutor (temp-tutor), send them to profile creation first
+      if (mockUser.id === "temp-tutor") {
+        setLocation("/tutor-dashboard?tab=profile");
+      } else {
+        setLocation("/tutor-dashboard");
+      }
     }, 800);
   };
 

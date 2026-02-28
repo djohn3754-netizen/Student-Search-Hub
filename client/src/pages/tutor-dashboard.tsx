@@ -21,6 +21,10 @@ import { Input } from "@/components/ui/input";
 export default function TutorDashboard() {
   const { user } = useAuth();
 
+  const [location] = useLocation();
+  const searchParams = new URLSearchParams(location.split("?")[1]);
+  const defaultTab = searchParams.get("tab") || "enquiries";
+
   if (!user || user.role !== "tutor") {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
@@ -65,7 +69,7 @@ export default function TutorDashboard() {
         ))}
       </div>
 
-      <Tabs defaultValue="enquiries" className="space-y-4">
+      <Tabs defaultValue={defaultTab} className="space-y-4">
         <TabsList className="bg-muted/50 p-1">
           <TabsTrigger value="enquiries">Student Enquiries</TabsTrigger>
           <TabsTrigger value="profile">Edit Profile</TabsTrigger>
