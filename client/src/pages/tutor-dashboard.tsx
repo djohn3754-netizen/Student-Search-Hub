@@ -1,5 +1,5 @@
 import { useAuth } from "@/lib/auth-context";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -13,13 +13,19 @@ import {
   CheckCircle2,
   Clock,
   User,
-  BookOpen
+  BookOpen,
+  Phone,
+  Star,
+  PlayCircle,
+  Upload
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export default function TutorDashboard() {
   const { user } = useAuth();
+  const [starredLeads, setStarredLeads] = useState<string[]>([]);
 
   const [location] = useLocation();
   const searchParams = new URLSearchParams(location.split("?")[1]);
@@ -35,12 +41,40 @@ export default function TutorDashboard() {
     );
   }
 
+  const toggleStar = (id: string) => {
+    setStarredLeads(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [id, ...prev]
+    );
+  };
+
+  const enquiries = [
+    { id: "1", name: "Arjun Mehta", subject: "JEE Mathematics", location: "Andheri West, Mumbai", phone: "+91 98765 43210", time: "10 mins ago", status: "new" },
+    { id: "2", name: "Priya Sharma", subject: "NEET Biology", location: "Hauz Khas, Delhi", phone: "+91 87654 32109", time: "2h ago", status: "new" },
+    { id: "3", name: "Rahul Singh", subject: "Coding (Python)", location: "Salt Lake, Kolkata", phone: "+91 76543 21098", time: "5h ago", status: "contacted" },
+    { id: "4", name: "Ananya Iyer", subject: "Commerce", location: "Indiranagar, Bengaluru", phone: "+91 65432 10987", time: "1d ago", status: "contacted" },
+  ];
+
+  const sortedEnquiries = [...enquiries].sort((a, b) => {
+    const aStarredIdx = starredLeads.indexOf(a.id);
+    const bStarredIdx = starredLeads.indexOf(b.id);
+    
+    if (aStarredIdx !== -1 && bStarredIdx !== -1) return aStarredIdx - bStarredIdx;
+    if (aStarredIdx !== -1) return -1;
+    if (bStarredIdx !== -1) return 1;
+    return 0;
+  });
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-heading font-bold">Tutor Dashboard</h1>
-          <p className="text-muted-foreground">Manage your profile and student enquiries.</p>
+          <p className="text-muted-foreground flex items-center gap-2">
+            Manage your profile and student enquiries. 
+            <span className="inline-flex items-center bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold border border-blue-100 animate-pulse">
+              🔔 New Enquiries (3)
+            </span>
+          </p>
         </div>
         <div className="flex items-center gap-4 bg-card p-2 rounded-lg border shadow-sm">
           <span className="text-sm font-medium pl-2">Profile Visibility</span>
@@ -50,7 +84,7 @@ export default function TutorDashboard() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "New Enquiries", value: "5", icon: MessageSquare, color: "text-blue-500", bg: "bg-blue-500/10" },
+          { label: "New Enquiries", value: "3", icon: MessageSquare, color: "text-blue-500", bg: "bg-blue-500/10" },
           { label: "Total Leads", value: "42", icon: Users, color: "text-purple-500", bg: "bg-purple-500/10" },
           { label: "Profile Views", value: "1.2k", icon: BarChart, color: "text-green-500", bg: "bg-green-500/10" },
           { label: "Response Rate", value: "98%", icon: CheckCircle2, color: "text-orange-500", bg: "bg-orange-500/10" },
@@ -80,17 +114,12 @@ export default function TutorDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Recent Leads</CardTitle>
-              <CardDescription>Direct enquiries from interested students.</CardDescription>
+              <CardDescription>Direct enquiries from interested students. Star your favorite leads to keep them at the top.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[
-                  { name: "Arjun Mehta", subject: "JEE Mathematics", location: "Andheri West, Mumbai", phone: "+91 98765 43210", time: "10 mins ago", status: "new" },
-                  { name: "Priya Sharma", subject: "NEET Biology", location: "Hauz Khas, Delhi", phone: "+91 87654 32109", time: "2h ago", status: "new" },
-                  { name: "Rahul Singh", subject: "Coding (Python)", location: "Salt Lake, Kolkata", phone: "+91 76543 21098", time: "5h ago", status: "contacted" },
-                  { name: "Ananya Iyer", subject: "Commerce", location: "Indiranagar, Bengaluru", phone: "+91 65432 10987", time: "1d ago", status: "contacted" },
-                ].map((enquiry, i) => (
-                  <div key={i} className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between p-5 border rounded-2xl hover:bg-muted/30 transition-all shadow-sm">
+                {sortedEnquiries.map((enquiry) => (
+                  <div key={enquiry.id} className={`flex flex-col md:flex-row gap-4 items-start md:items-center justify-between p-5 border rounded-2xl transition-all shadow-sm ${starredLeads.includes(enquiry.id) ? 'border-yellow-200 bg-yellow-50/30' : 'hover:bg-muted/30'}`}>
                     <div className="flex items-center gap-4">
                       <Avatar className="h-12 w-12 border-2 border-primary/10">
                         <AvatarFallback className="bg-primary/5 text-primary font-bold">{enquiry.name.charAt(0)}</AvatarFallback>
@@ -98,7 +127,15 @@ export default function TutorDashboard() {
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
                           <h4 className="font-bold text-lg">{enquiry.name}</h4>
-                          {enquiry.status === "new" && <Badge className="bg-blue-600 text-[10px] h-4 px-1.5">NEW LEAD</Badge>}
+                          {enquiry.status === "new" && <Badge className="bg-blue-600 text-[10px] h-4 px-1.5 border-none shadow-none text-white font-bold">NEW LEAD</Badge>}
+                          <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            className={`h-8 w-8 rounded-full ${starredLeads.includes(enquiry.id) ? 'text-yellow-500 hover:text-yellow-600 bg-yellow-100' : 'text-muted-foreground hover:text-yellow-500'}`}
+                            onClick={() => toggleStar(enquiry.id)}
+                          >
+                            <Star className={`h-4 w-4 ${starredLeads.includes(enquiry.id) ? 'fill-current' : ''}`} />
+                          </Button>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1.5"><BookOpen className="h-3.5 w-3.5 text-primary" /> {enquiry.subject}</span>
@@ -124,9 +161,26 @@ export default function TutorDashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Profile Configuration</CardTitle>
-              <CardDescription>Update your teaching details and visibility.</CardDescription>
+              <CardDescription>Update your teaching details, visibility, and demo content.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              <div className="p-8 border-2 border-dashed border-primary/20 rounded-3xl bg-primary/5 flex flex-col items-center justify-center text-center gap-4">
+                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <PlayCircle className="h-8 w-8" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold">Demo Tutorial (Video/Audio)</h4>
+                  <p className="text-sm text-muted-foreground max-w-sm mt-1">Upload a short demo (max 60s) to show students your teaching style. This will be visible on your profile.</p>
+                </div>
+                <div className="flex gap-3">
+                  <Button className="rounded-full px-8 shadow-lg flex items-center gap-2">
+                    <Upload className="h-4 w-4" />
+                    Upload File
+                  </Button>
+                </div>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">MP4, MOV, or MP3 supported</p>
+              </div>
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold">Tutor Name</label>

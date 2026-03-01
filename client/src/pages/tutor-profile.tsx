@@ -16,7 +16,8 @@ import {
   Share2, 
   Heart,
   Calendar,
-  GraduationCap
+  GraduationCap,
+  PlayCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
@@ -42,8 +43,8 @@ export default function TutorProfile() {
     setIsSubmitting(true);
     setTimeout(() => {
       toast({
-        title: "Enquiry Sent!",
-        description: `Your message has been sent to ${tutor.name}. They will contact you shortly.`,
+        title: "✅ Request Sent Successfully",
+        description: `Your request has been sent to ${tutor.name}.`,
       });
       setIsSubmitting(false);
       (e.target as HTMLFormElement).reset();
@@ -81,9 +82,15 @@ export default function TutorProfile() {
                   <Clock className="h-4 w-4 text-primary" />
                   {tutor.experience} Years Experience
                 </div>
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
-                  Verified Profile
+                <div className="flex flex-wrap gap-3">
+                  <Button variant="outline" size="sm" className="rounded-full border-primary/20 hover:bg-primary/5 gap-2 px-4 shadow-none">
+                    <PlayCircle className="h-4 w-4 text-primary" />
+                    View Demo Class
+                  </Button>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    Verified Profile
+                  </div>
                 </div>
               </div>
             </div>
