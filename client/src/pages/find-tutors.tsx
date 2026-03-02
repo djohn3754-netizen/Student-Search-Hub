@@ -53,13 +53,13 @@ export default function FindTutors() {
   }, [searchQuery, selectedSubject, selectedLocation, priceRange, minRating, selectedAvailability]);
 
   const FilterContent = () => (
-    <div className="space-y-6 pb-8">
-      <div className="space-y-2">
+    <div className="flex flex-wrap items-end gap-4 bg-card p-6 rounded-2xl border shadow-sm mb-8">
+      <div className="flex-1 min-w-[200px] space-y-2">
         <Label className="text-sm font-bold flex items-center gap-2">
           <Book className="h-4 w-4 text-primary" /> Subject
         </Label>
         <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-          <SelectTrigger className="bg-background">
+          <SelectTrigger className="bg-background h-11">
             <SelectValue placeholder="All Subjects" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -73,12 +73,12 @@ export default function FindTutors() {
         </Select>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex-1 min-w-[200px] space-y-2">
         <Label className="text-sm font-bold flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary" /> Location
         </Label>
         <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-          <SelectTrigger className="bg-background">
+          <SelectTrigger className="bg-background h-11">
             <SelectValue placeholder="All Locations" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -92,12 +92,12 @@ export default function FindTutors() {
         </Select>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex-1 min-w-[200px] space-y-2">
         <Label className="text-sm font-bold flex items-center gap-2">
           <GraduationCap className="h-4 w-4 text-primary" /> Class Level
         </Label>
         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-          <SelectTrigger className="bg-background">
+          <SelectTrigger className="bg-background h-11">
             <SelectValue placeholder="All Levels" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -111,95 +111,67 @@ export default function FindTutors() {
         </Select>
       </div>
 
-      <div className="space-y-3">
-        <Label className="text-sm font-bold flex items-center gap-2">
-          <Calendar className="h-4 w-4 text-primary" /> Availability
-        </Label>
-        <div className="flex flex-wrap gap-2">
-          {days.map((day) => (
-            <Badge 
-              key={day} 
-              variant={selectedAvailability.includes(day) ? "default" : "outline"}
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors px-3 py-1"
-              onClick={() => toggleAvailability(day)}
-            >
-              {day}
-            </Badge>
-          ))}
-        </div>
+      <div className="flex-shrink-0">
+        <Button 
+          variant="ghost" 
+          className="h-11 text-muted-foreground hover:text-destructive px-4"
+          onClick={() => {
+            setSelectedSubject("all");
+            setSelectedLocation("all");
+            setSearchQuery("");
+            setSelectedLevel("all");
+            setSelectedAvailability([]);
+          }}
+        >
+          Reset
+        </Button>
       </div>
-
-      <Button 
-        variant="ghost" 
-        className="w-full text-muted-foreground hover:text-destructive"
-        onClick={() => {
-          setSelectedSubject("all");
-          setSelectedLocation("all");
-          setSearchQuery("");
-          setSelectedLevel("all");
-          setSelectedAvailability([]);
-        }}
-      >
-        Reset Filters
-      </Button>
     </div>
   );
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="mb-12">
+        <h1 className="text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
+        <p className="text-muted-foreground mb-8">Connecting you with the best offline learning experiences.</p>
         
-        {/* Mobile Filter Sheet */}
-        <div className="md:hidden mb-4">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" className="w-full flex gap-2 h-12 shadow-sm">
-                <SlidersHorizontal className="h-4 w-4" /> Filters & Search
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <SheetHeader className="text-left border-b pb-4 mb-4">
-                <SheetTitle className="font-heading font-bold text-2xl">Refine Search</SheetTitle>
-                <SheetDescription>Find your perfect match</SheetDescription>
-              </SheetHeader>
-              <ScrollArea className="h-[calc(100vh-180px)] pr-4">
-                <FilterContent />
-              </ScrollArea>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* Desktop Sidebar */}
-        <div className="hidden md:block w-72 flex-shrink-0">
-          <div className="sticky top-24 p-6 rounded-2xl border bg-card shadow-sm">
-            <h2 className="font-heading font-bold text-xl mb-6 flex items-center gap-2">
-              <SlidersHorizontal className="h-5 w-5 text-primary" /> Filters
-            </h2>
-            <FilterContent />
+        {/* Search Bar */}
+        <div className="relative group flex gap-2 mb-8">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+            <Input 
+              placeholder="Search by name, area, or pincode..." 
+              className="pl-12 h-14 text-lg shadow-sm rounded-2xl border border-black/30 focus-visible:ring-primary/20"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
+          <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg">
+            Search
+          </Button>
         </div>
 
+        {/* Horizontal Filters Section - Above Featured */}
+        <FilterContent />
+
+        {/* Featured Section */}
+        <section className="bg-primary/5 p-8 rounded-3xl border border-primary/10 mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-heading font-bold flex items-center gap-2">
+              <Star className="h-6 w-6 text-primary fill-primary" /> Featured Tutors
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {TUTORS.slice(0, 3).map((tutor) => (
+              <TutorCard key={`featured-${tutor.id}`} tutor={tutor} />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <div className="flex flex-col gap-8">
         {/* Main Content */}
         <div className="flex-1">
-          <div className="mb-8">
-            <h1 className="text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
-            <p className="text-muted-foreground mb-6">Connecting you with the best offline learning experiences.</p>
-            <div className="relative group flex gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-                <Input 
-                  placeholder="Search by name, area, or pincode..." 
-                  className="pl-12 h-14 text-lg shadow-sm rounded-2xl border border-black/30 focus-visible:ring-primary/20"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-              <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg">
-                Search
-              </Button>
-            </div>
-          </div>
-
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 py-1 px-3 rounded-full text-sm font-medium">
@@ -207,7 +179,7 @@ export default function FindTutors() {
               </Badge>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
-              Sort by: <span className="font-bold text-foreground">Featured</span>
+              Sort by: <span className="font-bold text-foreground">Recently Added</span>
             </div>
           </div>
 
@@ -228,8 +200,6 @@ export default function FindTutors() {
                 onClick={() => {
                   setSelectedSubject("all");
                   setSelectedLocation("all");
-                  setPriceRange([0, 150]);
-                  setMinRating(0);
                   setSearchQuery("");
                   setSelectedLevel("all");
                   setSelectedAvailability([]);
