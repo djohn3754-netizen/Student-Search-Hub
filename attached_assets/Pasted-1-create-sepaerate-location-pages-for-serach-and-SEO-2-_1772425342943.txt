@@ -1,0 +1,274 @@
+1. create sepaerate location pages  for serach and SEO.
+2. Create SEO-optimized dynamic location pages for the tutor marketplace website.Goal Generate separate searchable pages for each city/location so the website can rank on Google for queries like:
+"Math Tutor in kolkata" or "Home Tuition in bhubaneshwar".
+
+Requirements
+
+Create a dynamic route:
+/location/[city]
+
+Example URLs:
+/location/siliguri
+/location/darjeeling
+/location/jalpaiguri
+
+Each page must:
+
+Display H1 heading:
+"Find the Best Tutors in {City}"
+
+
+Add FAQ section for SEO.on home page 
+
+Add dynamic SEO meta tags:
+
+
+
+Locations to Generate Initially
+
+Mumbai
+
+Colaba
+
+Fort
+
+Nariman Point
+
+Bandra
+
+Bandra Kurla Complex (BKC)
+
+Andheri
+
+Powai
+
+Juhu
+
+Lower Parel
+
+Worli
+
+Dadar
+
+Delhi
+
+Connaught Place
+
+Chanakyapuri
+
+Karol Bagh
+
+Saket
+
+Hauz Khas
+
+Dwarka
+
+Rohini
+
+Lajpat Nagar
+
+Chandni Chowk
+
+Janakpuri
+
+Bengaluru
+
+Electronic City
+
+Whitefield
+
+Outer Ring Road (ORR)
+
+MG Road
+
+Indiranagar
+
+Koramangala
+
+Yelahanka
+
+Hebbal
+
+Jayanagar
+
+Marathahalli
+
+Hyderabad
+
+HITEC City
+
+Gachibowli
+
+Madhapur
+
+Banjara Hills
+
+Jubilee Hills
+
+Charminar
+
+Secunderabad
+
+Kondapur
+
+Shamshabad
+
+Begumpet
+
+Chennai
+
+OMR (Old Mahabalipuram Road)
+
+Guindy
+
+Anna Salai
+
+T. Nagar
+
+Mylapore
+
+Adyar
+
+Velachery
+
+Sholinganallur
+
+Porur
+
+Sriperumbudur
+
+Kolkata
+
+Salt Lake (Sector V)
+
+New Town (Rajarhat)
+
+Park Street
+
+BBD Bagh
+
+Howrah
+
+Gariahat
+
+Alipore
+
+Dum Dum
+
+Esplanade
+
+Dakshineswar
+
+Pune
+
+Hinjawadi
+
+Koregaon Park
+
+Baner
+
+Balewadi
+
+Magarpatta
+
+Hadapsar
+
+Shivajinagar
+
+Kharadi
+
+Wakad
+
+Pimpri–Chinchwad
+
+Ahmedabad
+
+SG Highway
+
+Prahlad Nagar
+
+Bopal
+
+South Bopal
+
+Satellite
+
+Vastrapur
+
+Manek Chowk
+
+Sabarmati
+
+Chandkheda
+
+Naroda
+
+
+North India
+
+Jaipur
+
+Lucknow
+
+Kanpur
+
+Chandigarh
+
+Ludhiana
+
+Amritsar
+
+Agra
+
+Varanasi
+
+Dehradun
+
+West & Central India
+
+Surat
+
+Vadodara
+
+Indore
+
+Bhopal
+
+Nagpur
+
+Raipur
+
+Udaipur
+
+Jodhpur
+
+South India
+
+Coimbatore
+
+Madurai
+
+Tiruchirappalli
+
+Kochi
+
+Thiruvananthapuram
+
+Mysuru
+
+Mangaluru
+
+Visakhapatnam
+
+Vijayawada
+
+East & Northeast India
+
+Bhubaneswar
+
+Guwahati
+
+Ranchi
+
+Patna

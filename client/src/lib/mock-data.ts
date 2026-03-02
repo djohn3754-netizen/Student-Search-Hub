@@ -50,16 +50,18 @@ export const SUBJECTS = [
 ];
 
 export const LOCATIONS = [
-  "Mumbai, Maharashtra",
-  "Delhi, NCR",
-  "Bengaluru, Karnataka",
-  "Hyderabad, Telangana",
-  "Chennai, Tamil Nadu",
-  "Kolkata, West Bengal",
-  "Pune, Maharashtra",
-  "Ahmedabad, Gujarat",
-  "Kharagpur, West Bengal",
-  "Midnapore, West Bengal"
+  "Mumbai", "Colaba", "Fort", "Nariman Point", "Bandra", "BKC", "Andheri", "Powai", "Juhu", "Lower Parel", "Worli", "Dadar",
+  "Delhi", "Connaught Place", "Chanakyapuri", "Karol Bagh", "Saket", "Hauz Khas", "Dwarka", "Rohini", "Lajpat Nagar", "Chandni Chowk", "Janakpuri",
+  "Bengaluru", "Electronic City", "Whitefield", "ORR", "MG Road", "Indiranagar", "Koramangala", "Yelahanka", "Hebbal", "Jayanagar", "Marathahalli",
+  "Hyderabad", "HITEC City", "Gachibowli", "Madhapur", "Banjara Hills", "Jubilee Hills", "Charminar", "Secunderabad", "Kondapur", "Shamshabad", "Begumpet",
+  "Chennai", "OMR", "Guindy", "Anna Salai", "T. Nagar", "Mylapore", "Adyar", "Velachery", "Sholinganallur", "Porur", "Sriperumbudur",
+  "Kolkata", "Salt Lake", "New Town", "Park Street", "BBD Bagh", "Howrah", "Gariahat", "Alipore", "Dum Dum", "Esplanade", "Dakshineswar",
+  "Pune", "Hinjawadi", "Koregaon Park", "Baner", "Balewadi", "Magarpatta", "Hadapsar", "Shivajinagar", "Kharadi", "Wakad", "Pimpri-Chinchwad",
+  "Ahmedabad", "SG Highway", "Prahlad Nagar", "Bopal", "South Bopal", "Satellite", "Vastrapur", "Manek Chowk", "Sabarmati", "Chandkheda", "Naroda",
+  "Jaipur", "Lucknow", "Kanpur", "Chandigarh", "Ludhiana", "Amritsar", "Agra", "Varanasi", "Dehradun",
+  "Surat", "Vadodara", "Indore", "Bhopal", "Nagpur", "Raipur", "Udaipur", "Jodhpur",
+  "Coimbatore", "Madurai", "Tiruchirappalli", "Kochi", "Thiruvananthapuram", "Mysuru", "Mangaluru", "Visakhapatnam", "Vijayawada",
+  "Bhubaneswar", "Guwahati", "Ranchi", "Patna"
 ];
 
 export const TUTORS: Tutor[] = [

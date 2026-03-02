@@ -4,8 +4,28 @@ import { Search, ShieldCheck, MapPin, Star, BookOpen } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { LOCATIONS } from "@/lib/mock-data";
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      q: "How does Nexamid help me find a tutor?",
+      a: "Nexamid connects you with verified local tutors. You can search by subject and location, view profiles, and send requests directly to tutors without needing to create an account first."
+    },
+    {
+      q: "Are the tutors on Nexamid verified?",
+      a: "Yes, we manually verify the credentials and experience of every tutor who joins our platform to ensure high-quality learning experiences."
+    },
+    {
+      q: "Is there a fee to use Nexamid as a student?",
+      a: "No, searching for tutors and sending enquiries is completely free for students and parents."
+    }
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -62,6 +82,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Popular Locations Section */}
+      <section className="py-16 border-y border-border bg-muted/10">
+        <div className="container mx-auto px-4">
+          <h3 className="text-center text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Popular Locations</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {LOCATIONS.slice(0, 12).map((loc) => (
+              <Link key={loc} href={`/location/${loc.toLowerCase().replace(/\s+/g, '-')}`}>
+                <a className="text-sm font-medium hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">
+                  Tutors in {loc}
+                </a>
+              </Link>
+            ))}
+            <Link href="/find-tutors">
+              <a className="text-sm font-bold text-primary hover:underline pb-1">View All →</a>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -102,6 +141,30 @@ export default function Home() {
                   <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
                 </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-heading font-bold text-center mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <Card key={i} className="border-none shadow-sm cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <CardHeader className="p-6">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-bold text-lg">{faq.q}</h3>
+                    {openFaq === i ? <ChevronUp className="h-5 w-5 text-primary" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
+                  </div>
+                  {openFaq === i && (
+                    <div className="mt-4 text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
+                      {faq.a}
+                    </div>
+                  )}
+                </CardHeader>
               </Card>
             ))}
           </div>

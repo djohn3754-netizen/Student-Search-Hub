@@ -24,6 +24,7 @@ import TermsOfService from "@/pages/terms";
 import Contact from "@/pages/contact";
 import Disclaimer from "@/pages/disclaimer";
 import Blog from "@/pages/blog";
+import LocationPage from "@/pages/location/[city]";
 
 function Router() {
   return (
@@ -32,6 +33,7 @@ function Router() {
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/location/:city" component={LocationPage} />
           <Route path="/find-tutors" component={FindTutors} />
           <Route path="/tutor/:id" component={TutorProfile} />
           <Route path="/auth" component={AuthPage} />
