@@ -46,6 +46,9 @@ export function Navbar() {
           <Link href="/blog" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/blog") ? "text-primary" : "text-muted-foreground"}`}>
             Blog
           </Link>
+          <Link href="/about" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/about") ? "text-primary" : "text-muted-foreground"}`}>
+            About Us
+          </Link>
           
           {user && (
             <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"} className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/admin-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
@@ -102,7 +105,7 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-2">
               <Link href="/auth">
-                <Button variant="ghost" className="text-muted-foreground hover:text-primary">Log in</Button>
+                <Button variant="ghost" className="text-muted-foreground hover:text-primary">Tutors Login</Button>
               </Link>
               <Link href="/auth">
                 <Button className="font-semibold shadow-sm">Sign up</Button>
@@ -133,6 +136,9 @@ export function Navbar() {
             <Link href="/blog" className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
               Blog
             </Link>
+            <Link href="/about" className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+              About Us
+            </Link>
             {user && (
               <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"} className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
                 Dashboard
@@ -145,7 +151,7 @@ export function Navbar() {
               ) : (
                 <>
                   <Link href="/auth">
-                    <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Log in</Button>
+                    <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Tutors Login</Button>
                   </Link>
                   <Link href="/auth">
                     <Button className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Sign up</Button>
