@@ -43,8 +43,7 @@ export default function TutorProfile() {
     setIsSubmitting(true);
     setTimeout(() => {
       toast({
-        title: "✅ Request Sent Successfully",
-        description: `Your request has been sent to ${tutor.name}.`,
+        title: `✅ Your request has been sent to tutor ${tutor.name}.`,
       });
       setIsSubmitting(false);
       (e.target as HTMLFormElement).reset();

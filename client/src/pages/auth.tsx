@@ -61,11 +61,12 @@ export default function AuthPage() {
     setIsLoading(true);
     setTimeout(() => {
       if (values.otp === "123456") {
+        const tutorIdentifier = phoneNumber === "9876543210" ? "tutor@example.com" : `${phoneNumber}@nexamid.tutor`;
         toast({
           title: "Login Successful",
-          description: "Welcome back!",
+          description: phoneNumber === "9876543210" ? "Welcome back!" : "Welcome! Let’s set up your tutor profile.",
         });
-        login("tutor@example.com");
+        login(tutorIdentifier);
       } else {
         setIsLoading(false);
         toast({
@@ -78,13 +79,13 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-white">
-      <div className="w-full max-w-[440px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-3 sm:p-4 bg-gradient-to-b from-white to-slate-50">
+      <div className="w-full max-w-[440px] rounded-[28px] border border-slate-200 bg-white p-5 sm:p-7 shadow-xl shadow-slate-200/60 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="space-y-6">
-          <div className="text-center space-y-3">
-            <h1 className="text-[32px] font-heading font-bold text-[#1a365d] tracking-tight">Sign-in to Nexamid</h1>
-            <p className="text-[#4a5568] font-medium italic text-lg">
-              "Connecting India's Brightest Minds with the Best Tutors"
+          <div className="text-center space-y-3 px-2">
+            <h1 className="text-[28px] sm:text-[32px] font-heading font-bold text-[#1a365d] tracking-tight">Tutor Login</h1>
+            <p className="text-sm sm:text-base text-[#4a5568] font-medium italic">
+              Teach. Connect. Grow.
             </p>
           </div>
 
@@ -172,6 +173,13 @@ export default function AuthPage() {
             <Button 
               variant="outline" 
               className="w-full h-[50px] rounded-lg border-[#cbd5e0] text-[#4a5568] font-medium flex items-center justify-center gap-3 hover:bg-gray-50"
+              onClick={() => {
+                toast({
+                  title: "Google sign-in selected",
+                  description: "Using tutor demo access.",
+                });
+                login("tutor@example.com");
+              }}
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>

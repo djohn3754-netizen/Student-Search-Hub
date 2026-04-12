@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (mockUser.id === "temp-tutor") {
         setLocation("/tutor-dashboard?tab=profile");
       } else {
-        setLocation("/tutor-dashboard");
+        setLocation("/tutor-dashboard?tab=enquiries");
       }
     }, 800);
   };

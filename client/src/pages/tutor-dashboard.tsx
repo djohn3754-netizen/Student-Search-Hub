@@ -64,8 +64,14 @@ export default function TutorDashboard() {
     return 0;
   });
 
+  const starredEnquiries = starredLeads
+    .map((id) => enquiries.find((enquiry) => enquiry.id === id))
+    .filter((enquiry): enquiry is (typeof enquiries)[number] => Boolean(enquiry));
+
+  const isFirstTimeTutor = user.id === "temp-tutor";
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-6 md:py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-heading font-bold">Tutor Dashboard</h1>
@@ -104,10 +110,10 @@ export default function TutorDashboard() {
       </div>
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
-        <TabsList className="bg-muted/50 p-1">
-          <TabsTrigger value="enquiries">Student Enquiries</TabsTrigger>
-          <TabsTrigger value="profile">Edit Profile</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
+          <TabsTrigger value="enquiries" className="text-xs sm:text-sm">Student Enquiries</TabsTrigger>
+          <TabsTrigger value="profile" className="text-xs sm:text-sm">Edit Profile</TabsTrigger>
+          <TabsTrigger value="settings" className="text-xs sm:text-sm">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="enquiries" className="space-y-4 animate-in fade-in duration-300">
@@ -157,13 +163,51 @@ export default function TutorDashboard() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="profile" className="animate-in fade-in duration-300">
+        <TabsContent value="profile" className="space-y-4 animate-in fade-in duration-300">
+          <Card>
+            <CardHeader>
+              <CardTitle>Starred Enquiries</CardTitle>
+              <CardDescription>Your most recently starred leads appear first here for quick follow-up.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {starredEnquiries.length > 0 ? (
+                <div className="space-y-3">
+                  {starredEnquiries.map((enquiry) => (
+                    <div key={enquiry.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-yellow-200 bg-yellow-50/50 p-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-500" />
+                          <h4 className="font-bold">{enquiry.name}</h4>
+                        </div>
+                        <div className="text-sm text-muted-foreground space-y-1">
+                          <p>{enquiry.subject}</p>
+                          <p>{enquiry.location}</p>
+                        </div>
+                      </div>
+                      <div className="text-sm font-medium text-foreground">{enquiry.phone}</div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
+                  Star enquiries from the lead list and they will appear here instantly.
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Profile Configuration</CardTitle>
-              <CardDescription>Update your teaching details, visibility, and demo content.</CardDescription>
+              <CardDescription>{isFirstTimeTutor ? "This is where first-time tutors land so they can complete their profile before managing leads." : "Update your teaching details, visibility, and demo content."}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              {isFirstTimeTutor && (
+                <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-primary font-medium">
+                  Complete your tutor profile to start receiving high-quality enquiries.
+                </div>
+              )}
+
               <div className="p-8 border-2 border-dashed border-primary/20 rounded-3xl bg-primary/5 flex flex-col items-center justify-center text-center gap-4">
                 <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                   <PlayCircle className="h-8 w-8" />
@@ -198,7 +242,7 @@ export default function TutorDashboard() {
                   <label className="text-sm font-bold">Pincode</label>
                   <Input placeholder="6-digit Pincode" defaultValue="400053" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 md:col-span-2">
                   <label className="text-sm font-bold">Subjects (Comma separated)</label>
                   <Input defaultValue="Mathematics, Physics, Calculus" />
                 </div>
@@ -207,7 +251,7 @@ export default function TutorDashboard() {
                 <label className="text-sm font-bold">Professional Bio</label>
                 <textarea className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" defaultValue="Highly experienced tutor with a focus on..." />
               </div>
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
                 <Button variant="outline">Discard Changes</Button>
                 <Button>Save Profile</Button>
               </div>
