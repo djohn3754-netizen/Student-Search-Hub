@@ -24,6 +24,7 @@ import TermsOfService from "@/pages/terms";
 import Contact from "@/pages/contact";
 import Disclaimer from "@/pages/disclaimer";
 import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
 import LocationPage from "@/pages/location/[city]";
 
 function Router() {
@@ -45,6 +46,7 @@ function Router() {
           <Route path="/terms" component={TermsOfService} />
           <Route path="/contact" component={Contact} />
           <Route path="/disclaimer" component={Disclaimer} />
+          <Route path="/blog/:id" component={BlogPost} />
           <Route path="/blog" component={Blog} />
           {/* Redirect student dashboard to home as it's no longer used */}
           <Route path="/student-dashboard">

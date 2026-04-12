@@ -13,16 +13,36 @@ export default function Home() {
 
   const faqs = [
     {
-      q: "How does Nexamid help me find a tutor?",
-      a: "Nexamid connects you with verified local tutors. You can search by subject and location, view profiles, and send requests directly to tutors without needing to create an account first."
+      q: "How do I book a session with a tutor?",
+      a: "Browse tutor profiles, open the one you like, and submit the enquiry form on the profile page. The tutor then receives your request and can follow up directly."
     },
     {
-      q: "Are the tutors on Nexamid verified?",
-      a: "Yes, we manually verify the credentials and experience of every tutor who joins our platform to ensure high-quality learning experiences."
+      q: "Are sessions online, in-person, or both?",
+      a: "Nexamid is currently focused on local and offline tutoring experiences, helping students connect with tutors for in-person learning near their area."
     },
     {
-      q: "Is there a fee to use Nexamid as a student?",
-      a: "No, searching for tutors and sending enquiries is completely free for students and parents."
+      q: "Can I choose tutors near my location?",
+      a: "Yes. You can browse tutors by city and location-based pages, making it easier to find tutors close to your area."
+    },
+    {
+      q: "What subjects are available?",
+      a: "Tutors on Nexamid cover a wide range of subjects including Mathematics, Science, English, Coding, JEE/NEET preparation, commerce, humanities, and more."
+    },
+    {
+      q: "What levels do tutors cover (school, college, test prep)?",
+      a: "Tutors support school-level learning, college-level subjects, competitive exam preparation, and selected professional skill-based learning."
+    },
+    {
+      q: "Can I choose a tutor based on experience or qualifications?",
+      a: "Yes. Tutor profiles include teaching experience, education, subject expertise, and profile details so you can compare and choose the right fit."
+    },
+    {
+      q: "Do I need to create an account to contact tutors?",
+      a: "No. Students and parents can send tutor enquiries directly without creating an account."
+    },
+    {
+      q: "Can I save favorite tutors?",
+      a: "Not yet. Right now you can compare profiles and revisit them anytime, while a dedicated favorites feature can be added later."
     }
   ];
 
