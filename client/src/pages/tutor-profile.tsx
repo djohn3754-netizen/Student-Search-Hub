@@ -82,10 +82,6 @@ export default function TutorProfile() {
                   {tutor.experience} Years Experience
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  <Button variant="outline" size="sm" className="rounded-full border-primary/20 hover:bg-primary/5 gap-2 px-4 shadow-none">
-                    <PlayCircle className="h-4 w-4 text-primary" />
-                    View Demo Class
-                  </Button>
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <CheckCircle className="h-4 w-4 text-green-500" />
                     Verified Profile
@@ -120,23 +116,10 @@ export default function TutorProfile() {
                     <GraduationCap className="h-6 w-6 text-primary" />
                     Teaching Method
                   </h3>
-                  <div className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
+                  <div className="rounded-2xl border bg-muted/20 p-5">
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                       {tutor.teachingMethod?.description || 'My teaching philosophy centers on personalized instruction tailored to each student\'s unique learning style.'}
                     </p>
-                    <ul className="grid sm:grid-cols-2 gap-3">
-                      {(tutor.teachingMethod?.points || [
-                        "Concept-first learning",
-                        "Exam-focused preparation",
-                        "Practical problem solving",
-                        "Use of worksheets / digital tools"
-                      ]).map((point, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm font-medium bg-background border p-3 rounded-xl shadow-sm">
-                          <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 </section>
                 

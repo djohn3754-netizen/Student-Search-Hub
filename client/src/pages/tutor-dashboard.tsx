@@ -251,6 +251,10 @@ export default function TutorDashboard() {
                 <label className="text-sm font-bold">Professional Bio</label>
                 <textarea className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" defaultValue="Highly experienced tutor with a focus on..." />
               </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold">Teaching Method</label>
+                <textarea className="flex min-h-[140px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" defaultValue="I explain concepts in a simple way, adapt lessons to the student's pace, and use regular practice with doubt-solving to build confidence." />
+              </div>
               <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
                 <Button variant="outline">Discard Changes</Button>
                 <Button>Save Profile</Button>
