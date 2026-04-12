@@ -26,40 +26,30 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/">
-          <a className="flex flex-col items-start gap-0 hover:opacity-90 transition-opacity">
-            <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
-              <span>Nexamid</span>
-            </div>
-            <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-0 italic">
-              “Your Learning Journey Starts Here.”
-            </span>
-          </a>
+        <Link href="/" className="flex flex-col items-start gap-0 hover:opacity-90 transition-opacity">
+          <div className="flex items-center gap-2 font-heading font-bold text-xl text-primary">
+            <span>Nexamid</span>
+          </div>
+          <span className="text-[10px] text-muted-foreground font-medium -mt-1 ml-0 italic">
+            “Your Learning Journey Starts Here.”
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/">
-            <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/") ? "text-primary" : "text-muted-foreground"}`}>
-              Home
-            </a>
+          <Link href="/" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/") ? "text-primary" : "text-muted-foreground"}`}>
+            Home
           </Link>
-          <Link href="/find-tutors">
-            <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/find-tutors") ? "text-primary" : "text-muted-foreground"}`}>
-              Find Tutors
-            </a>
+          <Link href="/find-tutors" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/find-tutors") ? "text-primary" : "text-muted-foreground"}`}>
+            Find Tutors
           </Link>
-          <Link href="/blog">
-            <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/blog") ? "text-primary" : "text-muted-foreground"}`}>
-              Blog
-            </a>
+          <Link href="/blog" className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/blog") ? "text-primary" : "text-muted-foreground"}`}>
+            Blog
           </Link>
           
           {user && (
-            <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
-              <a className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/admin-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
-                Dashboard
-              </a>
+            <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"} className={`text-sm font-medium transition-colors hover:text-primary ${isActive("/admin-dashboard") || isActive("/tutor-dashboard") ? "text-primary" : "text-muted-foreground"}`}>
+              Dashboard
             </Link>
           )}
         </div>
@@ -134,18 +124,18 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t bg-background p-4 animate-in slide-in-from-top-5">
           <div className="flex flex-col space-y-4">
-            <Link href="/">
-              <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
+            <Link href="/" className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+              Home
             </Link>
-            <Link href="/find-tutors">
-              <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Find Tutors</a>
+            <Link href="/find-tutors" className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+              Find Tutors
             </Link>
-            <Link href="/blog">
-              <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Blog</a>
+            <Link href="/blog" className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+              Blog
             </Link>
             {user && (
-              <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"}>
-                <a className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</a>
+              <Link href={user.role === "admin" ? "/admin-dashboard" : "/tutor-dashboard"} className="text-sm font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+                Dashboard
               </Link>
             )}
             

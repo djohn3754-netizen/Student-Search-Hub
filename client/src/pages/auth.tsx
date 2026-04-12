@@ -184,7 +184,7 @@ export default function AuthPage() {
 
             <div className="text-center pt-8">
               <p className="text-[13px] text-[#718096]">
-                By continuing, I agree to the <Link href="/terms"><a className="text-[#3182ce] hover:underline">Terms of Use</a></Link> and <Link href="/privacy"><a className="text-[#3182ce] hover:underline">Privacy Policy</a></Link>.
+                By continuing, I agree to the <Link href="/terms" className="text-[#3182ce] hover:underline">Terms of Use</Link> and <Link href="/privacy" className="text-[#3182ce] hover:underline">Privacy Policy</Link>.
               </p>
             </div>
           </div>

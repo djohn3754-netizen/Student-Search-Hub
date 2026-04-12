@@ -23,20 +23,20 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold mb-4">Platform</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/about"><a className="hover:text-primary transition-colors">About Us</a></Link></li>
-              <li><Link href="/find-tutors"><a className="hover:text-primary transition-colors">Find a Tutor</a></Link></li>
-              <li><Link href="/auth"><a className="hover:text-primary transition-colors">Become a Tutor</a></Link></li>
-              <li><Link href="/how-it-works"><a className="hover:text-primary transition-colors">How it Works</a></Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="/find-tutors" className="hover:text-primary transition-colors">Find a Tutor</Link></li>
+              <li><Link href="/auth" className="hover:text-primary transition-colors">Become a Tutor</Link></li>
+              <li><Link href="/how-it-works" className="hover:text-primary transition-colors">How it Works</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-heading font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/terms"><a className="hover:text-primary transition-colors">Terms of Service</a></Link></li>
-              <li><Link href="/privacy"><a className="hover:text-primary transition-colors">Privacy Policy</a></Link></li>
-              <li><Link href="/disclaimer"><a className="hover:text-primary transition-colors">Disclaimer</a></Link></li>
-              <li><Link href="/contact"><a className="hover:text-primary transition-colors">Contact Us</a></Link></li>
+              <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
             </ul>
           </div>
           

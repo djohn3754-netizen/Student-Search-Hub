@@ -27,8 +27,8 @@ export default function Blog() {
               </CardHeader>
               <CardContent className="px-6 pb-6 pt-0">
                 <p className={`line-clamp-3 mb-4 ${index === 0 ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>{post.excerpt}</p>
-                <Link href={`/blog/${post.id}`}>
-                  <a className={`font-semibold hover:underline ${index === 0 ? 'text-white' : 'text-primary'}`}>Read More →</a>
+                <Link href={`/blog/${post.id}`} className={`font-semibold hover:underline ${index === 0 ? 'text-white' : 'text-primary'}`}>
+                  Read More →
                 </Link>
               </CardContent>
             </div>

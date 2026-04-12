@@ -88,14 +88,16 @@ export default function Home() {
           <h3 className="text-center text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Popular Locations</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {LOCATIONS.slice(0, 12).map((loc) => (
-              <Link key={loc} href={`/location/${loc.toLowerCase().replace(/\s+/g, '-')}`}>
-                <a className="text-sm font-medium hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1">
-                  Tutors in {loc}
-                </a>
+              <Link
+                key={loc}
+                href={`/location/${loc.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-sm font-medium hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1"
+              >
+                Tutors in {loc}
               </Link>
             ))}
-            <Link href="/find-tutors">
-              <a className="text-sm font-bold text-primary hover:underline pb-1">View All →</a>
+            <Link href="/find-tutors" className="text-sm font-bold text-primary hover:underline pb-1">
+              View All →
             </Link>
           </div>
         </div>
