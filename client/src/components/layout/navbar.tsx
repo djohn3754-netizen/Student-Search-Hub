@@ -108,7 +108,7 @@ export function Navbar() {
                 <Button variant="ghost" className="text-muted-foreground hover:text-primary">Tutors Login</Button>
               </Link>
               <Link href="/auth">
-                <Button className="font-semibold shadow-sm">Sign up</Button>
+                <Button className="font-semibold shadow-sm">Join as Tutor</Button>
               </Link>
             </div>
           )}
@@ -154,7 +154,7 @@ export function Navbar() {
                     <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Tutors Login</Button>
                   </Link>
                   <Link href="/auth">
-                    <Button className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Sign up</Button>
+                    <Button className="w-full" onClick={() => setIsMobileMenuOpen(false)}>Join as Tutor</Button>
                   </Link>
                 </>
               )}
