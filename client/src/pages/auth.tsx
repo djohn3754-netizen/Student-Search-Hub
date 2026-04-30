@@ -79,12 +79,12 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-3 sm:p-4 bg-gradient-to-b from-white to-slate-50">
-      <div className="w-full max-w-[440px] rounded-[28px] border border-slate-200 bg-white p-5 sm:p-7 shadow-xl shadow-slate-200/60 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-b from-background via-background to-muted/40 p-3 sm:p-4">
+      <div className="w-full max-w-[440px] rounded-[28px] border border-border/70 bg-card/95 p-5 shadow-xl shadow-primary/10 backdrop-blur-sm space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 sm:p-7">
         <div className="space-y-6">
           <div className="text-center space-y-3 px-2">
-            <h1 className="text-[28px] sm:text-[32px] font-heading font-bold text-[#1a365d] tracking-tight">Tutor Login</h1>
-            <p className="text-sm sm:text-base text-[#4a5568] font-medium italic">
+            <h1 className="text-[28px] sm:text-[32px] font-heading font-bold text-foreground tracking-tight">Tutor Login</h1>
+            <p className="text-sm sm:text-base text-muted-foreground font-medium italic">
               Teach. Connect. Grow.
             </p>
           </div>
@@ -100,12 +100,12 @@ export default function AuthPage() {
                       <FormItem>
                         <FormControl>
                           <div className="relative group">
-                            <div className="absolute left-0 -top-2.5 px-1 ml-3 bg-white text-[12px] text-[#718096] z-10">
+                            <div className="absolute left-0 -top-2.5 ml-3 bg-card px-1 text-[12px] text-muted-foreground z-10">
                               Mobile number
                             </div>
-                            <div className="flex items-center h-[54px] border border-black/40 rounded-lg px-4 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all bg-white shadow-sm">
+                            <div className="flex h-[54px] items-center rounded-lg border border-border bg-background/80 px-4 shadow-sm transition-all focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20">
                               <input 
-                                className="flex-1 bg-transparent border-none outline-none text-[#1a365d] text-[17px] font-medium placeholder:text-[#cbd5e0]"
+                                className="flex-1 bg-transparent border-none text-[17px] font-medium text-foreground outline-none placeholder:text-muted-foreground/60"
                                 placeholder="Enter 10 digit number"
                                 maxLength={10}
                                 {...field}
@@ -139,7 +139,7 @@ export default function AuthPage() {
                             <p className="text-sm font-medium text-muted-foreground">Verification code sent to {phoneNumber}</p>
                             <Input 
                               placeholder="000000" 
-                              className="h-14 text-center text-3xl tracking-[0.6em] font-mono border border-black/40 bg-white rounded-lg focus:border-primary focus:ring-primary/20" 
+                              className="h-14 rounded-lg border border-border bg-background/80 text-center font-mono text-3xl tracking-[0.6em] focus:border-primary focus:ring-primary/20" 
                               maxLength={6}
                               {...field}
                             />
@@ -163,16 +163,16 @@ export default function AuthPage() {
 
             <div className="relative py-4">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-[#e2e8f0]"></span>
+                <span className="w-full border-t border-border"></span>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-4 text-[#718096] font-medium">or</span>
+                <span className="bg-card px-4 text-muted-foreground font-medium">or</span>
               </div>
             </div>
 
             <Button 
               variant="outline" 
-              className="w-full h-[50px] rounded-lg border-[#cbd5e0] text-[#4a5568] font-medium flex items-center justify-center gap-3 hover:bg-gray-50"
+              className="w-full h-[50px] rounded-lg border-border bg-background/70 text-foreground font-medium flex items-center justify-center gap-3 hover:bg-accent"
               onClick={() => {
                 toast({
                   title: "Google sign-in selected",
@@ -191,8 +191,8 @@ export default function AuthPage() {
             </Button>
 
             <div className="text-center pt-8">
-              <p className="text-[13px] text-[#718096]">
-                By continuing, I agree to the <Link href="/terms" className="text-[#3182ce] hover:underline">Terms of Use</Link> and <Link href="/privacy" className="text-[#3182ce] hover:underline">Privacy Policy</Link>.
+              <p className="text-[13px] text-muted-foreground">
+                By continuing, I agree to the <Link href="/terms" className="text-primary hover:underline">Terms of Use</Link> and <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
               </p>
             </div>
           </div>

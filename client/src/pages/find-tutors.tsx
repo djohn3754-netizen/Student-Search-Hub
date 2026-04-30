@@ -126,7 +126,7 @@ export default function FindTutors() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
             <Input
               placeholder="Search by name, area, or pincode..."
-              className="pl-12 h-14 text-base sm:text-lg shadow-sm rounded-2xl border border-black/20 focus-visible:ring-primary/20"
+              className="pl-12 h-14 text-base sm:text-lg shadow-sm rounded-2xl border border-border bg-background/90 focus-visible:ring-primary/20"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               data-testid="input-search-tutors"
@@ -144,12 +144,12 @@ export default function FindTutors() {
             <h2 className="text-2xl font-heading font-bold flex items-center gap-2">
               <Star className="h-6 w-6 text-primary fill-primary" /> Featured Tutors
             </h2>
-            <Badge variant="outline" className="w-fit bg-white/70 border-primary/10 text-primary">Currently showing {TUTORS.length} verified tutor</Badge>
+            <Badge variant="outline" className="w-fit border-primary/10 bg-background/80 text-primary backdrop-blur-sm">Currently showing {TUTORS.length} verified tutor</Badge>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start">
             <TutorCard tutor={TUTORS[0]} />
-            <div className="rounded-3xl border border-dashed border-primary/20 bg-white/70 p-6 sm:p-7">
+            <div className="rounded-3xl border border-dashed border-primary/20 bg-card/80 p-6 sm:p-7 backdrop-blur-sm">
               <p className="text-lg font-bold mb-2">More verified tutors are joining soon.</p>
               <p className="text-sm text-muted-foreground leading-relaxed">We are keeping the marketplace lean and trustworthy while new tutor profiles are being reviewed. You can still send an enquiry to the currently available tutor today.</p>
             </div>

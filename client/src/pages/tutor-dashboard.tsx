@@ -133,14 +133,14 @@ export default function TutorDashboard() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1.5"><BookOpen className="h-3.5 w-3.5 text-primary" /> {enquiry.subject}</span>
-                          <span className="flex items-center gap-1.5 font-medium text-black"><Phone className="h-3.5 w-3.5 text-green-600" /> {enquiry.phone}</span>
+                          <span className="flex items-center gap-1.5 font-medium text-foreground"><Phone className="h-3.5 w-3.5 text-green-600" /> {enquiry.phone}</span>
                           <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {enquiry.location}</span>
                           <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {enquiry.time}</span>
                         </div>
                       </div>
                     </div>
                     <div className="flex gap-2 w-full md:w-auto">
-                      <Button variant="outline" size="sm" className="h-10 rounded-xl flex-1 md:flex-none border-black/10 hover:bg-black hover:text-white transition-colors ring-0 outline-none shadow-none px-6" data-testid={`button-view-enquiry-${enquiry.id}`}>
+                      <Button variant="outline" size="sm" className="h-10 rounded-xl flex-1 md:flex-none border-border bg-background/70 hover:bg-accent hover:text-accent-foreground transition-colors ring-0 outline-none shadow-none px-6" data-testid={`button-view-enquiry-${enquiry.id}`}>
                         View Details
                       </Button>
                     </div>
