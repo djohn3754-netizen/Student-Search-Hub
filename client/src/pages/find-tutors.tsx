@@ -3,63 +3,54 @@ import { TUTORS, SUBJECTS, LOCATIONS } from "@/lib/mock-data";
 import { TutorCard } from "@/components/tutor-card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Search, SlidersHorizontal, MapPin, Calendar, Clock, Book, Star } from "lucide-react";
+import { Search, MapPin, Book, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 export default function FindTutors() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSubject, setSelectedSubject] = useState<string>("all");
   const [selectedLocation, setSelectedLocation] = useState<string>("all");
-  const [priceRange, setPriceRange] = useState([0, 150]);
-  const [minRating, setMinRating] = useState(0);
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
 
   const levels = ["School", "College", "Competitive Exams", "Professional"];
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-  const toggleAvailability = (day: string) => {
-    setSelectedAvailability(prev => 
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
-    );
-  };
 
   const filteredTutors = useMemo(() => {
     return TUTORS.filter((tutor) => {
-      const matchesSearch = 
-        tutor.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      const matchesSearch =
+        tutor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tutor.bio.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tutor.localArea?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tutor.pincode?.includes(searchQuery) ||
-        tutor.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-        
+        tutor.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
       const matchesSubject = selectedSubject === "all" || tutor.subject === selectedSubject;
       const matchesLocation = selectedLocation === "all" || tutor.location === selectedLocation;
-      const matchesPrice = tutor.price >= priceRange[0] && tutor.price <= priceRange[1];
-      const matchesRating = tutor.rating >= minRating;
-      
-      const matchesAvailability = selectedAvailability.length === 0 || 
-        selectedAvailability.some(day => tutor.availability.includes(day));
+      const matchesAvailability = selectedAvailability.length === 0 ||
+        selectedAvailability.some((day) => tutor.availability.includes(day));
 
       return matchesSearch && matchesSubject && matchesLocation && matchesAvailability;
     });
-  }, [searchQuery, selectedSubject, selectedLocation, priceRange, minRating, selectedAvailability]);
+  }, [searchQuery, selectedSubject, selectedLocation, selectedAvailability]);
+
+  const resetFilters = () => {
+    setSelectedSubject("all");
+    setSelectedLocation("all");
+    setSearchQuery("");
+    setSelectedLevel("all");
+    setSelectedAvailability([]);
+  };
 
   const FilterContent = () => (
-    <div className="flex flex-wrap items-end gap-4 bg-card p-6 rounded-2xl border shadow-sm mb-8">
+    <div className="flex flex-wrap items-end gap-4 bg-card p-4 sm:p-6 rounded-2xl border shadow-sm mb-8">
       <div className="flex-1 min-w-[200px] space-y-2">
-        <Label className="text-sm font-bold flex items-center gap-2">
+        <label className="text-sm font-bold flex items-center gap-2">
           <Book className="h-4 w-4 text-primary" /> Subject
-        </Label>
+        </label>
         <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-          <SelectTrigger className="bg-background h-11">
+          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-subject-filter">
             <SelectValue placeholder="All Subjects" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -74,11 +65,11 @@ export default function FindTutors() {
       </div>
 
       <div className="flex-1 min-w-[200px] space-y-2">
-        <Label className="text-sm font-bold flex items-center gap-2">
+        <label className="text-sm font-bold flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary" /> Location
-        </Label>
+        </label>
         <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-          <SelectTrigger className="bg-background h-11">
+          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-location-filter">
             <SelectValue placeholder="All Locations" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -93,11 +84,11 @@ export default function FindTutors() {
       </div>
 
       <div className="flex-1 min-w-[200px] space-y-2">
-        <Label className="text-sm font-bold flex items-center gap-2">
+        <label className="text-sm font-bold flex items-center gap-2">
           <GraduationCap className="h-4 w-4 text-primary" /> Class Level
-        </Label>
+        </label>
         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-          <SelectTrigger className="bg-background h-11">
+          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-level-filter">
             <SelectValue placeholder="All Levels" />
           </SelectTrigger>
           <SelectContent className="max-h-[300px]">
@@ -111,17 +102,12 @@ export default function FindTutors() {
         </Select>
       </div>
 
-      <div className="flex-shrink-0">
-        <Button 
-          variant="ghost" 
-          className="h-11 text-muted-foreground hover:text-destructive px-4"
-          onClick={() => {
-            setSelectedSubject("all");
-            setSelectedLocation("all");
-            setSearchQuery("");
-            setSelectedLevel("all");
-            setSelectedAvailability([]);
-          }}
+      <div className="flex-shrink-0 w-full sm:w-auto">
+        <Button
+          variant="ghost"
+          className="h-12 w-full sm:w-auto text-muted-foreground hover:text-destructive px-4 rounded-xl"
+          onClick={resetFilters}
+          data-testid="button-reset-filters"
         >
           Reset
         </Button>
@@ -130,82 +116,81 @@ export default function FindTutors() {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8 min-h-screen">
+    <div className="container mx-auto px-4 py-6 sm:py-8 min-h-screen">
       <div className="mb-12">
-        <h1 className="text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
+        <h1 className="text-3xl sm:text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
         <p className="text-muted-foreground mb-8">Connecting you with the best offline learning experiences.</p>
-        
-        {/* Search Bar */}
-        <div className="relative group flex gap-2 mb-8">
+
+        <div className="relative group flex flex-col sm:flex-row gap-3 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-            <Input 
-              placeholder="Search by name, area, or pincode..." 
-              className="pl-12 h-14 text-lg shadow-sm rounded-2xl border border-black/30 focus-visible:ring-primary/20"
+            <Input
+              placeholder="Search by name, area, or pincode..."
+              className="pl-12 h-14 text-base sm:text-lg shadow-sm rounded-2xl border border-black/20 focus-visible:ring-primary/20"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              data-testid="input-search-tutors"
             />
           </div>
-          <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg">
+          <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg w-full sm:w-auto" data-testid="button-search-tutors">
             Search
           </Button>
         </div>
 
-        {/* Horizontal Filters Section - Above Featured */}
         <FilterContent />
 
-        {/* Featured Section */}
-        <section className="bg-primary/5 p-8 rounded-3xl border border-primary/10 mb-12">
-          <div className="flex items-center justify-between mb-6">
+        <section className="bg-primary/5 p-5 sm:p-8 rounded-3xl border border-primary/10 mb-12 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <h2 className="text-2xl font-heading font-bold flex items-center gap-2">
               <Star className="h-6 w-6 text-primary fill-primary" /> Featured Tutors
             </h2>
+            <Badge variant="outline" className="w-fit bg-white/70 border-primary/10 text-primary">Currently showing {TUTORS.length} verified tutor</Badge>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {TUTORS.slice(0, 3).map((tutor) => (
-              <TutorCard key={`featured-${tutor.id}`} tutor={tutor} />
-            ))}
+
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-6 items-start">
+            <TutorCard tutor={TUTORS[0]} />
+            <div className="rounded-3xl border border-dashed border-primary/20 bg-white/70 p-6 sm:p-7">
+              <p className="text-lg font-bold mb-2">More verified tutors are joining soon.</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">We are keeping the marketplace lean and trustworthy while new tutor profiles are being reviewed. You can still send an enquiry to the currently available tutor today.</p>
+            </div>
           </div>
         </section>
       </div>
 
       <div className="flex flex-col gap-8">
-        {/* Main Content */}
         <div className="flex-1">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 py-1 px-3 rounded-full text-sm font-medium">
-                {filteredTutors.length} Tutors Available
-              </Badge>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 py-1 px-3 rounded-full text-sm font-medium w-fit">
+              {filteredTutors.length} Tutor{filteredTutors.length === 1 ? "" : "s"} Available
+            </Badge>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-3 py-2 rounded-full w-fit">
               Sort by: <span className="font-bold text-foreground">Recently Added</span>
             </div>
           </div>
 
           {filteredTutors.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {filteredTutors.map((tutor) => (
-                <TutorCard key={tutor.id} tutor={tutor} />
-              ))}
-            </div>
+            <>
+              {filteredTutors.length === 1 && (
+                <div className="mb-6 rounded-3xl border border-primary/10 bg-primary/5 px-5 py-4">
+                  <p className="font-semibold text-foreground">More verified tutors are joining soon.</p>
+                  <p className="text-sm text-muted-foreground">For now, this is the currently available verified tutor on Nexamid.</p>
+                </div>
+              )}
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                {filteredTutors.map((tutor) => (
+                  <TutorCard key={tutor.id} tutor={tutor} />
+                ))}
+              </div>
+            </>
           ) : (
-            <div className="text-center py-24 bg-muted/20 rounded-3xl border border-dashed border-muted-foreground/20">
+            <div className="text-center py-16 sm:py-24 bg-muted/20 rounded-3xl border border-dashed border-muted-foreground/20 px-6">
               <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
                 <Search className="h-8 w-8 text-muted-foreground/50" />
               </div>
               <h3 className="text-2xl font-bold mb-2">No tutors matched your criteria</h3>
-              <p className="text-muted-foreground mb-8 max-w-sm mx-auto">Try widening your price range or selecting different subjects to see more options.</p>
-              <Button 
-                onClick={() => {
-                  setSelectedSubject("all");
-                  setSelectedLocation("all");
-                  setSearchQuery("");
-                  setSelectedLevel("all");
-                  setSelectedAvailability([]);
-                }}
-                className="rounded-full px-8"
-              >
+              <p className="text-muted-foreground mb-3 max-w-sm mx-auto">Try a broader location or subject search to see the current verified tutor.</p>
+              <p className="text-sm text-primary font-medium mb-8">More verified tutors are joining soon.</p>
+              <Button onClick={resetFilters} className="rounded-full px-8 h-12" data-testid="button-reset-empty-state">
                 Reset All Filters
               </Button>
             </div>
