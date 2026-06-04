@@ -121,20 +121,22 @@ export default function FindTutors() {
         <h1 className="text-3xl sm:text-4xl font-heading font-bold mb-2 tracking-tight">Discover Expert Tutors</h1>
         <p className="text-muted-foreground mb-8">Connecting you with the best offline learning experiences.</p>
 
-        <div className="relative group flex flex-col sm:flex-row gap-3 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-            <Input
-              placeholder="Search by name, area, or pincode..."
-              className="pl-12 h-14 text-base sm:text-lg shadow-sm rounded-2xl border border-border bg-background/90 focus-visible:ring-primary/20"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              data-testid="input-search-tutors"
-            />
+        <div className="relative mb-8">
+          <div className="group flex overflow-hidden rounded-2xl border border-border bg-background/90 shadow-sm focus-within:ring-2 focus-within:ring-primary/20">
+            <div className="relative flex-1">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <Input
+                placeholder="Search by name, area, or pincode..."
+                className="h-14 border-0 bg-transparent pl-12 pr-4 text-base shadow-none focus-visible:ring-0 sm:text-lg"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                data-testid="input-search-tutors"
+              />
+            </div>
+            <Button className="h-14 rounded-none rounded-r-2xl px-6 sm:px-8 font-bold shadow-none" data-testid="button-search-tutors">
+              Search
+            </Button>
           </div>
-          <Button className="h-14 px-8 rounded-2xl font-bold shadow-lg w-full sm:w-auto" data-testid="button-search-tutors">
-            Search
-          </Button>
         </div>
 
         <FilterContent />
