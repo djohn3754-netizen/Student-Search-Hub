@@ -247,7 +247,7 @@ export default function TutorDashboard() {
                 <div className="rounded-2xl border bg-background p-5 space-y-4">
                   <div>
                     <h3 className="font-bold text-lg">Location</h3>
-                    <p className="text-sm text-muted-foreground">This helps students find you in nearby searches.</p>
+                    <p className="text-sm text-muted-foreground">Tutors should mention their local area during profile creation so nearby students can find them easily.</p>
                   </div>
                   <div className="grid md:grid-cols-3 gap-4">
                     <div className="space-y-2 md:col-span-1">
@@ -257,6 +257,7 @@ export default function TutorDashboard() {
                     <div className="space-y-2 md:col-span-1">
                       <label className="text-sm font-bold">Local Area Name</label>
                       <Input placeholder="e.g. Andheri West" defaultValue="Andheri West" className="h-11" data-testid="input-tutor-area" />
+                      <p className="text-xs text-muted-foreground">Mention the exact local area you teach in, such as Andheri West, Koramangala, or Salt Lake.</p>
                     </div>
                     <div className="space-y-2 md:col-span-1">
                       <label className="text-sm font-bold">Pincode</label>
