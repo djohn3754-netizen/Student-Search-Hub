@@ -20,13 +20,6 @@ export default function AuthPage() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-primary/10 bg-primary/5 px-5 py-4 text-center">
-            <p className="font-semibold text-foreground" data-testid="text-login-method-label">Continue with Google</p>
-            <p className="mt-1 text-sm text-muted-foreground" data-testid="text-login-method-description">
-              Mobile number login has been removed. Tutors can now sign in only with Google.
-            </p>
-          </div>
-
           <Button
             variant="outline"
             className="w-full h-14 rounded-xl border-border bg-background/70 text-foreground font-semibold flex items-center justify-center gap-3 hover:bg-accent"
