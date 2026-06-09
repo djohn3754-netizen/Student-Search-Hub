@@ -61,7 +61,7 @@ export default function FindTutors() {
     setSelectedAvailability([]);
   };
 
-  const FilterContent = () => (
+  const filterContent = (
     <div className="mb-8 flex flex-wrap items-end gap-4 rounded-2xl border bg-card p-4 shadow-sm sm:p-6">
       <FilterInput
         label="Subject"
@@ -134,7 +134,7 @@ export default function FindTutors() {
           </div>
         </div>
 
-        <FilterContent />
+        {filterContent}
 
         <section className="mb-12 space-y-6 rounded-3xl border border-primary/10 bg-primary/5 p-5 sm:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
