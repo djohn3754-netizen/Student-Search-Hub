@@ -199,15 +199,9 @@ export default function TutorProfile() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="area">Area / Locality</Label>
-                          <Input id="area" placeholder="e.g. Andheri West" required className="h-12 rounded-xl" data-testid="input-student-area" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="timing">Preferred Timing</Label>
-                          <Input id="timing" placeholder="e.g. Evenings after 5 PM" required className="h-12 rounded-xl" data-testid="input-preferred-timing" />
-                        </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="area">Area / Locality</Label>
+                        <Input id="area" placeholder="e.g. Andheri West" required className="h-12 rounded-xl" data-testid="input-student-area" />
                       </div>
 
                       <div className="space-y-3">
