@@ -121,7 +121,7 @@ export default function FindTutors() {
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
               <Input
-                placeholder="Search by local area or pincode..."
+                placeholder="Search by local area, pincode, subject, or location..."
                 className="h-14 border-0 bg-transparent pl-12 pr-4 text-base shadow-none focus-visible:ring-0 sm:text-lg"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
