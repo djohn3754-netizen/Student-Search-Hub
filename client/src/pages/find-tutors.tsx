@@ -2,17 +2,15 @@ import { useState, useMemo } from "react";
 import { TUTORS, SUBJECTS, LOCATIONS } from "@/lib/mock-data";
 import { TutorCard } from "@/components/tutor-card";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, MapPin, Book, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 
 export default function FindTutors() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedSubject, setSelectedSubject] = useState<string>("all");
-  const [selectedLocation, setSelectedLocation] = useState<string>("all");
-  const [selectedLevel, setSelectedLevel] = useState<string>("all");
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
 
   const handleSearchClick = () => {
@@ -30,86 +28,102 @@ export default function FindTutors() {
         tutor.pincode?.includes(searchQuery) ||
         tutor.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesSubject = selectedSubject === "all" || tutor.subject === selectedSubject;
-      const matchesLocation = selectedLocation === "all" || tutor.location === selectedLocation;
+      const matchesSubject =
+        selectedSubject.trim() === "" ||
+        tutor.subject.toLowerCase().includes(selectedSubject.toLowerCase()) ||
+        tutor.tags.some((tag) => tag.toLowerCase().includes(selectedSubject.toLowerCase()));
+
+      const matchesLocation =
+        selectedLocation.trim() === "" ||
+        tutor.location.toLowerCase().includes(selectedLocation.toLowerCase()) ||
+        tutor.localArea?.toLowerCase().includes(selectedLocation.toLowerCase()) ||
+        tutor.pincode?.includes(selectedLocation);
+
+      const matchesLevel =
+        selectedLevel.trim() === "" ||
+        tutor.bio.toLowerCase().includes(selectedLevel.toLowerCase()) ||
+        tutor.tags.some((tag) => tag.toLowerCase().includes(selectedLevel.toLowerCase())) ||
+        tutor.subject.toLowerCase().includes(selectedLevel.toLowerCase());
+
       const matchesAvailability = selectedAvailability.length === 0 ||
         selectedAvailability.some((day) => tutor.availability.includes(day));
 
-      return matchesSearch && matchesSubject && matchesLocation && matchesAvailability;
+      return matchesSearch && matchesSubject && matchesLocation && matchesLevel && matchesAvailability;
     });
-  }, [searchQuery, selectedSubject, selectedLocation, selectedAvailability]);
+  }, [searchQuery, selectedSubject, selectedLocation, selectedLevel, selectedAvailability]);
 
   const resetFilters = () => {
-    setSelectedSubject("all");
-    setSelectedLocation("all");
+    setSelectedSubject("");
+    setSelectedLocation("");
     setSearchQuery("");
-    setSelectedLevel("all");
+    setSelectedLevel("");
     setSelectedAvailability([]);
   };
 
   const FilterContent = () => (
-    <div className="flex flex-wrap items-end gap-4 bg-card p-4 sm:p-6 rounded-2xl border shadow-sm mb-8">
+    <div className="flex flex-wrap items-end gap-4 rounded-2xl border bg-card p-4 shadow-sm mb-8 sm:p-6">
       <div className="flex-1 min-w-[200px] space-y-2">
         <label className="text-sm font-bold flex items-center gap-2">
           <Book className="h-4 w-4 text-primary" /> Subject
         </label>
-        <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-subject-filter">
-            <SelectValue placeholder="All Subjects" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px]">
-            <ScrollArea className="h-[200px]">
-              <SelectItem value="all">All Subjects</SelectItem>
-              {SUBJECTS.map((subject) => (
-                <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-              ))}
-            </ScrollArea>
-          </SelectContent>
-        </Select>
+        <Input
+          list="subject-filter-options"
+          value={selectedSubject}
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          placeholder="Type or select subject"
+          className="h-12 rounded-xl bg-background"
+          data-testid="input-subject-filter"
+        />
+        <datalist id="subject-filter-options">
+          {SUBJECTS.map((subject) => (
+            <option key={subject} value={subject} />
+          ))}
+        </datalist>
       </div>
 
       <div className="flex-1 min-w-[200px] space-y-2">
         <label className="text-sm font-bold flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary" /> Location
         </label>
-        <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-location-filter">
-            <SelectValue placeholder="All Locations" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px]">
-            <ScrollArea className="h-[200px]">
-              <SelectItem value="all">All Locations</SelectItem>
-              {LOCATIONS.map((location) => (
-                <SelectItem key={location} value={location}>{location}</SelectItem>
-              ))}
-            </ScrollArea>
-          </SelectContent>
-        </Select>
+        <Input
+          list="location-filter-options"
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+          placeholder="Type or select location"
+          className="h-12 rounded-xl bg-background"
+          data-testid="input-location-filter"
+        />
+        <datalist id="location-filter-options">
+          {LOCATIONS.map((location) => (
+            <option key={location} value={location} />
+          ))}
+        </datalist>
       </div>
 
       <div className="flex-1 min-w-[200px] space-y-2">
         <label className="text-sm font-bold flex items-center gap-2">
           <GraduationCap className="h-4 w-4 text-primary" /> Class Level
         </label>
-        <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-          <SelectTrigger className="bg-background h-12 rounded-xl" data-testid="select-level-filter">
-            <SelectValue placeholder="All Levels" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[300px]">
-            <ScrollArea className="h-[200px]">
-              <SelectItem value="all">All Levels</SelectItem>
-              {levels.map((level) => (
-                <SelectItem key={level} value={level}>{level}</SelectItem>
-              ))}
-            </ScrollArea>
-          </SelectContent>
-        </Select>
+        <Input
+          list="level-filter-options"
+          value={selectedLevel}
+          onChange={(e) => setSelectedLevel(e.target.value)}
+          placeholder="Type or select class level"
+          className="h-12 rounded-xl bg-background"
+          data-testid="input-level-filter"
+        />
+        <datalist id="level-filter-options">
+          {levels.map((level) => (
+            <option key={level} value={level} />
+          ))}
+        </datalist>
       </div>
 
-      <div className="flex-shrink-0 w-full sm:w-auto">
+      <div className="w-full flex-shrink-0 sm:w-auto">
         <Button
+          type="button"
           variant="ghost"
-          className="h-12 w-full sm:w-auto text-muted-foreground hover:text-destructive px-4 rounded-xl"
+          className="h-12 w-full rounded-xl px-4 text-muted-foreground hover:text-destructive sm:w-auto"
           onClick={resetFilters}
           data-testid="button-reset-filters"
         >
