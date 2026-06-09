@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from "wouter";
+import { Switch, Route, Redirect, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -28,32 +28,64 @@ import BlogPost from "@/pages/blog-post";
 import LocationPage from "@/pages/location/[city]";
 
 function Router() {
+  const [location] = useLocation();
+  const pathname = location.split("?")[0];
+  const mobileInterfaceRoutes = new Set([
+    "/about",
+    "/find-tutors",
+    "/auth",
+    "/how-it-works",
+    "/terms",
+    "/privacy",
+    "/disclaimer",
+    "/contact",
+  ]);
+  const useMobileInterface = mobileInterfaceRoutes.has(pathname);
+
+  const pageContent = (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/location/:city" component={LocationPage} />
+      <Route path="/find-tutors" component={FindTutors} />
+      <Route path="/tutor/:id" component={TutorProfile} />
+      <Route path="/auth" component={AuthPage} />
+      <Route path="/tutor-dashboard" component={TutorDashboard} />
+      <Route path="/admin-dashboard" component={AdminDashboard} />
+      <Route path="/privacy" component={PrivacyPolicy} />
+      <Route path="/about" component={AboutUs} />
+      <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/terms" component={TermsOfService} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/disclaimer" component={Disclaimer} />
+      <Route path="/blog/:id" component={BlogPost} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/student-dashboard">
+        <Redirect to="/" />
+      </Route>
+      <Route component={NotFound} />
+    </Switch>
+  );
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-grow">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/location/:city" component={LocationPage} />
-          <Route path="/find-tutors" component={FindTutors} />
-          <Route path="/tutor/:id" component={TutorProfile} />
-          <Route path="/auth" component={AuthPage} />
-          <Route path="/tutor-dashboard" component={TutorDashboard} />
-          <Route path="/admin-dashboard" component={AdminDashboard} />
-          <Route path="/privacy" component={PrivacyPolicy} />
-          <Route path="/about" component={AboutUs} />
-          <Route path="/how-it-works" component={HowItWorks} />
-          <Route path="/terms" component={TermsOfService} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/disclaimer" component={Disclaimer} />
-          <Route path="/blog/:id" component={BlogPost} />
-          <Route path="/blog" component={Blog} />
-          {/* Redirect student dashboard to home as it's no longer used */}
-          <Route path="/student-dashboard">
-            <Redirect to="/" />
-          </Route>
-          <Route component={NotFound} />
-        </Switch>
+        {useMobileInterface ? (
+          <div className="bg-[radial-gradient(circle_at_top,_hsl(var(--primary)/0.08),_transparent_38%),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.45))] px-2 py-3 sm:px-4 sm:py-6">
+            <div className="mx-auto w-full max-w-[460px]">
+              <div className="overflow-hidden rounded-[34px] border border-border/70 bg-background/95 shadow-[0_26px_90px_hsl(var(--foreground)/0.10)] backdrop-blur-xl">
+                <div className="flex items-center justify-center gap-1.5 border-b border-border/60 px-4 py-3">
+                  <span className="h-1.5 w-1.5 rounded-full bg-foreground/35" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-foreground/25" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-foreground/15" />
+                </div>
+                {pageContent}
+              </div>
+            </div>
+          </div>
+        ) : (
+          pageContent
+        )}
       </main>
       <Footer />
     </div>
