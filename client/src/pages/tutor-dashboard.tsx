@@ -8,10 +8,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Users, MessageSquare, MapPin, CheckCircle2, Clock, BookOpen, Phone, Star, PlayCircle, Upload } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 export default function TutorDashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
   const [starredLeads, setStarredLeads] = useState<string[]>([]);
 
   const [location] = useLocation();
@@ -56,6 +58,46 @@ export default function TutorDashboard() {
     .filter((enquiry): enquiry is (typeof enquiries)[number] => Boolean(enquiry));
 
   const isFirstTimeTutor = user.id === "temp-tutor";
+
+  const handleLeadDetails = (name: string) => {
+    toast({
+      title: `Lead opened for ${name}`,
+      description: "This demo opens the student lead details and keeps the button fully interactive on desktop and mobile.",
+    });
+  };
+
+  const handleUploadDemo = () => {
+    toast({
+      title: "Demo upload started",
+      description: "Your sample teaching video upload has been triggered in this prototype.",
+    });
+  };
+
+  const handleDiscardChanges = () => {
+    toast({
+      title: "Changes discarded",
+      description: "Profile fields were reset in this demo flow.",
+    });
+  };
+
+  const handleSaveProfile = () => {
+    toast({
+      title: "Profile saved",
+      description: "Your tutor profile details were saved successfully in this prototype.",
+    });
+  };
+
+  const handleDeleteAccount = () => {
+    const confirmed = window.confirm("Are you sure you want to delete your tutor account? This action cannot be undone in this demo.");
+
+    if (!confirmed) return;
+
+    toast({
+      title: "Account deleted",
+      description: "Your tutor account has been removed from this demo and you have been signed out.",
+    });
+    logout();
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-8">
@@ -140,7 +182,7 @@ export default function TutorDashboard() {
                       </div>
                     </div>
                     <div className="flex gap-2 w-full md:w-auto">
-                      <Button variant="outline" size="sm" className="h-10 rounded-xl flex-1 md:flex-none border-border bg-background/70 hover:bg-accent hover:text-accent-foreground transition-colors ring-0 outline-none shadow-none px-6" data-testid={`button-view-enquiry-${enquiry.id}`}>
+                      <Button type="button" variant="outline" size="sm" className="h-10 rounded-xl flex-1 md:flex-none border-border bg-background/70 hover:bg-accent hover:text-accent-foreground transition-colors ring-0 outline-none shadow-none px-6" onClick={() => handleLeadDetails(enquiry.name)} data-testid={`button-view-enquiry-${enquiry.id}`}>
                         View Details
                       </Button>
                     </div>
@@ -237,7 +279,7 @@ export default function TutorDashboard() {
                         <p className="text-sm text-muted-foreground">Upload a short intro clip if you want to show your teaching style.</p>
                       </div>
                     </div>
-                    <Button className="rounded-full px-6 shadow-lg flex items-center gap-2 h-11" data-testid="button-upload-demo">
+                    <Button type="button" className="rounded-full px-6 shadow-lg flex items-center gap-2 h-11" onClick={handleUploadDemo} data-testid="button-upload-demo">
                       <Upload className="h-4 w-4" />
                       Upload File
                     </Button>
@@ -278,9 +320,14 @@ export default function TutorDashboard() {
                 </div>
               </div>
 
-              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
-                <Button variant="outline" className="h-11">Discard Changes</Button>
-                <Button className="h-11">Save Profile</Button>
+              <div className="flex flex-col-reverse sm:flex-row sm:flex-wrap justify-between gap-3">
+                <Button type="button" variant="destructive" className="h-11 sm:mr-auto" onClick={handleDeleteAccount} data-testid="button-delete-account">
+                  Delete Account
+                </Button>
+                <div className="flex flex-col-reverse sm:flex-row gap-3">
+                  <Button type="button" variant="outline" className="h-11" onClick={handleDiscardChanges} data-testid="button-discard-profile-changes">Discard Changes</Button>
+                  <Button type="button" className="h-11" onClick={handleSaveProfile} data-testid="button-save-profile">Save Profile</Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -299,6 +346,15 @@ export default function TutorDashboard() {
                   <p>Keep this on to receive enquiries from nearby students.</p>
                 </div>
                 <Switch defaultChecked />
+              </div>
+              <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="font-medium text-foreground">Delete account</p>
+                  <p>Remove your tutor access from this demo if you no longer want to stay on the platform.</p>
+                </div>
+                <Button type="button" variant="destructive" onClick={handleDeleteAccount} data-testid="button-delete-account-settings">
+                  Delete Account
+                </Button>
               </div>
             </CardContent>
           </Card>

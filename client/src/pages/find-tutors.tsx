@@ -15,6 +15,10 @@ export default function FindTutors() {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
 
+  const handleSearchClick = () => {
+    document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const levels = ["School", "College", "Competitive Exams", "Professional"];
 
   const filteredTutors = useMemo(() => {
@@ -133,7 +137,7 @@ export default function FindTutors() {
                 data-testid="input-search-tutors"
               />
             </div>
-            <Button className="h-14 rounded-none rounded-r-2xl px-6 sm:px-8 font-bold shadow-none" data-testid="button-search-tutors">
+            <Button type="button" onClick={handleSearchClick} className="h-14 rounded-none rounded-r-2xl px-6 sm:px-8 font-bold shadow-none" data-testid="button-search-tutors">
               Search
             </Button>
           </div>
@@ -160,7 +164,7 @@ export default function FindTutors() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <div className="flex-1">
+        <div id="results-section" className="flex-1 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
             <Badge variant="outline" className="bg-primary/5 text-primary border-primary/10 py-1 px-3 rounded-full text-sm font-medium w-fit">
               {filteredTutors.length} Tutor{filteredTutors.length === 1 ? "" : "s"} Available
