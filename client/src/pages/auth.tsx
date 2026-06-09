@@ -74,16 +74,6 @@ export default function AuthPage() {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Button>
 
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-border/60 bg-card/80 p-4" data-testid="card-login-feature-visibility">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Profile</p>
-                    <p className="mt-2 text-sm font-medium text-foreground">Update your expertise, subjects, and local area coverage.</p>
-                  </div>
-                  <div className="rounded-2xl border border-border/60 bg-card/80 p-4" data-testid="card-login-feature-enquiries">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Leads</p>
-                    <p className="mt-2 text-sm font-medium text-foreground">Track fresh student enquiries and respond faster.</p>
-                  </div>
-                </div>
               </div>
             </div>
 
