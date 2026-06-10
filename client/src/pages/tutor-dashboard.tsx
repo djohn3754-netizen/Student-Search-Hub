@@ -140,9 +140,9 @@ export default function TutorDashboard() {
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
         <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
-          <TabsTrigger value="enquiries" className="text-xs sm:text-sm">Student Enquiries</TabsTrigger>
-          <TabsTrigger value="profile" className="text-xs sm:text-sm">Edit Profile</TabsTrigger>
-          <TabsTrigger value="settings" className="text-xs sm:text-sm">Settings</TabsTrigger>
+          <TabsTrigger value="enquiries" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Student Enquiries</TabsTrigger>
+          <TabsTrigger value="profile" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Edit Profile</TabsTrigger>
+          <TabsTrigger value="settings" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="enquiries" className="space-y-4 animate-in fade-in duration-300">
