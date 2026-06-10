@@ -6,8 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, CheckCircle, GraduationCap, MessageSquareMore } from "lucide-react";
+import { MapPin, Clock, CheckCircle, GraduationCap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
@@ -104,18 +103,6 @@ export default function TutorProfile() {
                   <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {tutor.bio}
                   </p>
-                </section>
-
-                <section>
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    <GraduationCap className="h-6 w-6 text-primary" />
-                    Teaching Method
-                  </h3>
-                  <div className="rounded-2xl border bg-muted/20 p-5">
-                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line" data-testid="text-teaching-method">
-                      {tutor.teachingMethod?.description || "My teaching philosophy centers on personalized instruction tailored to each student's unique learning style."}
-                    </p>
-                  </div>
                 </section>
 
                 <section>
