@@ -20,14 +20,6 @@ export default function AuthPage() {
               <div className="inline-flex items-center justify-center rounded-full border border-primary/15 bg-primary/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary" data-testid="badge-login-mobile">
                 Nexamid for Tutors
               </div>
-              <div className="space-y-3">
-                <h1 className="font-heading text-[30px] font-bold tracking-tight text-foreground sm:text-[36px]" data-testid="text-login-title">
-                  Welcome back
-                </h1>
-                <p className="text-sm leading-6 text-muted-foreground sm:text-base" data-testid="text-login-subtitle">
-                  Continue with Google to access your dashboard, tutor profile, and incoming student leads.
-                </p>
-              </div>
             </div>
 
             <div className="rounded-[28px] border border-border/70 bg-background/80 p-5 shadow-[0_18px_50px_hsl(var(--foreground)/0.04)] sm:p-6">
