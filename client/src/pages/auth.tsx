@@ -14,23 +14,24 @@ export default function AuthPage() {
       <div className="absolute left-1/2 top-16 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto flex min-h-[calc(100vh-8rem)] max-w-6xl items-center justify-center">
-        <div className="w-full max-w-xl rounded-[32px] border border-border/70 bg-card/90 p-5 shadow-[0_30px_90px_hsl(var(--primary)/0.12)] backdrop-blur-xl sm:p-8 lg:p-10">
-          <div className="mx-auto flex w-full max-w-md flex-col justify-center space-y-8">
+        <div className="w-full max-w-xl rounded-[36px] border border-primary/15 bg-[linear-gradient(180deg,hsl(var(--background))/0.98,hsl(var(--card))/0.94)] p-2 shadow-[0_36px_120px_hsl(var(--primary)/0.16)] backdrop-blur-2xl">
+          <div className="rounded-[30px] border border-white/60 bg-card/90 px-5 py-6 shadow-[inset_0_1px_0_hsl(var(--background)/0.9)] sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+            <div className="mx-auto flex w-full max-w-md flex-col justify-center space-y-8">
             <div className="space-y-4 text-center">
-              <div className="inline-flex items-center justify-center rounded-full border border-primary/15 bg-primary/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary" data-testid="badge-login-mobile">
+              <div className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary shadow-[0_10px_30px_hsl(var(--primary)/0.08)]" data-testid="badge-login-mobile">
                 Nexamid for Tutors
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-border/70 bg-background/80 p-5 shadow-[0_18px_50px_hsl(var(--foreground)/0.04)] sm:p-6">
+            <div className="rounded-[30px] border border-primary/10 bg-[linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.35))] p-5 shadow-[0_24px_70px_hsl(var(--foreground)/0.05)] sm:p-6">
               <div className="space-y-5">
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-3 rounded-2xl border border-border/60 bg-card px-4 py-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[22px] border border-border/60 bg-card/95 px-4 py-3 shadow-[inset_0_1px_0_hsl(var(--background)/0.85)]">
                     <div>
                       <p className="text-sm font-semibold text-foreground" data-testid="text-login-method-title">Google Sign-In</p>
                       <p className="text-xs text-muted-foreground" data-testid="text-login-method-subtitle">Fast, secure, and used for tutor access</p>
                     </div>
-                    <div className="rounded-full bg-green-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-green-600" data-testid="status-google-enabled">
+                    <div className="rounded-full border border-green-500/15 bg-green-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-green-600 shadow-[0_8px_20px_rgba(34,197,94,0.12)]" data-testid="status-google-enabled">
                       Enabled
                     </div>
                   </div>
@@ -39,7 +40,7 @@ export default function AuthPage() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="group h-14 w-full rounded-2xl border-border bg-card text-base font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent disabled:pointer-events-none disabled:opacity-70"
+                  className="group h-14 w-full rounded-[22px] border-primary/15 bg-background/95 text-base font-semibold text-foreground shadow-[0_18px_45px_hsl(var(--primary)/0.08)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-card disabled:pointer-events-none disabled:opacity-70"
                   onClick={() => {
                     toast({
                       title: "Google sign-in selected",
@@ -69,7 +70,7 @@ export default function AuthPage() {
               </div>
             </div>
 
-            <div className="text-center">
+            <div className="rounded-2xl border border-border/60 bg-background/50 px-4 py-3 text-center shadow-[inset_0_1px_0_hsl(var(--background)/0.9)]">
               <p className="text-[13px] leading-6 text-muted-foreground" data-testid="text-login-terms">
                 By continuing, I agree to the <Link href="/terms" className="font-medium text-primary hover:underline">Terms of Use</Link> and <Link href="/privacy" className="font-medium text-primary hover:underline">Privacy Policy</Link>.
               </p>
