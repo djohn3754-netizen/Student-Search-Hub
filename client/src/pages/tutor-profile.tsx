@@ -208,10 +208,6 @@ export default function TutorProfile() {
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="message">Learning Goal</Label>
-                        <Textarea id="message" placeholder="Tell the tutor what support you need, exam goal, or topic difficulty..." className="min-h-[120px] rounded-2xl" required data-testid="input-learning-goal" />
-                      </div>
 
                       <Button type="submit" className="w-full h-14 text-base font-bold shadow-lg rounded-2xl" disabled={isSubmitting} data-testid="button-send-request">
                         {isSubmitting ? "Sending..." : "Send Request Now"}
