@@ -136,22 +136,6 @@ export default function FindTutors() {
 
         {filterContent}
 
-        <section className="mb-12 space-y-6 rounded-3xl border border-primary/10 bg-primary/5 p-5 sm:p-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="flex items-center gap-2 text-2xl font-heading font-bold">
-              <Star className="h-6 w-6 fill-primary text-primary" /> Featured Tutors
-            </h2>
-            <Badge variant="outline" className="w-fit border-primary/10 bg-background/80 text-primary backdrop-blur-sm">Currently showing {TUTORS.length} verified tutor</Badge>
-          </div>
-
-          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <TutorCard tutor={TUTORS[0]} />
-            <div className="rounded-3xl border border-dashed border-primary/20 bg-card/80 p-6 backdrop-blur-sm sm:p-7">
-              <p className="mb-2 text-lg font-bold">More verified tutors are joining soon.</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">We are keeping the marketplace lean and trustworthy while new tutor profiles are being reviewed. You can still send an enquiry to the currently available tutor today.</p>
-            </div>
-          </div>
-        </section>
       </div>
 
       <div className="flex flex-col gap-8">
