@@ -117,27 +117,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Popular Locations Section */}
-      <section className="py-16 border-y border-border bg-muted/10">
-        <div className="container mx-auto px-4">
-          <h3 className="text-center text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Popular Locations</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {LOCATIONS.slice(0, 12).map((loc) => (
-              <Link
-                key={loc}
-                href={`/location/${loc.toLowerCase().replace(/\s+/g, '-')}`}
-                className="text-sm font-medium hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-1"
-              >
-                Tutors in {loc}
-              </Link>
-            ))}
-            <Link href="/find-tutors" className="text-sm font-bold text-primary hover:underline pb-1">
-              View All →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -227,6 +206,27 @@ export default function Home() {
             {/* Decorative circles */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"></div>
             <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Locations Section */}
+      <section className="border-y border-border bg-muted/10 py-16">
+        <div className="container mx-auto px-4">
+          <h3 className="mb-8 text-center text-sm font-bold uppercase tracking-widest text-muted-foreground">Popular Locations</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {LOCATIONS.slice(0, 12).map((loc) => (
+              <Link
+                key={loc}
+                href={`/location/${loc.toLowerCase().replace(/\s+/g, '-')}`}
+                className="border-b border-transparent pb-1 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+              >
+                Tutors in {loc}
+              </Link>
+            ))}
+            <Link href="/find-tutors" className="pb-1 text-sm font-bold text-primary hover:underline">
+              View All →
+            </Link>
           </div>
         </div>
       </section>
