@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, CheckCircle, MessageCircle, GraduationCap, Phone, MessageSquareMore } from "lucide-react";
+import { MapPin, Clock, CheckCircle, GraduationCap, MessageSquareMore } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
@@ -106,16 +106,6 @@ export default function TutorProfile() {
                   </p>
                 </section>
 
-                <section className="bg-primary/5 p-5 md:p-6 rounded-2xl border border-primary/10">
-                  <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5 text-primary" />
-                    Short Introduction
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed italic">
-                    "{tutor.shortIntro || "Professional educator dedicated to student success and academic excellence."}"
-                  </p>
-                </section>
-
                 <section>
                   <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <GraduationCap className="h-6 w-6 text-primary" />
@@ -159,14 +149,6 @@ export default function TutorProfile() {
                     <div className="text-center space-y-2">
                       <h4 className="text-2xl font-bold">Send Request Now</h4>
                       <p className="text-sm text-muted-foreground">No student login required. Share your need and {tutor.name.split(" ")[0]} can respond directly.</p>
-                    </div>
-
-                    <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm">
-                      <div className="flex items-center gap-2 font-semibold text-green-800 mb-1">
-                        <Phone className="h-4 w-4" />
-                        Preferred contact: call / WhatsApp
-                      </div>
-                      <p className="text-green-700">This helps the tutor know how you would like to be contacted.</p>
                     </div>
 
                     {requestSent && (
