@@ -265,10 +265,6 @@ export default function TutorDashboard() {
                     <label className="text-sm font-bold">Subjects</label>
                     <Input defaultValue="Mathematics, Physics, Calculus" className="h-11" data-testid="input-tutor-subjects" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold">Teaching Method</label>
-                    <textarea className="flex min-h-[120px] w-full rounded-xl border border-input bg-background px-3 py-3 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" defaultValue="I explain concepts in a simple way, adapt lessons to the student's pace, and use regular practice with doubt-solving to build confidence." data-testid="input-tutor-teaching-method" />
-                  </div>
                   <div className="rounded-2xl border-2 border-dashed border-primary/20 bg-primary/5 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className="flex items-start gap-3">
                       <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
