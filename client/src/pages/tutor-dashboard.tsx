@@ -265,21 +265,6 @@ export default function TutorDashboard() {
                     <label className="text-sm font-bold">Subjects</label>
                     <Input defaultValue="Mathematics, Physics, Calculus" className="h-11" data-testid="input-tutor-subjects" />
                   </div>
-                  <div className="rounded-2xl border-2 border-dashed border-primary/20 bg-primary/5 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <PlayCircle className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-bold">Demo Tutorial</h4>
-                        <p className="text-sm text-muted-foreground">Upload a short intro clip if you want to show your teaching style.</p>
-                      </div>
-                    </div>
-                    <Button type="button" className="rounded-full px-6 shadow-lg flex items-center gap-2 h-11" onClick={handleUploadDemo} data-testid="button-upload-demo">
-                      <Upload className="h-4 w-4" />
-                      Upload File
-                    </Button>
-                  </div>
                 </div>
 
                 <div className="rounded-2xl border bg-background p-5 space-y-4">
