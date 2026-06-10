@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Switch, Route, Redirect, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -30,6 +31,10 @@ import LocationPage from "@/pages/location/[city]";
 function Router() {
   const [location] = useLocation();
   const pathname = location.split("?")[0];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
   const mobileInterfaceRoutes = new Set([
     "/about",
     "/find-tutors",
