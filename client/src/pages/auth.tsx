@@ -18,8 +18,8 @@ export default function AuthPage() {
           <div className="rounded-[30px] border border-white/60 bg-card/90 px-5 py-6 shadow-[inset_0_1px_0_hsl(var(--background)/0.9)] sm:px-8 sm:py-8 lg:px-10 lg:py-10">
             <div className="mx-auto flex w-full max-w-md flex-col justify-center space-y-8">
             <div className="space-y-4 text-center">
-              <div className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary shadow-[0_10px_30px_hsl(var(--primary)/0.08)]" data-testid="badge-login-mobile">
-                Nexamid for Tutors
+              <div className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-primary/10 px-5 py-2.5 text-sm font-black uppercase tracking-[0.28em] text-primary shadow-[0_10px_30px_hsl(var(--primary)/0.08)] sm:text-base" data-testid="badge-login-mobile">
+                NEXAMID
               </div>
             </div>
 
