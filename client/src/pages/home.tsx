@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Search, ShieldCheck, MapPin, Star, BookOpen } from "lucide-react";
+import { Search, ShieldCheck, MapPin, Star, BookOpen, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -80,8 +80,11 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/auth">
-                  <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2">
-                    Become a Tutor
+                  <Button size="lg" variant="ghost" className="group h-14 rounded-full px-6 text-lg font-bold text-foreground hover:bg-transparent hover:text-primary">
+                    <span>Become a Tutor</span>
+                    <span className="ml-3 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background shadow-sm transition-all group-hover:translate-x-1 group-hover:border-primary/30 group-hover:bg-primary/5">
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
                   </Button>
                 </Link>
               </div>
