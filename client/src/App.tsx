@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Switch, Route, Redirect, useLocation } from "wouter";
+import { useEffect, useState } from "react";
+import { Link, Switch, Route, Redirect, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -31,10 +31,25 @@ import LocationPage from "@/pages/location/[city]";
 function Router() {
   const [location] = useLocation();
   const pathname = location.split("?")[0];
+  const [isAndroidMobile, setIsAndroidMobile] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname]);
+
+  useEffect(() => {
+    const updateAndroidMobile = () => {
+      const androidDevice = /Android/i.test(window.navigator.userAgent);
+      const mobileViewport = window.innerWidth < 768;
+      setIsAndroidMobile(androidDevice && mobileViewport);
+    };
+
+    updateAndroidMobile();
+    window.addEventListener("resize", updateAndroidMobile);
+
+    return () => window.removeEventListener("resize", updateAndroidMobile);
+  }, []);
+
   const mobileInterfaceRoutes = new Set([
     "/about",
     "/find-tutors",
@@ -45,7 +60,20 @@ function Router() {
     "/disclaimer",
     "/contact",
   ]);
+  const androidBottomTabRoutes = new Set([
+    "/",
+    "/blog",
+    "/auth",
+    "/about",
+    "/find-tutors",
+    "/how-it-works",
+    "/terms",
+    "/privacy",
+    "/disclaimer",
+    "/contact",
+  ]);
   const useMobileInterface = mobileInterfaceRoutes.has(pathname);
+  const showAndroidBottomTabs = isAndroidMobile && androidBottomTabRoutes.has(pathname);
 
   const pageContent = (
     <Switch>
@@ -74,7 +102,7 @@ function Router() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main className={showAndroidBottomTabs ? "flex-grow pb-24" : "flex-grow"}>
         {useMobileInterface ? (
           <div className="bg-[radial-gradient(circle_at_top,_hsl(var(--primary)/0.08),_transparent_38%),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.45))] px-2 py-3 sm:px-4 sm:py-6">
             <div className="mx-auto w-full max-w-[460px] md:max-w-6xl">
@@ -87,6 +115,33 @@ function Router() {
           pageContent
         )}
       </main>
+      {showAndroidBottomTabs && (
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border/70 bg-background/95 px-3 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 backdrop-blur-xl md:hidden">
+          <div className="mx-auto grid max-w-md grid-cols-3 gap-2 rounded-[24px] border border-border/70 bg-card/90 p-2 shadow-[0_18px_50px_hsl(var(--foreground)/0.10)]">
+            <Link
+              href="/"
+              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              data-testid="link-bottom-home"
+            >
+              Home
+            </Link>
+            <Link
+              href="/blog"
+              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/blog" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              data-testid="link-bottom-blog"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/auth"
+              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/auth" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              data-testid="link-bottom-sign-in"
+            >
+              Sign In
+            </Link>
+          </div>
+        </div>
+      )}
       <Footer />
     </div>
   );
