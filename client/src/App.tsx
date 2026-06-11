@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Switch, Route, Redirect, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { House, Newspaper, UserRound } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth-context";
@@ -116,28 +117,31 @@ function Router() {
         )}
       </main>
       {showAndroidBottomTabs && (
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border/70 bg-background/95 px-3 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 backdrop-blur-xl md:hidden">
-          <div className="mx-auto grid max-w-md grid-cols-3 gap-2 rounded-[24px] border border-border/70 bg-card/90 p-2 shadow-[0_18px_50px_hsl(var(--foreground)/0.10)]">
+        <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 shadow-[0_-10px_30px_hsl(var(--foreground)/0.08)] backdrop-blur-xl md:hidden">
+          <div className="mx-auto grid max-w-md grid-cols-3 items-center">
             <Link
               href="/"
-              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-home"
             >
-              Home
+              <House className="h-5 w-5" />
+              <span>Home</span>
             </Link>
             <Link
               href="/blog"
-              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/blog" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/blog" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-blog"
             >
-              Blog
+              <Newspaper className="h-5 w-5" />
+              <span>Blog</span>
             </Link>
             <Link
               href="/auth"
-              className={`rounded-2xl px-3 py-3 text-center text-[11px] uppercase tracking-[0.18em] transition-colors ${pathname === "/auth" ? "bg-primary/10 font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.12em] transition-colors ${pathname === "/auth" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-sign-in"
             >
-              Sign In
+              <UserRound className="h-5 w-5" />
+              <span>Tutor Login</span>
             </Link>
           </div>
         </div>
