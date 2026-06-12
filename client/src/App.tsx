@@ -32,23 +32,21 @@ import LocationPage from "@/pages/location/[city]";
 function Router() {
   const [location] = useLocation();
   const pathname = location.split("?")[0];
-  const [isAndroidMobile, setIsAndroidMobile] = useState(false);
+  const [showMobileBottomTabsViewport, setShowMobileBottomTabsViewport] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname]);
 
   useEffect(() => {
-    const updateAndroidMobile = () => {
-      const androidDevice = /Android/i.test(window.navigator.userAgent);
-      const mobileViewport = window.innerWidth < 768;
-      setIsAndroidMobile(androidDevice && mobileViewport);
+    const updateMobileViewport = () => {
+      setShowMobileBottomTabsViewport(window.innerWidth < 768);
     };
 
-    updateAndroidMobile();
-    window.addEventListener("resize", updateAndroidMobile);
+    updateMobileViewport();
+    window.addEventListener("resize", updateMobileViewport);
 
-    return () => window.removeEventListener("resize", updateAndroidMobile);
+    return () => window.removeEventListener("resize", updateMobileViewport);
   }, []);
 
   const mobileInterfaceRoutes = new Set([
@@ -74,7 +72,7 @@ function Router() {
     "/contact",
   ]);
   const useMobileInterface = mobileInterfaceRoutes.has(pathname);
-  const showAndroidBottomTabs = isAndroidMobile && androidBottomTabRoutes.has(pathname);
+  const showAndroidBottomTabs = showMobileBottomTabsViewport && androidBottomTabRoutes.has(pathname);
 
   const pageContent = (
     <Switch>
@@ -118,7 +116,7 @@ function Router() {
       </main>
       {showAndroidBottomTabs && (
         <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 shadow-[0_-10px_30px_hsl(var(--foreground)/0.08)] backdrop-blur-xl md:hidden">
-          <div className="mx-auto grid max-w-[320px] grid-cols-3 items-center">
+          <div className="mx-auto grid max-w-[300px] grid-cols-3 items-center">
             <Link
               href="/"
               className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
