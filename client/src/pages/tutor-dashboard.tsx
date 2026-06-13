@@ -275,9 +275,15 @@ export default function TutorDashboard() {
                     <h3 className="font-bold text-lg">Teaching Details</h3>
                     <p className="text-sm text-muted-foreground">Tell students what you teach and how you teach it.</p>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold">Subjects</label>
-                    <Input defaultValue="Mathematics, Physics, Calculus" className="h-11" data-testid="input-tutor-subjects" />
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold">Subjects</label>
+                      <Input defaultValue="Mathematics, Physics, Calculus" className="h-11" data-testid="input-tutor-subjects" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold">Qualification</label>
+                      <Input defaultValue="Ph.D. Mathematics" className="h-11" data-testid="input-tutor-qualification" />
+                    </div>
                   </div>
                 </div>
 
