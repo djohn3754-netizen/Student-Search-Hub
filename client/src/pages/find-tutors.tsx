@@ -236,9 +236,7 @@ function FilterInput({ label, icon, value, onChange, options, placeholder, input
           value={value}
           onChange={(e) => {
             onChange(e.target.value);
-            setIsOpen(true);
           }}
-          onFocus={() => setIsOpen(true)}
           onBlur={() => {
             window.setTimeout(() => setIsOpen(false), 150);
           }}
