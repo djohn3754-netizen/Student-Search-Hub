@@ -115,7 +115,7 @@ function Router() {
         )}
       </main>
       {showAndroidBottomTabs && (
-        <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+4px)] pt-1 shadow-[0_-8px_24px_hsl(var(--foreground)/0.06)] backdrop-blur-xl md:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+7px)] pt-2 shadow-[0_-8px_24px_hsl(var(--foreground)/0.06)] backdrop-blur-xl md:hidden">
           <div className="mx-auto flex max-w-[320px] items-center justify-between">
             <Link
               href="/"
