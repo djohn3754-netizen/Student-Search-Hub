@@ -123,19 +123,6 @@ export default function TutorDashboard() {
         )}
       </div>
 
-      {showOnboardingProfileSetup && (
-        <div className="mb-8 rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,hsl(var(--primary)/0.10),hsl(var(--background)))] p-5 shadow-[0_18px_60px_hsl(var(--primary)/0.08)]">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-2">
-              <Badge className="w-fit rounded-full bg-primary text-primary-foreground" data-testid="badge-create-profile-step">Step 1 of 1</Badge>
-              <h2 className="text-xl font-heading font-bold">You are now on the tutor profile creation page</h2>
-              <p className="max-w-2xl text-sm text-muted-foreground">Fill in your teaching details, local area, and pincode, then click Save Profile to complete your tutor onboarding.</p>
-            </div>
-            <Button type="button" className="rounded-full px-6" onClick={handleSaveProfile} data-testid="button-save-profile-top">Save Profile</Button>
-          </div>
-        </div>
-      )}
-
       {!showOnboardingProfileSetup && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
