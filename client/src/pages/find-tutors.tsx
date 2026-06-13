@@ -17,39 +17,44 @@ export default function FindTutors() {
   const levels = ["School", "College", "Competitive Exams", "Professional"];
   const pincodeOptions = useMemo(() => Array.from(new Set(TUTORS.map((tutor) => tutor.pincode).filter(Boolean) as string[])), []);
 
+  const normalizeText = (value: string) => value.toLowerCase().trim();
+
+  const matchesTutorProfileText = (input: string, tutor: (typeof TUTORS)[number]) => {
+    const normalizedInput = normalizeText(input);
+
+    if (!normalizedInput) return true;
+
+    const tutorProfileText = normalizeText([
+      tutor.name,
+      tutor.subject,
+      tutor.location,
+      tutor.localArea || "",
+      tutor.pincode || "",
+      tutor.bio,
+      tutor.education,
+      ...tutor.tags,
+      ...tutor.availability,
+      tutor.shortIntro || "",
+      tutor.teachingMethod?.description || "",
+      ...(tutor.teachingMethod?.points || []),
+    ].join(" "));
+
+    return normalizedInput
+      .split(/\s+/)
+      .every((word) => tutorProfileText.includes(word));
+  };
+
   const handleSearchClick = () => {
     document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const filteredTutors = useMemo(() => {
     return TUTORS.filter((tutor) => {
-      const matchesSearch =
-        tutor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tutor.bio.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tutor.localArea?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tutor.pincode?.includes(searchQuery) ||
-        tutor.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      const matchesSubject =
-        selectedSubject.trim() === "" ||
-        tutor.subject.toLowerCase().includes(selectedSubject.toLowerCase()) ||
-        tutor.tags.some((tag) => tag.toLowerCase().includes(selectedSubject.toLowerCase()));
-
-      const matchesLocation =
-        selectedLocation.trim() === "" ||
-        tutor.location.toLowerCase().includes(selectedLocation.toLowerCase()) ||
-        tutor.localArea?.toLowerCase().includes(selectedLocation.toLowerCase()) ||
-        tutor.pincode?.includes(selectedLocation);
-
-      const matchesLevel =
-        selectedLevel.trim() === "" ||
-        tutor.bio.toLowerCase().includes(selectedLevel.toLowerCase()) ||
-        tutor.tags.some((tag) => tag.toLowerCase().includes(selectedLevel.toLowerCase())) ||
-        tutor.subject.toLowerCase().includes(selectedLevel.toLowerCase());
-
-      const matchesPincode =
-        selectedPincode.trim() === "" ||
-        tutor.pincode?.includes(selectedPincode);
+      const matchesSearch = matchesTutorProfileText(searchQuery, tutor);
+      const matchesSubject = matchesTutorProfileText(selectedSubject, tutor);
+      const matchesLocation = matchesTutorProfileText(selectedLocation, tutor);
+      const matchesLevel = matchesTutorProfileText(selectedLevel, tutor);
+      const matchesPincode = matchesTutorProfileText(selectedPincode, tutor);
 
       const matchesAvailability =
         selectedAvailability.length === 0 ||
