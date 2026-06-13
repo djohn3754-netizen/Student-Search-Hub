@@ -119,26 +119,26 @@ function Router() {
           <div className="mx-auto flex max-w-[320px] items-center justify-between">
             <Link
               href="/"
-              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] uppercase tracking-[0.14em] leading-none transition-colors ${pathname === "/" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] font-bold uppercase tracking-[0.14em] leading-none transition-colors ${pathname === "/" ? "text-primary" : "text-muted-foreground"}`}
               data-testid="link-bottom-home"
             >
-              <House className="h-4.5 w-4.5" />
+              <House className="h-4.5 w-4.5" strokeWidth={2.6} />
               <span>Home</span>
             </Link>
             <Link
               href="/blog"
-              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] uppercase tracking-[0.14em] leading-none transition-colors ${pathname === "/blog" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] font-bold uppercase tracking-[0.14em] leading-none transition-colors ${pathname === "/blog" ? "text-primary" : "text-muted-foreground"}`}
               data-testid="link-bottom-blog"
             >
-              <Newspaper className="h-4.5 w-4.5" />
+              <Newspaper className="h-4.5 w-4.5" strokeWidth={2.6} />
               <span>Blog</span>
             </Link>
             <Link
               href="/auth"
-              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] uppercase tracking-[0.1em] leading-none transition-colors ${pathname === "/auth" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0 py-1 text-[9px] font-bold uppercase tracking-[0.1em] leading-none transition-colors ${pathname === "/auth" ? "text-primary" : "text-muted-foreground"}`}
               data-testid="link-bottom-sign-in"
             >
-              <UserRound className="h-4.5 w-4.5" />
+              <UserRound className="h-4.5 w-4.5" strokeWidth={2.6} />
               <span>Tutor Login</span>
             </Link>
           </div>
