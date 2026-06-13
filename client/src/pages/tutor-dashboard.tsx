@@ -19,6 +19,7 @@ export default function TutorDashboard() {
   const [location] = useLocation();
   const searchParams = new URLSearchParams(location.split("?")[1]);
   const defaultTab = searchParams.get("tab") || "enquiries";
+  const isProfileCreationMode = searchParams.get("mode") === "create";
 
   if (!user || user.role !== "tutor") {
     return (
@@ -58,6 +59,7 @@ export default function TutorDashboard() {
     .filter((enquiry): enquiry is (typeof enquiries)[number] => Boolean(enquiry));
 
   const isFirstTimeTutor = user.id === "temp-tutor";
+  const showOnboardingProfileSetup = isFirstTimeTutor || isProfileCreationMode;
 
   const handleLeadDetails = (name: string) => {
     toast({
@@ -103,40 +105,46 @@ export default function TutorDashboard() {
     <div className="container mx-auto px-4 py-6 md:py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-heading font-bold">Tutor Dashboard</h1>
+          <h1 className="text-3xl font-heading font-bold">{showOnboardingProfileSetup ? "Create Your Tutor Profile" : "Tutor Dashboard"}</h1>
           <p className="text-muted-foreground flex flex-wrap items-center gap-2">
-            Manage your profile and student enquiries.
-            <span className="inline-flex items-center bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold border border-blue-100 animate-pulse">
-              🔔 New Enquiries (3)
-            </span>
+            {showOnboardingProfileSetup ? "Complete your details below and click save to finish your tutor setup." : "Manage your profile and student enquiries."}
+            {!showOnboardingProfileSetup && (
+              <span className="inline-flex items-center bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold border border-blue-100 animate-pulse">
+                🔔 New Enquiries (3)
+              </span>
+            )}
           </p>
         </div>
-        <div className="flex items-center gap-4 bg-card p-2 rounded-lg border shadow-sm w-full md:w-auto justify-between md:justify-start">
-          <span className="text-sm font-medium pl-2">Profile Visibility</span>
-          <Switch defaultChecked />
-        </div>
+        {!showOnboardingProfileSetup && (
+          <div className="flex items-center gap-4 bg-card p-2 rounded-lg border shadow-sm w-full md:w-auto justify-between md:justify-start">
+            <span className="text-sm font-medium pl-2">Profile Visibility</span>
+            <Switch defaultChecked />
+          </div>
+        )}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        {[
-          { label: "New Enquiries", value: "3", icon: MessageSquare, color: "text-blue-500", bg: "bg-blue-500/10" },
-          { label: "Starred Leads", value: `${starredEnquiries.length}`, icon: Star, color: "text-yellow-500", bg: "bg-yellow-500/10" },
-          { label: "Profile Views", value: "18", icon: BarChart, color: "text-green-500", bg: "bg-green-500/10" },
-          { label: "Response Rate", value: "91%", icon: CheckCircle2, color: "text-orange-500", bg: "bg-orange-500/10" },
-        ].map((stat) => (
-          <Card key={stat.label} className="border-none shadow-sm">
-            <CardContent className="p-4 sm:p-6 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-                <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
-              </div>
-              <div className={`h-10 w-10 ${stat.bg} rounded-full flex items-center justify-center ${stat.color}`}>
-                <stat.icon className="h-5 w-5" />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {!showOnboardingProfileSetup && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {[
+            { label: "New Enquiries", value: "3", icon: MessageSquare, color: "text-blue-500", bg: "bg-blue-500/10" },
+            { label: "Starred Leads", value: `${starredEnquiries.length}`, icon: Star, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+            { label: "Profile Views", value: "18", icon: BarChart, color: "text-green-500", bg: "bg-green-500/10" },
+            { label: "Response Rate", value: "91%", icon: CheckCircle2, color: "text-orange-500", bg: "bg-orange-500/10" },
+          ].map((stat) => (
+            <Card key={stat.label} className="border-none shadow-sm">
+              <CardContent className="p-4 sm:p-6 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+                  <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
+                </div>
+                <div className={`h-10 w-10 ${stat.bg} rounded-full flex items-center justify-center ${stat.color}`}>
+                  <stat.icon className="h-5 w-5" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
       <Tabs defaultValue={defaultTab} className="space-y-4">
         <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
@@ -194,42 +202,44 @@ export default function TutorDashboard() {
         </TabsContent>
 
         <TabsContent value="profile" className="space-y-4 animate-in fade-in duration-300">
-          <Card>
-            <CardHeader>
-              <CardTitle>Starred Enquiries</CardTitle>
-              <CardDescription>Your most recently starred leads appear first here for quick follow-up.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {starredEnquiries.length > 0 ? (
-                <div className="space-y-3">
-                  {starredEnquiries.map((enquiry) => (
-                    <div key={enquiry.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-yellow-200 bg-yellow-50/50 p-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-500" />
-                          <h4 className="font-bold">{enquiry.name}</h4>
+          {!showOnboardingProfileSetup && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Starred Enquiries</CardTitle>
+                <CardDescription>Your most recently starred leads appear first here for quick follow-up.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {starredEnquiries.length > 0 ? (
+                  <div className="space-y-3">
+                    {starredEnquiries.map((enquiry) => (
+                      <div key={enquiry.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-yellow-200 bg-yellow-50/50 p-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-500" />
+                            <h4 className="font-bold">{enquiry.name}</h4>
+                          </div>
+                          <div className="text-sm text-muted-foreground space-y-1">
+                            <p>{enquiry.subject}</p>
+                            <p>{enquiry.location}</p>
+                          </div>
                         </div>
-                        <div className="text-sm text-muted-foreground space-y-1">
-                          <p>{enquiry.subject}</p>
-                          <p>{enquiry.location}</p>
-                        </div>
+                        <div className="text-sm font-medium text-foreground">{enquiry.phone}</div>
                       </div>
-                      <div className="text-sm font-medium text-foreground">{enquiry.phone}</div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-2xl border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
-                  Star enquiries from the lead list and they will appear here instantly.
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
+                    Star enquiries from the lead list and they will appear here instantly.
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           <Card>
             <CardHeader>
-              <CardTitle>Profile Configuration</CardTitle>
-              <CardDescription>{isFirstTimeTutor ? "This is where first-time tutors land so they can complete their profile before managing leads." : "Update your teaching details, location, and profile summary."}</CardDescription>
+              <CardTitle>{showOnboardingProfileSetup ? "Tutor Profile Creation" : "Profile Configuration"}</CardTitle>
+              <CardDescription>{showOnboardingProfileSetup ? "New tutors land here first so they can fill in their profile and save it before anything else." : "Update your teaching details, location, and profile summary."}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {isFirstTimeTutor && (
@@ -307,7 +317,7 @@ export default function TutorDashboard() {
                 </Button>
                 <div className="flex flex-col-reverse sm:flex-row gap-3">
                   <Button type="button" variant="outline" className="h-11" onClick={handleDiscardChanges} data-testid="button-discard-profile-changes">Discard Changes</Button>
-                  <Button type="button" className="h-11" onClick={handleSaveProfile} data-testid="button-save-profile">Save Profile</Button>
+                  <Button type="button" className="h-11" onClick={handleSaveProfile} data-testid="button-save-profile">{showOnboardingProfileSetup ? "Save" : "Save Profile"}</Button>
                 </div>
               </div>
             </CardContent>

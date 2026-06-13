@@ -44,9 +44,9 @@ export default function AuthPage() {
                   onClick={() => {
                     toast({
                       title: "Google sign-in selected",
-                      description: "Using tutor demo access.",
+                      description: "Taking you to tutor profile creation.",
                     });
-                    login("tutor@example.com");
+                    login("newtutor@nexamid.demo", { isNewTutor: true });
                   }}
                   disabled={isLoading}
                   data-testid="button-google-signin"

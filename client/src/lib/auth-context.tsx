@@ -4,7 +4,7 @@ import { useLocation } from "wouter";
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string) => void;
+  login: (email: string, options?: { isNewTutor?: boolean }) => void;
   logout: () => void;
   isLoading: boolean;
 }
@@ -16,22 +16,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [, setLocation] = useLocation();
 
-  const login = (email: string) => {
+  const login = (email: string, options?: { isNewTutor?: boolean }) => {
     setIsLoading(true);
     setTimeout(() => {
-      const mockUser = USERS.find((u) => u.email === email && u.role === "tutor") || {
-        id: "temp-tutor",
-        name: "Demo Tutor",
-        email,
-        role: "tutor",
-        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
-        status: "approved",
-      };
-      
+      const existingTutor = USERS.find((u) => u.email === email && u.role === "tutor");
+      const mockUser = options?.isNewTutor
+        ? {
+            id: "temp-tutor",
+            name: "New Tutor",
+            email,
+            role: "tutor",
+            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+            status: "approved",
+          }
+        : existingTutor || {
+            id: "temp-tutor",
+            name: "Demo Tutor",
+            email,
+            role: "tutor",
+            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+            status: "approved",
+          };
+
       setUser(mockUser as User);
       setIsLoading(false);
-      
-      setLocation("/tutor-dashboard?tab=profile");
+
+      setLocation(options?.isNewTutor ? "/tutor-dashboard?tab=profile&mode=create" : "/tutor-dashboard?tab=profile");
     }, 800);
   };
 
