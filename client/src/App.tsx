@@ -101,7 +101,7 @@ function Router() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className={showAndroidBottomTabs ? "flex-grow pb-28" : "flex-grow"}>
+      <main className={showAndroidBottomTabs ? "flex-grow pb-24" : "flex-grow"}>
         {useMobileInterface ? (
           <div className="bg-[radial-gradient(circle_at_top,_hsl(var(--primary)/0.08),_transparent_38%),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.45))] px-2 py-3 sm:px-4 sm:py-6">
             <div className="mx-auto w-full max-w-[460px] md:max-w-6xl">
@@ -115,11 +115,11 @@ function Router() {
         )}
       </main>
       {showAndroidBottomTabs && (
-        <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+12px)] pt-3 shadow-[0_-10px_30px_hsl(var(--foreground)/0.08)] backdrop-blur-xl md:hidden">
-          <div className="mx-auto grid max-w-[236px] grid-cols-3 items-center">
+        <div className="fixed inset-x-0 bottom-0 z-50 bg-background/96 px-4 pb-[calc(env(safe-area-inset-bottom)+8px)] pt-2 shadow-[0_-10px_30px_hsl(var(--foreground)/0.08)] backdrop-blur-xl md:hidden">
+          <div className="mx-auto flex max-w-[320px] items-center justify-between">
             <Link
               href="/"
-              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0.5 py-1.5 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-home"
             >
               <House className="h-5 w-5" />
@@ -127,7 +127,7 @@ function Router() {
             </Link>
             <Link
               href="/blog"
-              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/blog" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0.5 py-1.5 text-[10px] uppercase tracking-[0.16em] transition-colors ${pathname === "/blog" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-blog"
             >
               <Newspaper className="h-5 w-5" />
@@ -135,7 +135,7 @@ function Router() {
             </Link>
             <Link
               href="/auth"
-              className={`flex flex-col items-center justify-center gap-1 py-2 text-[10px] uppercase tracking-[0.12em] transition-colors ${pathname === "/auth" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
+              className={`flex w-[76px] flex-col items-center justify-center gap-0.5 py-1.5 text-[10px] uppercase tracking-[0.12em] transition-colors ${pathname === "/auth" ? "font-bold text-primary" : "font-medium text-muted-foreground"}`}
               data-testid="link-bottom-sign-in"
             >
               <UserRound className="h-5 w-5" />
@@ -144,7 +144,7 @@ function Router() {
           </div>
         </div>
       )}
-      <div className={showAndroidBottomTabs ? "pb-28" : ""}>
+      <div className={showAndroidBottomTabs ? "pb-24" : ""}>
         <Footer />
       </div>
     </div>
