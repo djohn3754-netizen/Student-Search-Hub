@@ -147,11 +147,7 @@ export default function TutorDashboard() {
       )}
 
       <Tabs defaultValue={activeTab} className="space-y-4">
-        {showOnboardingProfileSetup ? (
-          <TabsList className="grid w-full grid-cols-1 bg-muted/50 p-1 h-auto">
-            <TabsTrigger value="profile" className="text-sm font-bold text-primary">Create Profile</TabsTrigger>
-          </TabsList>
-        ) : (
+        {!showOnboardingProfileSetup && (
           <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
             <TabsTrigger value="enquiries" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Student Enquiries</TabsTrigger>
             <TabsTrigger value="profile" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Edit Profile</TabsTrigger>
@@ -243,10 +239,12 @@ export default function TutorDashboard() {
           )}
 
           <Card>
-            <CardHeader>
-              <CardTitle>{showOnboardingProfileSetup ? "Tutor Profile Creation" : "Profile Configuration"}</CardTitle>
-              <CardDescription>{showOnboardingProfileSetup ? "New tutors land here first so they can fill in their profile and save it before anything else." : "Update your teaching details, location, and profile summary."}</CardDescription>
-            </CardHeader>
+            {!showOnboardingProfileSetup && (
+              <CardHeader>
+                <CardTitle>Profile Configuration</CardTitle>
+                <CardDescription>Update your teaching details, location, and profile summary.</CardDescription>
+              </CardHeader>
+            )}
             <CardContent className="space-y-6">
               {isFirstTimeTutor && (
                 <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-primary font-medium">
