@@ -10,10 +10,12 @@ export default function FindTutors() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedPincode, setSelectedPincode] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
 
   const levels = ["School", "College", "Competitive Exams", "Professional"];
+  const pincodeOptions = useMemo(() => Array.from(new Set(TUTORS.map((tutor) => tutor.pincode).filter(Boolean) as string[])), []);
 
   const handleSearchClick = () => {
     document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -45,17 +47,22 @@ export default function FindTutors() {
         tutor.tags.some((tag) => tag.toLowerCase().includes(selectedLevel.toLowerCase())) ||
         tutor.subject.toLowerCase().includes(selectedLevel.toLowerCase());
 
+      const matchesPincode =
+        selectedPincode.trim() === "" ||
+        tutor.pincode?.includes(selectedPincode);
+
       const matchesAvailability =
         selectedAvailability.length === 0 ||
         selectedAvailability.some((day) => tutor.availability.includes(day));
 
-      return matchesSearch && matchesSubject && matchesLocation && matchesLevel && matchesAvailability;
+      return matchesSearch && matchesSubject && matchesLocation && matchesLevel && matchesPincode && matchesAvailability;
     });
-  }, [searchQuery, selectedSubject, selectedLocation, selectedLevel, selectedAvailability]);
+  }, [searchQuery, selectedSubject, selectedLocation, selectedLevel, selectedPincode, selectedAvailability]);
 
   const resetFilters = () => {
     setSelectedSubject("");
     setSelectedLocation("");
+    setSelectedPincode("");
     setSearchQuery("");
     setSelectedLevel("");
     setSelectedAvailability([]);
@@ -83,6 +90,17 @@ export default function FindTutors() {
         placeholder="Type or select location"
         inputTestId="input-location-filter"
         buttonTestId="button-location-filter-toggle"
+      />
+
+      <FilterInput
+        label="Pincode"
+        icon={<Search className="h-4 w-4 text-primary" />}
+        value={selectedPincode}
+        onChange={setSelectedPincode}
+        options={pincodeOptions}
+        placeholder="Type or select pincode"
+        inputTestId="input-pincode-filter"
+        buttonTestId="button-pincode-filter-toggle"
       />
 
       <FilterInput
@@ -233,26 +251,22 @@ function FilterInput({ label, icon, value, onChange, options, placeholder, input
           <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`} />
         </button>
 
-        {isOpen && (
+        {isOpen && filteredOptions.length > 0 && (
           <div className="absolute z-20 mt-2 max-h-56 w-full overflow-auto rounded-2xl border border-border bg-popover p-2 shadow-xl">
-            {filteredOptions.length > 0 ? (
-              filteredOptions.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    onChange(option);
-                    setIsOpen(false);
-                  }}
-                  className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
-                >
-                  {option}
-                </button>
-              ))
-            ) : (
-              <div className="px-3 py-2 text-sm text-muted-foreground">No matching options</div>
-            )}
+            {filteredOptions.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => {
+                  onChange(option);
+                  setIsOpen(false);
+                }}
+                className="flex w-full items-center rounded-xl px-3 py-2 text-left text-sm text-foreground transition-colors hover:bg-accent"
+              >
+                {option}
+              </button>
+            ))}
           </div>
         )}
       </div>
