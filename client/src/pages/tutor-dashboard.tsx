@@ -20,6 +20,9 @@ export default function TutorDashboard() {
   const searchParams = new URLSearchParams(location.split("?")[1]);
   const defaultTab = searchParams.get("tab") || "enquiries";
   const isProfileCreationMode = searchParams.get("mode") === "create";
+  const isFirstTimeTutor = user?.id === "temp-tutor";
+  const showOnboardingProfileSetup = isFirstTimeTutor || isProfileCreationMode;
+  const activeTab = showOnboardingProfileSetup ? "profile" : defaultTab;
 
   if (!user || user.role !== "tutor") {
     return (
@@ -57,9 +60,6 @@ export default function TutorDashboard() {
   const starredEnquiries = starredLeads
     .map((id) => enquiries.find((enquiry) => enquiry.id === id))
     .filter((enquiry): enquiry is (typeof enquiries)[number] => Boolean(enquiry));
-
-  const isFirstTimeTutor = user.id === "temp-tutor";
-  const showOnboardingProfileSetup = isFirstTimeTutor || isProfileCreationMode;
 
   const handleLeadDetails = (name: string) => {
     toast({
@@ -123,6 +123,19 @@ export default function TutorDashboard() {
         )}
       </div>
 
+      {showOnboardingProfileSetup && (
+        <div className="mb-8 rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,hsl(var(--primary)/0.10),hsl(var(--background)))] p-5 shadow-[0_18px_60px_hsl(var(--primary)/0.08)]">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-2">
+              <Badge className="w-fit rounded-full bg-primary text-primary-foreground" data-testid="badge-create-profile-step">Step 1 of 1</Badge>
+              <h2 className="text-xl font-heading font-bold">You are now on the tutor profile creation page</h2>
+              <p className="max-w-2xl text-sm text-muted-foreground">Fill in your teaching details, local area, and pincode, then click Save Profile to complete your tutor onboarding.</p>
+            </div>
+            <Button type="button" className="rounded-full px-6" onClick={handleSaveProfile} data-testid="button-save-profile-top">Save Profile</Button>
+          </div>
+        </div>
+      )}
+
       {!showOnboardingProfileSetup && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
@@ -146,12 +159,18 @@ export default function TutorDashboard() {
         </div>
       )}
 
-      <Tabs defaultValue={defaultTab} className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
-          <TabsTrigger value="enquiries" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Student Enquiries</TabsTrigger>
-          <TabsTrigger value="profile" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Edit Profile</TabsTrigger>
-          <TabsTrigger value="settings" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Settings</TabsTrigger>
-        </TabsList>
+      <Tabs defaultValue={activeTab} className="space-y-4">
+        {showOnboardingProfileSetup ? (
+          <TabsList className="grid w-full grid-cols-1 bg-muted/50 p-1 h-auto">
+            <TabsTrigger value="profile" className="text-sm font-bold text-primary">Create Profile</TabsTrigger>
+          </TabsList>
+        ) : (
+          <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 h-auto">
+            <TabsTrigger value="enquiries" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Student Enquiries</TabsTrigger>
+            <TabsTrigger value="profile" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Edit Profile</TabsTrigger>
+            <TabsTrigger value="settings" className="text-xs font-medium text-muted-foreground data-[state=active]:font-bold data-[state=active]:text-primary sm:text-sm">Settings</TabsTrigger>
+          </TabsList>
+        )}
 
         <TabsContent value="enquiries" className="space-y-4 animate-in fade-in duration-300">
           <Card>
@@ -317,7 +336,7 @@ export default function TutorDashboard() {
                 </Button>
                 <div className="flex flex-col-reverse sm:flex-row gap-3">
                   <Button type="button" variant="outline" className="h-11" onClick={handleDiscardChanges} data-testid="button-discard-profile-changes">Discard Changes</Button>
-                  <Button type="button" className="h-11" onClick={handleSaveProfile} data-testid="button-save-profile">{showOnboardingProfileSetup ? "Save" : "Save Profile"}</Button>
+                  <Button type="button" className="h-11" onClick={handleSaveProfile} data-testid="button-save-profile">Save Profile</Button>
                 </div>
               </div>
             </CardContent>

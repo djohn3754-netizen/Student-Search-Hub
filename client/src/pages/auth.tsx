@@ -67,6 +67,9 @@ export default function AuthPage() {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Button>
 
+                <div className="rounded-[22px] border border-primary/10 bg-primary/5 px-4 py-3 text-sm text-primary shadow-[inset_0_1px_0_hsl(var(--background)/0.95)]" data-testid="text-create-profile-redirect">
+                  After sign-in, tutors land directly on the create profile page so they can start filling in their details right away.
+                </div>
               </div>
             </div>
 

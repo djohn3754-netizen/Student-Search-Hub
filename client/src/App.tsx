@@ -9,8 +9,6 @@ import { AuthProvider } from "@/lib/auth-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "next-themes";
-
-// Pages
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import FindTutors from "@/pages/find-tutors";
@@ -22,12 +20,13 @@ import PrivacyPolicy from "@/pages/privacy";
 import AboutUs from "@/pages/about";
 import HowItWorks from "@/pages/how-it-works";
 import TermsOfService from "@/pages/terms";
-
 import Contact from "@/pages/contact";
 import Disclaimer from "@/pages/disclaimer";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import LocationPage from "@/pages/location/[city]";
+import SubjectPage from "@/pages/subject/[subject]";
+import PincodePage from "@/pages/pincode/[code]";
 
 function Router() {
   const [location] = useLocation();
@@ -71,13 +70,17 @@ function Router() {
     "/disclaimer",
     "/contact",
   ]);
-  const useMobileInterface = mobileInterfaceRoutes.has(pathname);
-  const showAndroidBottomTabs = showMobileBottomTabsViewport && androidBottomTabRoutes.has(pathname);
+  const seoRoutePrefixes = ["/location/", "/subject/", "/pincode/"];
+  const isSeoLandingRoute = seoRoutePrefixes.some((prefix) => pathname.startsWith(prefix));
+  const useMobileInterface = mobileInterfaceRoutes.has(pathname) || isSeoLandingRoute;
+  const showAndroidBottomTabs = showMobileBottomTabsViewport && (androidBottomTabRoutes.has(pathname) || isSeoLandingRoute);
 
   const pageContent = (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/location/:city" component={LocationPage} />
+      <Route path="/subject/:subject" component={SubjectPage} />
+      <Route path="/pincode/:code" component={PincodePage} />
       <Route path="/find-tutors" component={FindTutors} />
       <Route path="/tutor/:id" component={TutorProfile} />
       <Route path="/auth" component={AuthPage} />

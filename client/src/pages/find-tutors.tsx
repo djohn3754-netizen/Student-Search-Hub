@@ -1,8 +1,12 @@
 import { useMemo, useState } from "react";
-import { TUTORS, SUBJECTS, LOCATIONS } from "@/lib/mock-data";
+import { Link } from "wouter";
+import { Helmet } from "react-helmet";
+import { SUBJECTS } from "@/lib/mock-data";
+import { getCanonicalUrl, indexableLocations, indexablePincodes, indexableSubjects, matchesTutorProfileText, slugify } from "@/lib/seo-routes";
+import { TUTORS } from "@/lib/mock-data";
 import { TutorCard } from "@/components/tutor-card";
 import { Input } from "@/components/ui/input";
-import { Search, MapPin, Book, Star, ChevronDown } from "lucide-react";
+import { Search, MapPin, Book, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -15,34 +19,7 @@ export default function FindTutors() {
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
 
   const levels = ["School", "College", "Competitive Exams", "Professional"];
-  const pincodeOptions = useMemo(() => Array.from(new Set(TUTORS.map((tutor) => tutor.pincode).filter(Boolean) as string[])), []);
-
-  const normalizeText = (value: string) => value.toLowerCase().trim();
-
-  const matchesTutorProfileText = (input: string, tutor: (typeof TUTORS)[number]) => {
-    const normalizedInput = normalizeText(input);
-
-    if (!normalizedInput) return true;
-
-    const tutorProfileText = normalizeText([
-      tutor.name,
-      tutor.subject,
-      tutor.location,
-      tutor.localArea || "",
-      tutor.pincode || "",
-      tutor.bio,
-      tutor.education,
-      ...tutor.tags,
-      ...tutor.availability,
-      tutor.shortIntro || "",
-      tutor.teachingMethod?.description || "",
-      ...(tutor.teachingMethod?.points || []),
-    ].join(" "));
-
-    return normalizedInput
-      .split(/\s+/)
-      .every((word) => tutorProfileText.includes(word));
-  };
+  const pincodeOptions = indexablePincodes;
 
   const handleSearchClick = () => {
     document.getElementById("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -91,7 +68,7 @@ export default function FindTutors() {
         icon={<MapPin className="h-4 w-4 text-primary" />}
         value={selectedLocation}
         onChange={setSelectedLocation}
-        options={LOCATIONS}
+        options={indexableLocations}
         placeholder="Type or select location"
         inputTestId="input-location-filter"
         buttonTestId="button-location-filter-toggle"
@@ -135,9 +112,34 @@ export default function FindTutors() {
 
   return (
     <div className="container mx-auto min-h-screen px-4 py-6 sm:py-8">
+      <Helmet>
+        <title>Find Tutors by Subject, City, Area & Pincode | Nexamid</title>
+        <meta
+          name="description"
+          content="Search Nexamid tutors by subject, city, local area, and pincode. Browse SEO-friendly landing pages and send direct student enquiries without login."
+        />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Find Tutors by Subject, City, Area & Pincode | Nexamid" />
+        <meta
+          property="og:description"
+          content="Browse tutors by subject, city, local area, and pincode on Nexamid with search-friendly landing pages for students across India."
+        />
+        <meta name="twitter:title" content="Find Tutors by Subject, City, Area & Pincode | Nexamid" />
+        <meta
+          name="twitter:description"
+          content="Browse tutors by subject, city, local area, and pincode on Nexamid with search-friendly landing pages for students across India."
+        />
+        <link rel="canonical" href={getCanonicalUrl("/find-tutors")} />
+      </Helmet>
+
       <div className="mb-12">
+        <Badge className="mb-4 rounded-full border-primary/20 bg-primary/10 px-4 py-1 text-primary" data-testid="badge-find-tutors-seo">
+          Search-Friendly Tutor Discovery
+        </Badge>
         <h1 className="mb-2 text-3xl font-heading font-bold tracking-tight sm:text-4xl">Discover Expert Tutors</h1>
-        <p className="mb-8 text-muted-foreground">Connecting you with the best offline learning experiences.</p>
+        <p className="mb-8 max-w-3xl text-muted-foreground">
+          Search tutors by subject, city, local area, and pincode with crawlable landing pages designed to make Nexamid easier to discover for students on Google.
+        </p>
 
         <div className="relative mb-8">
           <div className="group flex overflow-hidden rounded-2xl border border-border bg-background/90 shadow-sm focus-within:ring-2 focus-within:ring-primary/20">
@@ -158,7 +160,6 @@ export default function FindTutors() {
         </div>
 
         {filterContent}
-
       </div>
 
       <div className="flex flex-col gap-8">
@@ -200,6 +201,49 @@ export default function FindTutors() {
             </div>
           )}
         </div>
+
+        <section className="rounded-[32px] border border-border/70 bg-[linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.32))] p-5 shadow-[0_20px_80px_hsl(var(--foreground)/0.05)] sm:p-8">
+          <div className="mb-8 max-w-3xl">
+            <Badge className="mb-4 rounded-full border-primary/15 bg-primary/10 px-4 py-1 text-primary" data-testid="badge-indexable-pages">
+              Indexable Search Pages
+            </Badge>
+            <h2 className="text-2xl font-heading font-bold tracking-tight sm:text-3xl">Google-friendly landing pages for subjects, cities, local areas, and pincodes</h2>
+            <p className="mt-3 text-muted-foreground">
+              These internal landing pages give visitors direct paths into Nexamid from search results and make every important tutor discovery route easier to crawl.
+            </p>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-3">
+            <LandingLinkGroup
+              title="Subjects"
+              description="Direct entry pages for students searching by subject or exam focus."
+              links={indexableSubjects.map((subject) => ({
+                label: subject,
+                href: `/subject/${slugify(subject)}`,
+                testId: `link-subject-landing-${slugify(subject)}`,
+              }))}
+            />
+            <LandingLinkGroup
+              title="Cities & Local Areas"
+              description="Crawlable pages for city and neighborhood-based tutor searches."
+              links={indexableLocations.map((location) => ({
+                label: location,
+                href: `/location/${slugify(location)}`,
+                testId: `link-location-landing-${slugify(location)}`,
+              }))}
+            />
+            <LandingLinkGroup
+              title="Pincodes"
+              description="Direct pages for hyperlocal tutor discovery by postal code."
+              links={pincodeOptions.map((pincode) => ({
+                label: pincode,
+                href: `/pincode/${pincode}`,
+                testId: `link-pincode-landing-${pincode}`,
+              }))}
+              emptyText="Pincode landing pages will appear here as more tutors are listed."
+            />
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -277,7 +321,45 @@ function FilterInput({ label, icon, value, onChange, options, placeholder, input
   );
 }
 
-function GraduationCap(props: any) {
+type LandingLink = {
+  label: string;
+  href: string;
+  testId: string;
+};
+
+type LandingLinkGroupProps = {
+  title: string;
+  description: string;
+  links: LandingLink[];
+  emptyText?: string;
+};
+
+function LandingLinkGroup({ title, description, links, emptyText }: LandingLinkGroupProps) {
+  return (
+    <div className="rounded-[28px] border border-border/70 bg-card/95 p-5 shadow-[0_18px_50px_hsl(var(--foreground)/0.04)]">
+      <h3 className="text-lg font-heading font-bold">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {links.length > 0 ? (
+          links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-full border px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+              data-testid={link.testId}
+            >
+              {link.label}
+            </Link>
+          ))
+        ) : (
+          <p className="text-sm text-muted-foreground">{emptyText}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function GraduationCap(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -291,7 +373,8 @@ function GraduationCap(props: any) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M22 10v6" />
+      <path d="M2 10l10-5 10 5-10 5z" />
       <path d="M6 12v5c3 3 9 3 12 0v-5" />
     </svg>
   );
