@@ -103,10 +103,10 @@ export default function TutorDashboard() {
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-        <div>
-          <h1 className="text-3xl font-heading font-bold">{showOnboardingProfileSetup ? "Create Your Tutor Profile" : "Tutor Dashboard"}</h1>
-          <p className="text-muted-foreground flex flex-wrap items-center gap-2">
+      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className={showOnboardingProfileSetup ? "w-full rounded-[30px] bg-[linear-gradient(135deg,hsl(var(--primary)),hsl(221_83%_58%))] px-6 py-5 text-primary-foreground shadow-[0_22px_70px_hsl(var(--primary)/0.28)]" : ""}>
+          <h1 className={`text-3xl font-heading font-bold ${showOnboardingProfileSetup ? "text-white" : "text-foreground"}`}>{showOnboardingProfileSetup ? "Create Your Tutor Profile" : "Tutor Dashboard"}</h1>
+          <p className={`flex flex-wrap items-center gap-2 ${showOnboardingProfileSetup ? "mt-2 text-primary-foreground/90" : "text-muted-foreground"}`}>
             {showOnboardingProfileSetup ? "Complete your details below and click save to finish your tutor setup." : "Manage your profile and student enquiries."}
             {!showOnboardingProfileSetup && (
               <span className="inline-flex items-center bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold border border-blue-100 animate-pulse">
