@@ -62,13 +62,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email,
         role: "tutor",
         avatar: tutorRecord.avatar,
-        status: tutorRecord.verified ? "approved" : "pending",
+        status: tutorRecord.profileCompleted ? "approved" : "pending",
       };
 
       setUser(nextUser);
       setIsLoading(false);
 
-      if (tutorRecord.profileCompleted && tutorRecord.verified) {
+      if (tutorRecord.profileCompleted) {
         setLocation("/tutor-dashboard?tab=enquiries&view=live");
         return;
       }
