@@ -71,27 +71,67 @@ export const isTutorOnboardingStep = (value: string | null): value is TutorOnboa
   return Boolean(value && TUTOR_ONBOARDING_STEPS.includes(value as TutorOnboardingStep));
 };
 
-export const createTutorAccountRecord = (email: string, name = "New Tutor", avatar = defaultAvatar): TutorAccountRecord => ({
-  email,
-  name,
-  avatar,
-  profileCompleted: false,
-  verified: false,
-  currentStep: "basic",
-  completedSteps: [],
-  profileData: getDefaultTutorProfileDraft(name),
-  lastUpdatedAt: new Date().toISOString(),
-});
+export const getFirstIncompleteTutorStep = (completedSteps: TutorOnboardingStep[]) => {
+  return TUTOR_ONBOARDING_STEPS.find((step) => !completedSteps.includes(step)) || "bio";
+};
+
+export const normalizeTutorAccountRecord = (record: TutorAccountRecord): TutorAccountRecord => {
+  const completedSteps = Array.from(new Set(record.completedSteps.filter((step) => TUTOR_ONBOARDING_STEPS.includes(step))));
+  const profileCompleted = record.profileCompleted || completedSteps.length === TUTOR_ONBOARDING_STEPS.length;
+  const currentStep = profileCompleted
+    ? "bio"
+    : isTutorOnboardingStep(record.currentStep)
+      ? record.currentStep
+      : getFirstIncompleteTutorStep(completedSteps);
+
+  return {
+    ...record,
+    profileCompleted,
+    verified: profileCompleted ? record.verified : false,
+    currentStep,
+    completedSteps,
+    profileData: {
+      ...getDefaultTutorProfileDraft(record.name),
+      ...record.profileData,
+    },
+  };
+};
+
+export const createTutorAccountRecord = (
+  email: string,
+  name = "New Tutor",
+  avatar = defaultAvatar,
+  overrides: Partial<TutorAccountRecord> = {},
+): TutorAccountRecord => {
+  const profileData = {
+    ...getDefaultTutorProfileDraft(name),
+    ...overrides.profileData,
+  };
+
+  return normalizeTutorAccountRecord({
+    email,
+    name,
+    avatar,
+    profileCompleted: false,
+    verified: false,
+    currentStep: "basic",
+    completedSteps: [],
+    lastUpdatedAt: new Date().toISOString(),
+    ...overrides,
+    profileData,
+  });
+};
 
 export const getTutorAccountRecord = (email: string) => {
   const records = readTutorAccountStore();
-  return records[email] || null;
+  const record = records[email];
+  return record ? normalizeTutorAccountRecord(record) : null;
 };
 
 export const saveTutorAccountRecord = (record: TutorAccountRecord) => {
   const records = readTutorAccountStore();
   records[record.email] = {
-    ...record,
+    ...normalizeTutorAccountRecord(record),
     lastUpdatedAt: new Date().toISOString(),
   };
   writeTutorAccountStore(records);
