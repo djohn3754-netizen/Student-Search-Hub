@@ -40,7 +40,7 @@ export default function AuthPage() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="group h-14 w-full rounded-[22px] border-primary/15 bg-background/95 text-base font-semibold text-foreground shadow-[0_18px_45px_hsl(var(--primary)/0.08)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-card disabled:pointer-events-none disabled:opacity-70"
+                    className="group h-14 w-full rounded-[22px] border-primary/15 bg-background/95 px-4 text-base font-black text-foreground shadow-[0_18px_45px_hsl(var(--primary)/0.08)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-card disabled:pointer-events-none disabled:opacity-70"
                     onClick={() => {
                       toast({
                         title: "Google sign-in selected",
@@ -51,7 +51,7 @@ export default function AuthPage() {
                     disabled={isLoading}
                     data-testid="button-google-signin"
                   >
-                    <span className="flex items-center gap-3">
+                    <span className="flex items-center gap-3 font-black">
                       {isLoading ? (
                         <Loader2 className="h-5 w-5 animate-spin" />
                       ) : (
@@ -64,7 +64,9 @@ export default function AuthPage() {
                       )}
                       {isLoading ? "Signing in..." : "Sign in with Google"}
                     </span>
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    <span className="ml-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/15 bg-primary/10 text-primary transition-transform group-hover:translate-x-0.5">
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
                   </Button>
 
                   <div className="rounded-[22px] border border-primary/10 bg-primary/5 px-4 py-3 text-sm text-primary shadow-[inset_0_1px_0_hsl(var(--background)/0.95)]" data-testid="text-create-profile-redirect">
